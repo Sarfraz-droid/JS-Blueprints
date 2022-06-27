@@ -1,0 +1,16 @@
+[
+  {
+    "_id": "6f6b44d0-f974-465e-8b36-12b539603bc1",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://www.jmi.ac.in/bulletinboard/NoticeOfficialorder/latest/1",
+    "url": "https://www.jmi.ac.in/bulletinboard/NoticeOfficialorder/latest/1",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-06-27T18:31:24.261Z",
+    "modified": "2022-06-27T18:31:24.637Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  }
+]
