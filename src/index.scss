@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.react-flow__node {
+  @apply border border-gray-400 bg-gray-100 p-0 w-auto;
+  &.selected {
+    @apply bg-slate-200 outline-none shadow-xl;
+  }
+}

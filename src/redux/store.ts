@@ -1,10 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from "./features/counterSlice";
-import cardReducer from "./features/cardSlice";
+import NodeReducer from "./features/NodeSlice";
+import EdgeReducer from "./features/edgeSlice";
+import ActiveNodeReducer from "./features/activeNodeSlice";
+
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
-    card: cardReducer,
+    nodes: NodeReducer,
+    edges: EdgeReducer,
+    activeNode: ActiveNodeReducer,
   },
 });
 
