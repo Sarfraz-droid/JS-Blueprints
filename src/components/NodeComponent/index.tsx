@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import React, { MouseEventHandler } from "react";
 import ReactFlow, {
   useNodesState,
@@ -20,19 +21,23 @@ const initialNodes: Array<CardInterface> = [
   {
     data: {
       label: "Heading",
+      input: [],
       output: [],
       parameters: [
         {
           type: Parameters.string,
           value: "string",
+          id: nanoid(),
         },
         {
           type: Parameters.object,
           value: "object",
+          id: nanoid(),
         },
         {
           type: Parameters.number,
           value: "number",
+          id: nanoid(),
         },
       ],
       error: {

@@ -4,8 +4,8 @@ import ArrowLeft from "../../assets/svg/ArrowLeft.svg";
 import { useDispatch } from "react-redux";
 import { deleteNode } from "../../redux/features/activeNodeSlice";
 
-function Drawer() {
-  const mWidth = useMotionValue(200);
+function Drawer({ children }: { children: React.ReactNode }) {
+  const mWidth = useMotionValue(400);
   const [isDragging, setIsDragging] = useState(false);
 
   const dispatch = useDispatch();
@@ -83,6 +83,7 @@ function Drawer() {
             />
           </svg>
         </motion.div>
+        {children}
       </motion.div>
     </React.Fragment>
   );

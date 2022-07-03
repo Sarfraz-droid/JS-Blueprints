@@ -1,8 +1,8 @@
 import { CardType } from "../types/Card";
-import { Input } from "./Input";
+import { InputCard } from "./Input";
 
 const PredefinedComponents = {
-  [CardType.input]: Input,
+  [CardType.input]: InputCard,
 };
 
 export default PredefinedComponents;

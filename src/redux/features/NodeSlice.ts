@@ -4,6 +4,8 @@ import { CardInterface, CardType } from "../../types/Card";
 import { nanoid } from "nanoid";
 import { NodeChange, NodeDimensionChange } from "react-flow-renderer";
 import NodeChangeHandler from "../../utils/NodeChangeHandler";
+import { UpdateData } from "../functions/UpdateData";
+import { newIOP } from "../functions/newIOP";
 const initialState: Array<CardInterface> = [];
 
 export const NodeSlice = createSlice({
@@ -42,6 +44,34 @@ export const NodeSlice = createSlice({
         state = NodeChangeHandler(nodeChange, state);
       });
     },
+  },
+  extraReducers(builder) {
+    builder.addCase(UpdateData.fulfilled, (state, action) => {
+      if (action.payload === undefined) return state;
+      const newNode: CardInterface = action.payload;
+
+      state = state.map((node: CardInterface) => {
+        if (node.id === newNode.id) {
+          return newNode;
+        }
+        return node;
+      });
+
+      return state;
+    });
+    builder.addCase(newIOP.fulfilled, (state, action) => {
+      if (action.payload === undefined) return state;
+      const newNode: CardInterface = action.payload;
+
+      state = state.map((node: CardInterface) => {
+        if (node.id === newNode.id) {
+          return newNode;
+        }
+        return node;
+      });
+
+      return state;
+    });
   },
 });
 

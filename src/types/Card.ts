@@ -3,28 +3,43 @@ export enum CardType {
 }
 
 export enum Parameters {
-  string,
-  number,
-  object,
+  string = "string",
+  number = "number",
+  object = "object",
 }
 
-export const ParameterColor: Array<string> = ["green", "blue", "orange"];
+export const ParameterColor: object = {
+  string: "green",
+  number: "blue",
+  object: "orange",
+};
+
+export interface ICardIO {
+  type: Parameters;
+  value: string;
+  id: string;
+}
 
 export interface CardData {
   label: string;
-  parameters: Array<{
-    type: Parameters;
-    value: string;
-  }>;
-  output: Array<{
-    type: Parameters;
-    value: string;
-  }>;
+  input: Array<ICardIO>;
+  parameters: Array<ICardIO>;
+  output: Array<ICardIO>;
   error: {
     message: string;
     code: string;
   };
-  function: string;
+  function: {
+    content: string;
+    outdated: boolean;
+    old: string;
+  };
+}
+
+export enum ICardIOP {
+  input = "input",
+  parameters = "parameters",
+  output = "output",
 }
 
 export interface CardInterface {

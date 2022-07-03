@@ -1,5 +1,6 @@
 import { AnimatePresence } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
+import EditorComponent from "./components/Editor";
 import Drawer from "./components/Editor/Drawer";
 import NodeComponent from "./components/NodeComponent";
 import { addCard } from "./redux/features/NodeSlice";
@@ -14,7 +15,7 @@ function App() {
   const dispatch = useDispatch();
 
   return (
-    <div className="App h-screen">
+    <div className="App h-screen bg-white">
       <button
         onClick={() => {
           dispatch(
@@ -27,7 +28,9 @@ function App() {
         Add Card
       </button>
       <NodeComponent />
-      <AnimatePresence>{activeCard.active && <Drawer />}</AnimatePresence>
+      <AnimatePresence>
+        {activeCard.active && <EditorComponent />}
+      </AnimatePresence>
     </div>
   );
 }

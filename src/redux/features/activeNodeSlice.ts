@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Node } from "react-flow-renderer";
 import { CardInterface, CardType } from "../../types/Card";
+import { UpdateData } from "../functions/UpdateData";
 
-interface activeNodestate {
-  activeNode: CardInterface | null;
+export interface activeNodestate {
+  activeNode: string | null;
   active: boolean;
 }
 
@@ -28,7 +29,7 @@ export const activeNodeSlice = createSlice({
       };
 
       state.active = true;
-      state.activeNode = newState;
+      state.activeNode = newState.id;
 
       return state;
     },
@@ -39,6 +40,7 @@ export const activeNodeSlice = createSlice({
       return state;
     },
   },
+  extraReducers(builder) {},
 });
 
 export const { setNode, deleteNode } = activeNodeSlice.actions;
