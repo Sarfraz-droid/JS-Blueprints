@@ -6,6 +6,7 @@ import NodeComponent from "./components/NodeComponent";
 import { addCard } from "./redux/features/NodeSlice";
 import { RootState } from "./redux/store";
 import { CardType } from "./types/Card";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const card = useSelector((state: RootState) => state.nodes);
@@ -31,6 +32,7 @@ function App() {
       <AnimatePresence>
         {activeCard.active && <EditorComponent />}
       </AnimatePresence>
+      <Toaster />
     </div>
   );
 }

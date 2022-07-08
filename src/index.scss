@@ -8,3 +8,7 @@
     @apply bg-slate-200 outline-none shadow-xl;
   }
 }
+
+.btn {
+  @apply p-3 px-5 shadow-xl hover:shadow-blue-500/30 my-4 bg-blue-500 hover:bg-blue-600 rounded-lg transition-all text-white;
+}

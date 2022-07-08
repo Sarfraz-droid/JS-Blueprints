@@ -1,5 +1,8 @@
 import React, { ChangeEvent, useCallback } from "react";
 import { Handle, Position } from "react-flow-renderer";
+import { useDispatch } from "react-redux";
+import { UpdateData } from "../../redux/functions/UpdateData";
+import { AppDispatch } from "../../redux/store";
 import { CardInterface, ParameterColor, Parameters } from "../../types/Card";
 import Input from "../commons/UI/Input";
 import InputHandler from "./UI/InputHandler";
@@ -11,6 +14,8 @@ export function TextUpdaterNode(props: CardInterface) {
   const onChange = useCallback((evt: ChangeEvent<HTMLInputElement>) => {
     console.log(evt.target.value);
   }, []);
+
+  const dispatch = useDispatch<AppDispatch>();
 
   return (
     <>
@@ -38,12 +43,12 @@ export function TextUpdaterNode(props: CardInterface) {
               className="absolute right-0 mr-1 font-extralight"
               style={{
                 top: index * 10 + 20,
-                fontSize: "0.5rem",
-                marginTop: "-0.4rem",
+                fontSize: "0.3rem",
+                marginTop: "-0.15rem",
                 color: (ParameterColor as any)[_.type],
               }}
             >
-              {_.value}
+              {_.name}
             </label>
           </React.Fragment>
         ))}
@@ -55,9 +60,28 @@ export function TextUpdaterNode(props: CardInterface) {
         >
           {props.data.label}
         </div>
-        <div className="px-7 py-2  flex flex-col justify-start items-start gap-1 rounded-lg ">
+        <div className="px-9 py-2  flex flex-col justify-start items-start gap-1 rounded-lg ">
           {props.data.parameters.map((item, index) => (
-            <InputHandler {...item} key={index} />
+            <InputHandler
+              item={item}
+              onChange={(value) => {
+                const newParameters = { ...item, value: value };
+
+                console.log(newParameters);
+                dispatch(
+                  UpdateData({
+                    data: {
+                      parameters: [
+                        props.data.parameters.filter((_, i) => i !== index),
+                        newParameters,
+                      ],
+                    },
+                    id: props.id,
+                  })
+                );
+              }}
+              key={index}
+            />
           ))}
         </div>
 
@@ -78,12 +102,12 @@ export function TextUpdaterNode(props: CardInterface) {
                 className="absolute left-0 ml-1 font-extralight"
                 style={{
                   top: index * 10 + 20,
-                  fontSize: "0.5rem",
-                  marginTop: "-0.4rem",
+                  fontSize: "0.3rem",
+                  marginTop: "-0.15rem",
                   color: (ParameterColor as any)[_.type],
                 }}
               >
-                {_.value}
+                {_.name}
               </label>
             </React.Fragment>
           );

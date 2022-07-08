@@ -22,6 +22,7 @@ function FormHandler(props: IProps) {
               value: props.data.type as string,
               label: props.data.type as string,
             }}
+            className="w-32"
             options={options}
             onChange={(e) => {
               if (e)
@@ -32,13 +33,13 @@ function FormHandler(props: IProps) {
             }}
           />
           <input
-            value={props.data.value}
+            value={props.data.name}
             className="p-2 border outline-none border-blue-500/70 rounded-lg"
             placeholder="Value"
             onChange={(e) => {
               props.onChange(props.data, {
                 ...props.data,
-                value: e.target.value,
+                name: e.target.value,
               });
             }}
           />
@@ -53,6 +54,7 @@ function FormHandler(props: IProps) {
               value: props.data.type.toString(),
               label: props.data.type.toString(),
             }}
+            className="w-32"
             options={options}
             onChange={(e) => {
               if (e)

@@ -1,5 +1,7 @@
 export enum CardType {
   input = "input",
+  EventStart = "EventStart",
+  EventEnd = "EventEnd",
 }
 
 export enum Parameters {
@@ -17,6 +19,7 @@ export const ParameterColor: object = {
 export interface ICardIO {
   type: Parameters;
   value: string;
+  name: string;
   id: string;
 }
 

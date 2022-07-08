@@ -1,5 +1,6 @@
 import { nanoid } from "nanoid";
 import { CardData, CardInterface, Parameters } from "../types/Card";
+import { defaultComment, main } from "../utils/default";
 
 export const InputCard: CardData = {
   error: {
@@ -7,8 +8,8 @@ export const InputCard: CardData = {
     message: "",
   },
   function: {
-    content: "",
-    outdated: true,
+    content: `${defaultComment}  \n${main.toString()}`,
+    outdated: false,
     old: "",
   },
   label: "Heading",
@@ -16,6 +17,7 @@ export const InputCard: CardData = {
     {
       type: Parameters.string,
       value: "string",
+      name: `Output#1`,
       id: `output__${nanoid()}`,
     },
   ],
@@ -23,6 +25,7 @@ export const InputCard: CardData = {
     {
       type: Parameters.string,
       value: "string",
+      name: `Parameter#1`,
       id: `parameter__${nanoid()}`,
     },
   ],
@@ -31,6 +34,7 @@ export const InputCard: CardData = {
       id: `input__${nanoid()}`,
       type: Parameters.string,
       value: "string",
+      name: `Input#1`,
     },
   ],
 };
