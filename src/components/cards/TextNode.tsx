@@ -1,4 +1,5 @@
 import { Card, createStyles, Typography } from "@mui/material";
+import { grey } from "@mui/material/colors";
 import { Box } from "@mui/system";
 import React, { ChangeEvent, useCallback } from "react";
 import { Handle, Position } from "react-flow-renderer";
@@ -29,16 +30,46 @@ export function TextUpdaterNode(props: CardInterface) {
           "&:focus": {
             boxShadow: theme.shadows[6],
           },
-          boxShadow: theme.shadows[2],
+          boxShadow: theme.shadows[0],
+          background: grey[100],
+          border: `1px solid ${theme.palette.primary.main}`,
         })}
       >
+        <Handle
+          type="source"
+          position={Position.Right}
+          style={{
+            top: 25,
+            padding: 1,
+            marginLeft: -1.5,
+            backgroundColor: "red",
+            width: 3,
+            height: 3,
+            borderRadius: 0,
+          }}
+        />
+
+        <Typography
+          sx={{
+            position: "absolute",
+            top: 25,
+            right: 3,
+            px: 1,
+            fontSize: "0.3rem",
+            marginTop: "-0.2rem",
+            color: "gray",
+          }}
+        >
+          Event
+        </Typography>
+
         {props.data.output.map((_, index) => (
           <React.Fragment>
             <Handle
               type="source"
               position={Position.Right}
               style={{
-                top: index * 10 + 25,
+                top: (index + 1) * 10 + 25,
                 padding: 1,
                 marginLeft: -1.5,
                 backgroundColor: (ParameterColor as any)[_.type],
@@ -49,7 +80,7 @@ export function TextUpdaterNode(props: CardInterface) {
             <Typography
               sx={{
                 position: "absolute",
-                top: index * 10 + 25,
+                top: (index + 1) * 10 + 25,
                 right: 3,
                 fontSize: "0.3rem",
                 marginTop: "-0.2rem",
@@ -118,7 +149,7 @@ export function TextUpdaterNode(props: CardInterface) {
                 type="source"
                 position={Position.Left}
                 style={{
-                  top: index * 10 + 25,
+                  top: (index + 1) * 10 + 25,
                   padding: 1,
                   marginLeft: 1,
                   backgroundColor: (ParameterColor as any)[_.type],
@@ -132,7 +163,7 @@ export function TextUpdaterNode(props: CardInterface) {
                   position: "absolute",
                   left: 0,
                   ml: 0.6,
-                  top: index * 10 + 25,
+                  top: (index + 1) * 10 + 25,
                   fontSize: "0.3rem",
                   marginTop: "-0.2rem",
                   color: (ParameterColor as any)[_.type],
@@ -143,6 +174,34 @@ export function TextUpdaterNode(props: CardInterface) {
             </React.Fragment>
           );
         })}
+
+        <Handle
+          type="source"
+          position={Position.Left}
+          style={{
+            top: 25,
+            padding: 1,
+            marginLeft: 1,
+            backgroundColor: "red",
+            width: 3,
+            height: 3,
+            borderRadius: 0,
+          }}
+        />
+
+        <Typography
+          sx={{
+            position: "absolute",
+            top: 25,
+            left: 0,
+            ml: 0.6,
+            fontSize: "0.3rem",
+            marginTop: "-0.2rem",
+            color: "gray",
+          }}
+        >
+          Event
+        </Typography>
       </Card>
     </>
   );
