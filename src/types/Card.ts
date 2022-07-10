@@ -24,7 +24,7 @@ export interface ICardIO {
 }
 
 export interface CardData {
-  label: string;
+  label: string | undefined;
   input: Array<ICardIO>;
   parameters: Array<ICardIO>;
   output: Array<ICardIO>;

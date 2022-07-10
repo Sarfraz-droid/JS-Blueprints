@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { newIOP } from "../../../redux/functions/newIOP";
 import { UpdateData } from "../../../redux/functions/UpdateData";
@@ -6,6 +6,7 @@ import { AppDispatch, RootState } from "../../../redux/store";
 import {
   CardData,
   CardInterface,
+  CardType,
   ICardIO,
   ICardIOP,
   Parameters,
@@ -27,6 +28,7 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import { red } from "@mui/material/colors";
 import AddIcon from "@mui/icons-material/Add";
+import { HaveIOP } from "../../../PredefinedComponents";
 const CardMenu = ({
   activeCard,
   type,
@@ -154,6 +156,49 @@ function CardInfo() {
 
     return card;
   });
+
+  const CardInputs = [
+    {
+      title: "Input",
+      name: "input",
+      activeCard: [],
+    },
+  ];
+
+  const [cardData, setCardData] = useState<
+    Array<{
+      title: string;
+      name: string;
+      activeCard: Array<ICardIO>;
+      id: string;
+    }>
+  >([]);
+
+  useEffect(() => {
+    if (activeCard) {
+      setCardData([
+        {
+          title: "Input",
+          name: "input",
+          activeCard: activeCard.data.input,
+          id: activeCard?.id,
+        },
+        {
+          title: "Output",
+          name: "output",
+          activeCard: activeCard.data.output,
+          id: activeCard?.id,
+        },
+        {
+          title: "Parameters",
+          name: "parameters",
+          activeCard: activeCard.data.parameters,
+          id: activeCard?.id,
+        },
+      ]);
+    }
+  }, [activeCard]);
+
   const dispatch = useDispatch<AppDispatch>();
 
   const data = [
@@ -169,7 +214,7 @@ function CardInfo() {
     },
     {
       name: "label",
-      value: activeCard?.data.label,
+      value: activeCard?.data?.label,
       editable: true,
     },
   ];
@@ -187,96 +232,66 @@ function CardInfo() {
       }}
     >
       <Grid direction={"column"} gap={5} columnSpacing={5}>
-        {data.map((item, index) => (
-          <Grid item container>
-            <Grid item xs={3} alignSelf="center">
-              <Typography>{item.name}</Typography>
+        {data.map((item, index) => {
+          if (item.value === undefined) return null;
+          return (
+            <Grid item container>
+              <Grid item xs={3} alignSelf="center">
+                <Typography>{item.name}</Typography>
+              </Grid>
+              <Grid item xs={9}>
+                {item.editable ? (
+                  <TextField
+                    variant="filled"
+                    value={(activeCard?.data as any)[item.name]!}
+                    sx={{
+                      "& input": {
+                        padding: "0.5rem",
+                      },
+                    }}
+                    onChange={(e) => {
+                      console.log(e.target.value);
+                      dispatch(
+                        UpdateData({
+                          data: {
+                            [item.name]: e.target.value,
+                          },
+                          id: activeCard?.id,
+                        })
+                      );
+                    }}
+                  />
+                ) : (
+                  <Typography className="self-center opacity-70 italic">
+                    {activeCard?.id}
+                  </Typography>
+                )}
+              </Grid>
             </Grid>
-            <Grid item xs={9}>
-              {item.editable ? (
-                <TextField
-                  variant="filled"
-                  value={(activeCard?.data as any)[item.name]!}
-                  sx={{
-                    "& input": {
-                      padding: "0.5rem",
-                    },
-                  }}
-                  onChange={(e) => {
-                    console.log(e.target.value);
-                    dispatch(
-                      UpdateData({
-                        data: {
-                          [item.name]: e.target.value,
-                        },
-                        id: activeCard?.id,
-                      })
-                    );
-                  }}
-                />
-              ) : (
-                <Typography className="self-center opacity-70 italic">
-                  {activeCard?.id}
-                </Typography>
-              )}
-            </Grid>
-          </Grid>
-        ))}
+          );
+        })}
 
-        <div>
-          <Typography
-            variant="h6"
-            sx={{
-              my: 2,
-              fontWeight: 700,
-            }}
-          >
-            Input
-          </Typography>
-          <div className="p-3">
-            <CardMenu
-              activeCard={activeCard.data.input}
-              type="input"
-              id={activeCard?.id}
-            />
-          </div>
-        </div>
-        <div>
-          <Typography
-            variant="h6"
-            sx={{
-              my: 2,
-              fontWeight: 700,
-            }}
-          >
-            Parameters
-          </Typography>
-          <div className="p-3">
-            <CardMenu
-              activeCard={activeCard.data.parameters}
-              id={activeCard?.id}
-              type="parameters"
-            />
-          </div>
-        </div>
-        <div>
-          <Typography
-            variant="h6"
-            sx={{
-              my: 2,
-              fontWeight: 700,
-            }}
-          >
-            Output
-          </Typography>
-          <div className="p-3">
-            <CardMenu
-              activeCard={activeCard.data.output}
-              id={activeCard?.id}
-              type="output"
-            />
-          </div>
-        </div>
+        {HaveIOP[activeCard.type] &&
+          cardData.map((item, index) => (
+            <div key={index}>
+              <Typography
+                variant="h6"
+                sx={{
+                  my: 2,
+                  fontWeight: 700,
+                }}
+              >
+                {item.title}
+              </Typography>
+              <div className="p-3">
+                <CardMenu
+                  activeCard={item.activeCard}
+                  id={item.id}
+                  type={item.name}
+                />
+              </div>
+            </div>
+          ))}
       </Grid>
     </Box>
   );

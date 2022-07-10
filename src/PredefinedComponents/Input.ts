@@ -37,4 +37,6 @@ export const InputCard: CardData = {
       name: `Input#1`,
     },
   ],
+  start: undefined,
+  end: undefined,
 };

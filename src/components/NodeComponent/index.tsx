@@ -16,6 +16,7 @@ import { setNode } from "../../redux/features/activeNodeSlice";
 import { UpdateNode } from "../../redux/features/NodeSlice";
 import { RootState } from "../../redux/store";
 import { CardInterface, CardType, Parameters } from "../../types/Card";
+import { EventHandlerNode } from "../cards/EventStart";
 
 const initialEdges = [
   { id: "e1-2", source: "1", target: "2", label: "updatable edge" },
@@ -23,6 +24,8 @@ const initialEdges = [
 
 const nodeTypes = {
   [CardType.input]: TextUpdaterNode,
+  [CardType.EventStart]: EventHandlerNode,
+  [CardType.EventEnd]: EventHandlerNode,
 };
 
 const NodeComponent = () => {

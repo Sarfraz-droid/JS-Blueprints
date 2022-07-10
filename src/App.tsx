@@ -8,7 +8,7 @@ import { RootState } from "./redux/store";
 import { CardType } from "./types/Card";
 import { Toaster } from "react-hot-toast";
 import Button from "@mui/material/Button";
-import { Icon } from "@mui/material";
+import { Icon, Stack } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
 function App() {
@@ -20,20 +20,53 @@ function App() {
 
   return (
     <div className="App h-screen bg-white">
-      <Button
-        color="primary"
-        variant="contained"
-        onClick={() => {
-          dispatch(
-            addCard({
-              type: CardType.input,
-            })
-          );
-        }}
-      >
-        <AddIcon />
-        Add Card
-      </Button>
+      <Stack direction="row" spacing={3}>
+        <Button
+          color="primary"
+          variant="contained"
+          onClick={() => {
+            dispatch(
+              addCard({
+                type: CardType.input,
+              })
+            );
+          }}
+        >
+          <AddIcon />
+          Add Card
+        </Button>
+
+        <Button
+          color="success"
+          variant="contained"
+          onClick={() => {
+            dispatch(
+              addCard({
+                type: CardType.EventStart,
+              })
+            );
+          }}
+        >
+          <AddIcon />
+          Add Event Start
+        </Button>
+
+        <Button
+          color="warning"
+          variant="contained"
+          onClick={() => {
+            dispatch(
+              addCard({
+                type: CardType.EventEnd,
+              })
+            );
+          }}
+        >
+          <AddIcon />
+          Add Event End
+        </Button>
+      </Stack>
+
       <NodeComponent />
       <AnimatePresence>
         {activeCard.active && <EditorComponent />}
