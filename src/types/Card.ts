@@ -37,6 +37,8 @@ export interface CardData {
     outdated: boolean;
     old: string;
   };
+  start: string | undefined;
+  end: string | undefined;
 }
 
 export enum ICardIOP {

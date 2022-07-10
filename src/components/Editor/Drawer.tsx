@@ -3,16 +3,18 @@ import { motion, PanInfo, useMotionValue } from "framer-motion";
 import ArrowLeft from "../../assets/svg/ArrowLeft.svg";
 import { useDispatch } from "react-redux";
 import { deleteNode } from "../../redux/features/activeNodeSlice";
+import styles from "./styles.module.scss";
+import { style } from "@mui/system";
 
 function Drawer({ children }: { children: React.ReactNode }) {
-  const mWidth = useMotionValue(400);
+  const mWidth = useMotionValue(501);
   const [isDragging, setIsDragging] = useState(false);
 
   const dispatch = useDispatch();
 
   const handleDrag = React.useCallback((event: MouseEvent, info: PanInfo) => {
     let newWidth = mWidth.get() - info.delta.x;
-    if (newWidth > 200 && newWidth < window.innerWidth - 100) {
+    if (newWidth > 500 && newWidth < window.innerWidth - 100) {
       mWidth.set(mWidth.get() - info.delta.x);
     }
   }, []);
@@ -28,13 +30,17 @@ function Drawer({ children }: { children: React.ReactNode }) {
           width: mWidth,
           height: "100vh",
           position: "fixed",
-          zIndex: 9999,
+          zIndex: 100,
+          backgroundColor: "white",
+          boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
+          display: "flex",
+          justifyContent: "start",
+          alignItems: "start",
         }}
         exit={{ x: "100%" }}
-        className="bg-white shadow-2xl flex justify-start items-start"
       >
         <motion.div
-          className="bg-blue-300/50 rounded-l-md flex flex-col justify-center items-center"
+          className={styles.drawer}
           style={{
             height: "100vh",
             width: 20,
@@ -62,12 +68,19 @@ function Drawer({ children }: { children: React.ReactNode }) {
           </svg>
         </motion.div>
         <motion.div
-          className="text-blue-500 inline h-auto cursor-pointer"
+          className={styles.drawerClose}
           whileHover={{
             rotate: 45,
           }}
           onClick={() => {
             dispatch(deleteNode());
+          }}
+          style={{
+            width: 20,
+            height: 20,
+            margin: 3,
+            padding: 6,
+            borderRadius: "50%",
           }}
         >
           <svg

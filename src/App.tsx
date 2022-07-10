@@ -7,6 +7,9 @@ import { addCard } from "./redux/features/NodeSlice";
 import { RootState } from "./redux/store";
 import { CardType } from "./types/Card";
 import { Toaster } from "react-hot-toast";
+import Button from "@mui/material/Button";
+import { Icon } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
 
 function App() {
   const card = useSelector((state: RootState) => state.nodes);
@@ -17,7 +20,9 @@ function App() {
 
   return (
     <div className="App h-screen bg-white">
-      <button
+      <Button
+        color="primary"
+        variant="contained"
         onClick={() => {
           dispatch(
             addCard({
@@ -26,8 +31,9 @@ function App() {
           );
         }}
       >
+        <AddIcon />
         Add Card
-      </button>
+      </Button>
       <NodeComponent />
       <AnimatePresence>
         {activeCard.active && <EditorComponent />}

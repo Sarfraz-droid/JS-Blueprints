@@ -1,10 +1,11 @@
+import { Card, createStyles, Typography } from "@mui/material";
+import { Box } from "@mui/system";
 import React, { ChangeEvent, useCallback } from "react";
 import { Handle, Position } from "react-flow-renderer";
 import { useDispatch } from "react-redux";
 import { UpdateData } from "../../redux/functions/UpdateData";
 import { AppDispatch } from "../../redux/store";
 import { CardInterface, ParameterColor, Parameters } from "../../types/Card";
-import Input from "../commons/UI/Input";
 import InputHandler from "./UI/InputHandler";
 
 const handleStyle = { top: 10 };
@@ -19,13 +20,17 @@ export function TextUpdaterNode(props: CardInterface) {
 
   return (
     <>
-      <div
-        style={{
+      <Card
+        sx={(theme) => ({
           minHeight:
             Math.max(props.data.output.length, props.data.parameters.length) *
               5 +
             50,
-        }}
+          "&:focus": {
+            boxShadow: theme.shadows[6],
+          },
+          boxShadow: theme.shadows[2],
+        })}
       >
         {props.data.output.map((_, index) => (
           <React.Fragment>
@@ -33,41 +38,62 @@ export function TextUpdaterNode(props: CardInterface) {
               type="source"
               position={Position.Right}
               style={{
-                top: index * 10 + 20,
-                padding: 3,
-                marginLeft: -1,
+                top: index * 10 + 25,
+                padding: 1,
+                marginLeft: -1.5,
                 backgroundColor: (ParameterColor as any)[_.type],
+                width: 3,
+                height: 3,
               }}
             />
-            <label
-              className="absolute right-0 mr-1 font-extralight"
-              style={{
-                top: index * 10 + 20,
+            <Typography
+              sx={{
+                position: "absolute",
+                top: index * 10 + 25,
+                right: 3,
                 fontSize: "0.3rem",
-                marginTop: "-0.15rem",
+                marginTop: "-0.2rem",
                 color: (ParameterColor as any)[_.type],
               }}
             >
               {_.name}
-            </label>
+            </Typography>
           </React.Fragment>
         ))}
-        <div
-          className="text-left font-mono p-0 px-1 text-white bg-blue-400  w-full "
-          style={{
-            fontSize: "0.5rem",
-          }}
+        <Box
+          sx={(theme) => ({
+            width: "100%",
+            py: 0.4,
+            bgcolor: theme.palette.primary.main,
+            borderRadius: "0.2rem",
+            mt: 0.1,
+            ml: 0.01,
+          })}
         >
-          {props.data.label}
-        </div>
-        <div className="px-9 py-2  flex flex-col justify-start items-start gap-1 rounded-lg ">
+          <Typography
+            sx={{
+              fontSize: "0.3rem",
+              textAlign: "left",
+              pl: 1,
+              fontWeight: "bold",
+              color: "white",
+            }}
+          >
+            {props.data.label}
+          </Typography>
+        </Box>
+        <Box
+          sx={(theme) => ({
+            pl: 4,
+            pr: 5,
+            py: 1,
+          })}
+        >
           {props.data.parameters.map((item, index) => (
             <InputHandler
               item={item}
               onChange={(value) => {
                 const newParameters = { ...item, value: value };
-
-                console.log(newParameters);
                 dispatch(
                   UpdateData({
                     data: {
@@ -83,7 +109,7 @@ export function TextUpdaterNode(props: CardInterface) {
               key={index}
             />
           ))}
-        </div>
+        </Box>
 
         {props.data.input.map((_, index) => {
           return (
@@ -92,27 +118,32 @@ export function TextUpdaterNode(props: CardInterface) {
                 type="source"
                 position={Position.Left}
                 style={{
-                  top: index * 10 + 20,
-                  padding: 3,
-                  marginLeft: -1,
+                  top: index * 10 + 25,
+                  padding: 1,
+                  marginLeft: 1,
                   backgroundColor: (ParameterColor as any)[_.type],
+                  width: 3,
+                  height: 3,
                 }}
               />
-              <label
+              <Typography
                 className="absolute left-0 ml-1 font-extralight"
-                style={{
-                  top: index * 10 + 20,
+                sx={{
+                  position: "absolute",
+                  left: 0,
+                  ml: 0.6,
+                  top: index * 10 + 25,
                   fontSize: "0.3rem",
-                  marginTop: "-0.15rem",
+                  marginTop: "-0.2rem",
                   color: (ParameterColor as any)[_.type],
                 }}
               >
                 {_.name}
-              </label>
+              </Typography>
             </React.Fragment>
           );
         })}
-      </div>
+      </Card>
     </>
   );
 }

@@ -17,48 +17,6 @@ import { UpdateNode } from "../../redux/features/NodeSlice";
 import { RootState } from "../../redux/store";
 import { CardInterface, CardType, Parameters } from "../../types/Card";
 
-const initialNodes: Array<CardInterface> = [
-  {
-    data: {
-      label: "Heading",
-      input: [],
-      output: [],
-      parameters: [
-        {
-          type: Parameters.string,
-          value: "string",
-          id: nanoid(),
-        },
-        {
-          type: Parameters.object,
-          value: "object",
-          id: nanoid(),
-        },
-        {
-          type: Parameters.number,
-          value: "number",
-          id: nanoid(),
-        },
-      ],
-      error: {
-        code: "",
-        message: "",
-      },
-      function: "",
-    },
-    id: "a",
-    type: CardType.input,
-    position: {
-      x: 0,
-      y: 0,
-    },
-    positionAbsolute: {
-      x: 0,
-      y: 0,
-    },
-  },
-];
-
 const initialEdges = [
   { id: "e1-2", source: "1", target: "2", label: "updatable edge" },
 ];
@@ -66,8 +24,6 @@ const initialEdges = [
 const nodeTypes = {
   [CardType.input]: TextUpdaterNode,
 };
-
-console.log(nodeTypes, initialNodes);
 
 const NodeComponent = () => {
   const nodes = useSelector((state: RootState) => state.nodes);
@@ -100,6 +56,9 @@ const NodeComponent = () => {
       onNodeDoubleClick={(event, node) => {
         console.log(node);
         dispatch(setNode(node));
+      }}
+      style={{
+        height: "90vh",
       }}
     >
       <Controls />

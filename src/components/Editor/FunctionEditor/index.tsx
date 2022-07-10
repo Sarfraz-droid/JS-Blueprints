@@ -5,6 +5,7 @@ import { AppDispatch, RootState } from "../../../redux/store";
 import { UpdateData } from "../../../redux/functions/UpdateData";
 import { instance } from "../../../api/instance";
 import toast from "react-hot-toast";
+import { Button, Typography } from "@mui/material";
 
 function FunctionEditor() {
   const [CodeRunner, setCodeRunner] = useState({
@@ -76,6 +77,7 @@ function FunctionEditor() {
       ) : (
         <Editor
           height="60vh"
+          width={"95%"}
           defaultLanguage="javascript"
           value={activeCard.data.function.content}
           onChange={(newValue) => {
@@ -95,12 +97,18 @@ function FunctionEditor() {
         />
       )}
 
-      <button className="btn" onClick={TestState}>
+      <Button variant="contained" onClick={TestState} sx={{ my: 2 }}>
         {CodeRunner.running ? "Running..." : "Run"}
-      </button>
+      </Button>
 
       <div className="p-1">
-        <h1 className="font-bold text-lg">Output</h1>
+        <Typography
+          sx={{
+            fontWeight: 700,
+          }}
+        >
+          Output
+        </Typography>
         <pre className="p-3 h-40 bg-slate-200 font-mono">
           {CodeRunner.output}
         </pre>

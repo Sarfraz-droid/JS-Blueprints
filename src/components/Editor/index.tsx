@@ -1,8 +1,9 @@
 import React, { Fragment } from "react";
 import Drawer from "./Drawer";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import CardInfo from "./CardInfo";
 import FunctionEditor from "./FunctionEditor";
+import { Tabs, Tab, Box } from "@mui/material";
+import { theme } from "../theme/theme";
 
 const EditorTabs = [
   {
@@ -15,33 +16,67 @@ const EditorTabs = [
   },
 ];
 
+function TabPanel({ value }: { value: number }) {
+  const TabComponent = EditorTabs[value].component;
+  return (
+    <Box
+      sx={{
+        padding: "0.3rem",
+        width: "100%",
+      }}
+    >
+      <TabComponent />
+    </Box>
+  );
+}
+
 function EditorComponent() {
+  const [tab, setTab] = React.useState(0);
+
   return (
     <React.Fragment>
       <Drawer>
-        <div className="p-3 w-full">
-          <Tabs>
-            <TabList className={`flex gap-5`}>
-              {EditorTabs.map((value, index) => (
-                <Tab
-                  key={index}
-                  className={
-                    "p-3 rounded-lg cursor-pointer transition-all duration-200"
-                  }
-                  selectedClassName="bg-blue-500 shadow-2xl text-white"
-                >
-                  {value.name}
-                </Tab>
-              ))}
-            </TabList>
-
-            {EditorTabs.map((value, index) => (
-              <TabPanel>
-                <value.component />
-              </TabPanel>
+        <Box
+          sx={{
+            flexGrow: 1,
+          }}
+        >
+          <Tabs
+            value={tab}
+            TabIndicatorProps={{
+              children: <span className="MuiTabs-indicatorSpan" />,
+            }}
+            sx={{
+              "& .MuiTabs-indicator": {
+                display: "flex",
+                justifyContent: "center",
+                backgroundColor: "transparent",
+                height: "5px",
+                borderRadius: "10px",
+              },
+              "& .MuiTabs-indicatorSpan": {
+                maxWidth: 40,
+                width: "100%",
+                height: "20px",
+                backgroundColor: theme.palette.primary.main,
+              },
+            }}
+          >
+            {EditorTabs.map((item, index) => (
+              <Tab
+                key={index}
+                label={item.name}
+                sx={{
+                  fontWeight: "bold",
+                }}
+                disableRipple
+                onClick={() => setTab(index)}
+              />
             ))}
           </Tabs>
-        </div>
+
+          <TabPanel value={tab} />
+        </Box>
       </Drawer>
     </React.Fragment>
   );

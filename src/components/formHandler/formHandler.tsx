@@ -1,6 +1,8 @@
+import { Grid, InputBase } from "@mui/material";
 import React from "react";
 import ReactSelect from "react-select";
 import { ICardIO, Parameters } from "../../types/Card";
+import styles from "./styles.module.scss";
 
 interface IProps {
   data: ICardIO;
@@ -16,13 +18,13 @@ function FormHandler(props: IProps) {
   switch (props.data.type) {
     case Parameters.string:
       return (
-        <div className="flex gap-5">
+        <React.Fragment>
           <ReactSelect
             value={{
               value: props.data.type as string,
               label: props.data.type as string,
             }}
-            className="w-32"
+            className={styles.select}
             options={options}
             onChange={(e) => {
               if (e)
@@ -32,9 +34,11 @@ function FormHandler(props: IProps) {
                 });
             }}
           />
-          <input
+          <InputBase
             value={props.data.name}
-            className="p-2 border outline-none border-blue-500/70 rounded-lg"
+            sx={{
+              px: 2,
+            }}
             placeholder="Value"
             onChange={(e) => {
               props.onChange(props.data, {
@@ -43,19 +47,19 @@ function FormHandler(props: IProps) {
               });
             }}
           />
-        </div>
+        </React.Fragment>
       );
 
     case Parameters.number:
       return (
-        <div className="flex gap-5">
+        <React.Fragment>
           <ReactSelect
             value={{
               value: props.data.type.toString(),
               label: props.data.type.toString(),
             }}
-            className="w-32"
             options={options}
+            className={styles.select}
             onChange={(e) => {
               if (e)
                 props.onChange(props.data, {
@@ -64,18 +68,20 @@ function FormHandler(props: IProps) {
                 });
             }}
           />
-          <input
-            value={props.data.value}
-            className="p-2 border outline-none border-blue-500/70 rounded-lg"
+          <InputBase
+            value={props.data.name}
+            sx={{
+              px: 2,
+            }}
             placeholder="Value"
             onChange={(e) => {
               props.onChange(props.data, {
                 ...props.data,
-                value: e.target.value,
+                name: e.target.value,
               });
             }}
           />
-        </div>
+        </React.Fragment>
       );
   }
 

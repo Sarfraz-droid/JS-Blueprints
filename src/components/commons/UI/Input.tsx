@@ -1,15 +1,18 @@
 import React, { InputHTMLAttributes } from "react";
+import { alpha, styled } from "@mui/material/styles";
+import { InputBase } from "@mui/material";
 
-function Input(props: InputHTMLAttributes<HTMLInputElement>) {
-  return (
-    <input
-      {...props}
-      className={`text-xs bg-slate-100 p-1 rounded-md border border-gray-300 outline-none ${props.className}`}
-      style={{
-        ...props.style,
-      }}
-    />
-  );
-}
-
-export default Input;
+export const Input = styled(InputBase)(({ theme }) => ({
+  "label + &": {
+    marginTop: theme.spacing(3),
+  },
+  "& .MuiInputBase-input": {
+    fontSize: "0.5rem",
+    border: `1px solid ${alpha(theme.palette.secondary.main, 0.5)}`,
+    padding: "0.2rem",
+    borderRadius: "0.2rem",
+    "&:focus": {
+      borderColor: theme.palette.primary.main,
+    },
+  },
+}));
