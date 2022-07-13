@@ -47,6 +47,7 @@ export function TextUpdaterNode(props: CardInterface) {
             height: 3,
             borderRadius: 0,
           }}
+          id={props.data.start}
         />
 
         <Typography
@@ -76,6 +77,7 @@ export function TextUpdaterNode(props: CardInterface) {
                 width: 3,
                 height: 3,
               }}
+              id={_.id}
             />
             <Typography
               sx={{
@@ -146,7 +148,7 @@ export function TextUpdaterNode(props: CardInterface) {
           return (
             <React.Fragment>
               <Handle
-                type="source"
+                type="target"
                 position={Position.Left}
                 style={{
                   top: (index + 1) * 10 + 25,
@@ -156,6 +158,7 @@ export function TextUpdaterNode(props: CardInterface) {
                   width: 3,
                   height: 3,
                 }}
+                id={_.id}
               />
               <Typography
                 className="absolute left-0 ml-1 font-extralight"
@@ -176,7 +179,7 @@ export function TextUpdaterNode(props: CardInterface) {
         })}
 
         <Handle
-          type="source"
+          type="target"
           position={Position.Left}
           style={{
             top: 25,
@@ -187,6 +190,7 @@ export function TextUpdaterNode(props: CardInterface) {
             height: 3,
             borderRadius: 0,
           }}
+          id={props.data.end}
         />
 
         <Typography

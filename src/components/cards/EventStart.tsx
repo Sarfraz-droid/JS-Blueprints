@@ -47,6 +47,7 @@ export function EventHandlerNode(props: CardInterface) {
                 height: 3,
                 borderRadius: 0,
               }}
+              id={props.data.start}
             />
 
             <Typography
@@ -123,7 +124,7 @@ export function EventHandlerNode(props: CardInterface) {
         {props.type === CardType.EventEnd && (
           <React.Fragment>
             <Handle
-              type="source"
+              type="target"
               position={Position.Left}
               style={{
                 top: 25,
@@ -134,6 +135,7 @@ export function EventHandlerNode(props: CardInterface) {
                 height: 3,
                 borderRadius: 0,
               }}
+              id={props.data.end}
             />
 
             <Typography

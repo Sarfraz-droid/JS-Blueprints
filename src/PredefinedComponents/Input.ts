@@ -37,6 +37,6 @@ export const InputCard: CardData = {
       name: `Input#1`,
     },
   ],
-  start: undefined,
-  end: undefined,
+  start: `root__${nanoid()}`,
+  end: `root__${nanoid()}`,
 };

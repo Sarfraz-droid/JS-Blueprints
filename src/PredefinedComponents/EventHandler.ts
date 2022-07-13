@@ -1,5 +1,6 @@
 import { CardData, CardInterface, Parameters } from "../types/Card";
 import { defaultComment, main } from "../utils/default";
+import { nanoid } from "nanoid";
 
 export const EventHandler: CardData = {
   error: {
@@ -15,6 +16,6 @@ export const EventHandler: CardData = {
   output: [],
   parameters: [],
   input: [],
-  start: undefined,
-  end: undefined,
+  start: `root__${nanoid()}`,
+  end: `root__${nanoid()}`,
 };
