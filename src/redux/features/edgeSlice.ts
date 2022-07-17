@@ -24,6 +24,13 @@ export const EdgeSlice = createSlice({
       state = action.payload;
       return state;
     },
+    DeleteEdges: (state: Array<Edge>, action: PayloadAction<string>) => {
+      state = state.filter(
+        (_) => _.source != action.payload || _.target != action.payload
+      );
+
+      return state;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(addEdgeThunk.fulfilled, (state, action) => {
@@ -48,5 +55,6 @@ export const EdgeSlice = createSlice({
   },
 });
 
-export const { addEdgeReducer, setEdgeReducer } = EdgeSlice.actions;
+export const { addEdgeReducer, setEdgeReducer, DeleteEdges } =
+  EdgeSlice.actions;
 export default EdgeSlice.reducer;

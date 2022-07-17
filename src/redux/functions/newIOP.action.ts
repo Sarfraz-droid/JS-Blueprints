@@ -3,26 +3,26 @@ import { nanoid } from "nanoid";
 import { CardInterface, Parameters } from "../../types/Card";
 import { RootState } from "../store";
 
-function getField(field: Parameters) {
+function getField(field: Parameters, type: string) {
   switch (field) {
     case Parameters.number:
       return {
         type: Parameters.number,
         value: 0,
-        id: nanoid(),
+        id: `${field}__${type}__${nanoid()}`,
       };
     case Parameters.string:
       return {
         type: Parameters.string,
         value: "",
-        id: nanoid(),
+        id: `${field}__${type}__${nanoid()}`,
       };
 
     case Parameters.object:
       return {
         type: Parameters.object,
         value: {},
-        id: nanoid(),
+        id: `${field}__${type}__${nanoid()}`,
       };
   }
 }
@@ -57,7 +57,7 @@ export const newIOP = createAsyncThunk(
         ...activeNode.data,
         [action.type]: [
           ...(activeNode.data as any)[action.type],
-          getField(action.field),
+          getField(action.field, action.type),
         ],
       },
     };

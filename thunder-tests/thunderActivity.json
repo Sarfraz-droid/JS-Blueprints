@@ -36,5 +36,19 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "d8a97d73-f7ff-438f-b498-05743a67d23a",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:5000/node/test/1",
+    "url": "http://localhost:5000/node/test/2",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2022-07-14T20:27:20.065Z",
+    "modified": "2022-07-15T11:32:07.589Z",
+    "headers": [],
+    "params": [],
+    "tests": []
   }
 ]

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { newIOP } from "../../../redux/functions/newIOP";
-import { UpdateData } from "../../../redux/functions/UpdateData";
+import { newIOP } from "../../../redux/functions/newIOP.action";
+import { UpdateData } from "../../../redux/functions/UpdateData.action";
 import { AppDispatch, RootState } from "../../../redux/store";
 import {
   CardData,
@@ -62,8 +62,9 @@ const CardMenu = ({
                   UpdateData({
                     data: {
                       [type]: [
-                        ...activeCard.filter((i) => i.id !== oldData.id),
-                        newData,
+                        ...activeCard.map((_) =>
+                          _.id === newData.id ? newData : _
+                        ),
                       ],
                     },
                     id: id,
@@ -176,48 +177,56 @@ function CardInfo() {
 
   useEffect(() => {
     if (activeCard) {
-      setCardData([
+      const card = [
         {
           title: "Input",
           name: "input",
           activeCard: activeCard.data.input,
           id: activeCard?.id,
+          allowed: HaveIOP[activeCard.type]?.input,
         },
         {
           title: "Output",
           name: "output",
           activeCard: activeCard.data.output,
           id: activeCard?.id,
+          allowed: HaveIOP[activeCard.type]?.output,
         },
         {
           title: "Parameters",
           name: "parameters",
           activeCard: activeCard.data.parameters,
           id: activeCard?.id,
+          allowed: HaveIOP[activeCard.type]?.parameters,
         },
-      ]);
+      ];
+
+      setCardData(() => card.filter((i) => i.allowed));
     }
   }, [activeCard]);
 
   const dispatch = useDispatch<AppDispatch>();
 
-  const data = [
-    {
-      name: "id",
-      value: activeCard?.id,
-      editable: false,
-    },
-    {
-      name: "type",
-      value: activeCard?.type,
-      editable: false,
-    },
-    {
-      name: "label",
-      value: activeCard?.data?.label,
-      editable: true,
-    },
-  ];
+  const data = useMemo(
+    () => [
+      {
+        name: "id",
+        value: activeCard?.id,
+        editable: false,
+      },
+      {
+        name: "type",
+        value: activeCard?.type,
+        editable: false,
+      },
+      {
+        name: "label",
+        value: activeCard?.data?.label,
+        editable: true && activeCard?.data.editable,
+      },
+    ],
+    [activeCard]
+  );
 
   console.log(activeCard);
 
@@ -271,27 +280,35 @@ function CardInfo() {
           );
         })}
 
-        {HaveIOP[activeCard.type] &&
-          cardData.map((item, index) => (
-            <div key={index}>
-              <Typography
-                variant="h6"
-                sx={{
-                  my: 2,
-                  fontWeight: 700,
-                }}
-              >
-                {item.title}
-              </Typography>
-              <div className="p-3">
-                <CardMenu
-                  activeCard={item.activeCard}
-                  id={item.id}
-                  type={item.name}
-                />
-              </div>
+        {cardData.map((item, index) => (
+          <div key={index}>
+            <Typography
+              variant="h6"
+              sx={{
+                my: 2,
+                fontWeight: 700,
+              }}
+            >
+              {item.title}
+            </Typography>
+            <div className="p-3">
+              <CardMenu
+                activeCard={item.activeCard}
+                id={item.id}
+                type={item.name}
+              />
             </div>
-          ))}
+          </div>
+        ))}
+
+        <Button
+          variant="contained"
+          onClick={() => {
+            console.log(activeCard);
+          }}
+        >
+          Log Node
+        </Button>
       </Grid>
     </Box>
   );

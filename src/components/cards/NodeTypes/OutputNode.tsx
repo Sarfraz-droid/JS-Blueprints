@@ -1,17 +1,17 @@
 import { Card, createStyles, Typography } from "@mui/material";
-import { grey } from "@mui/material/colors";
+import { grey, yellow } from "@mui/material/colors";
 import { Box } from "@mui/system";
 import React, { ChangeEvent, useCallback } from "react";
 import { Handle, Position } from "react-flow-renderer";
 import { useDispatch } from "react-redux";
-import { UpdateData } from "../../redux/functions/UpdateData";
-import { AppDispatch } from "../../redux/store";
-import { CardInterface, ParameterColor, Parameters } from "../../types/Card";
-import InputHandler from "./UI/InputHandler";
+import { UpdateData } from "../../../redux/functions/UpdateData.action";
+import { AppDispatch } from "../../../redux/store";
+import { CardInterface, ParameterColor, Parameters } from "../../../types/Card";
+import InputHandler from "../UI/InputHandler";
 
 const handleStyle = { top: 10 };
 
-export function TextUpdaterNode(props: CardInterface) {
+export function OutputNode(props: CardInterface) {
   console.log(props);
   const onChange = useCallback((evt: ChangeEvent<HTMLInputElement>) => {
     console.log(evt.target.value);
@@ -35,69 +35,11 @@ export function TextUpdaterNode(props: CardInterface) {
           border: `1px solid ${theme.palette.primary.main}`,
         })}
       >
-        <Handle
-          type="source"
-          position={Position.Right}
-          style={{
-            top: 25,
-            padding: 1,
-            marginLeft: -1.5,
-            backgroundColor: "red",
-            width: 3,
-            height: 3,
-            borderRadius: 0,
-          }}
-          id={props.data.start}
-        />
-
-        <Typography
-          sx={{
-            position: "absolute",
-            top: 25,
-            right: 3,
-            px: 1,
-            fontSize: "0.3rem",
-            marginTop: "-0.2rem",
-            color: "gray",
-          }}
-        >
-          Event
-        </Typography>
-
-        {props.data.output.map((_, index) => (
-          <React.Fragment>
-            <Handle
-              type="source"
-              position={Position.Right}
-              style={{
-                top: (index + 1) * 10 + 25,
-                padding: 1,
-                marginLeft: -1.5,
-                backgroundColor: (ParameterColor as any)[_.type],
-                width: 3,
-                height: 3,
-              }}
-              id={_.id}
-            />
-            <Typography
-              sx={{
-                position: "absolute",
-                top: (index + 1) * 10 + 25,
-                right: 3,
-                fontSize: "0.3rem",
-                marginTop: "-0.2rem",
-                color: (ParameterColor as any)[_.type],
-              }}
-            >
-              {_.name}
-            </Typography>
-          </React.Fragment>
-        ))}
         <Box
           sx={(theme) => ({
             width: "100%",
             py: 0.4,
-            bgcolor: theme.palette.primary.main,
+            bgcolor: yellow[800],
             borderRadius: "0.2rem",
             mt: 0.1,
             ml: 0.01,
@@ -122,26 +64,26 @@ export function TextUpdaterNode(props: CardInterface) {
             py: 1,
           })}
         >
-          {props.data.parameters.map((item, index) => (
-            <InputHandler
-              item={item}
-              onChange={(value) => {
-                const newParameters = { ...item, value: value };
-                dispatch(
-                  UpdateData({
-                    data: {
-                      parameters: [
-                        props.data.parameters.filter((_, i) => i !== index),
-                        newParameters,
-                      ],
-                    },
-                    id: props.id,
-                  })
-                );
-              }}
-              key={index}
-            />
-          ))}
+          <Typography>
+            {props.data.input.map((input, index) => (
+              <div>
+                <Typography
+                  sx={{
+                    fontSize: "0.4rem",
+                  }}
+                >
+                  {input.name}
+                </Typography>
+                <pre
+                  style={{
+                    fontSize: "0.4rem",
+                  }}
+                >
+                  {JSON.stringify(input.value, null, 2)}
+                </pre>
+              </div>
+            ))}
+          </Typography>
         </Box>
 
         {props.data.input.map((_, index) => {

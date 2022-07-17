@@ -2,10 +2,16 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import PredefinedComponents from "../../PredefinedComponents";
 import { CardInterface, CardType } from "../../types/Card";
 import { nanoid } from "nanoid";
-import { NodeChange, NodeDimensionChange } from "react-flow-renderer";
+import {
+  NodeChange,
+  NodeDimensionChange,
+  useUpdateNodeInternals,
+} from "react-flow-renderer";
 import NodeChangeHandler from "../../utils/NodeChangeHandler";
-import { UpdateData } from "../functions/UpdateData";
-import { newIOP } from "../functions/newIOP";
+import { UpdateData } from "../functions/UpdateData.action";
+import { newIOP } from "../functions/newIOP.action";
+import { RunCode } from "../functions/run.action";
+import toast from "react-hot-toast";
 const initialState: Array<CardInterface> = [];
 
 export const NodeSlice = createSlice({
@@ -20,7 +26,7 @@ export const NodeSlice = createSlice({
     ) => {
       const newCard: CardInterface = {
         type: action.payload.type,
-        data: PredefinedComponents[action.payload.type],
+        data: PredefinedComponents[action.payload.type](),
         positionAbsolute: {
           x: 0,
           y: 0,
@@ -44,9 +50,19 @@ export const NodeSlice = createSlice({
         state = NodeChangeHandler(nodeChange, state);
       });
     },
+
+    DeleteNode: (
+      state: Array<CardInterface>,
+      action: PayloadAction<CardInterface>
+    ) => {
+      state = state.filter((_) => _.id != action.payload.id);
+
+      return state;
+    },
   },
   extraReducers(builder) {
     builder.addCase(UpdateData.fulfilled, (state, action) => {
+      console.log(action.payload);
       if (action.payload === undefined) return state;
       const newNode: CardInterface = action.payload;
 
@@ -56,6 +72,8 @@ export const NodeSlice = createSlice({
         }
         return node;
       });
+
+      console.log(state);
 
       return state;
     });
@@ -72,8 +90,22 @@ export const NodeSlice = createSlice({
 
       return state;
     });
+    builder.addCase(RunCode.fulfilled, (state, action) => {
+      toast.success("Code executed successfully");
+      if (action.payload === undefined) return state;
+
+      const newNode: Array<CardInterface> | undefined = action.payload.node;
+      if (newNode === undefined) return state;
+
+      state = newNode;
+      return state;
+    });
+    builder.addCase(RunCode.rejected, (state, action) => {
+      toast.error("Code execution failed");
+      return state;
+    });
   },
 });
 
-export const { addCard, UpdateNode } = NodeSlice.actions;
+export const { addCard, UpdateNode, DeleteNode } = NodeSlice.actions;
 export default NodeSlice.reducer;

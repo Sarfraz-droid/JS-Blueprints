@@ -1,7 +1,15 @@
 export enum CardType {
   input = "input",
-  EventStart = "EventStart",
-  EventEnd = "EventEnd",
+  basic_EventStart = "basic_EventStart",
+  basic_EventEnd = "basic_EventEnd",
+  basic_Output = "basic_Output",
+  string_AddStrings = "string_AddStrings",
+  input_StringInput = "input_StringInput",
+  string_Repeater = "string_Repeater",
+  input_Number = "input_Number",
+  number_AddNumbers = "number_AddNumbers",
+  number_MultiplyNumbers = "number_MultiplyNumbers",
+  number_DivideNumbers = "number_DivideNumbers",
 }
 
 export enum Parameters {
@@ -18,7 +26,7 @@ export const ParameterColor: object = {
 
 export interface ICardIO {
   type: Parameters;
-  value: string;
+  value: string | number | object;
   name: string;
   id: string;
 }
@@ -32,6 +40,7 @@ export interface CardData {
     message: string;
     code: string;
   };
+  editable: boolean | undefined;
   function: {
     content: string;
     outdated: boolean;

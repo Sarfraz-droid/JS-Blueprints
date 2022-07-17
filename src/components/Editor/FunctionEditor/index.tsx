@@ -2,10 +2,12 @@ import React, { useCallback, useState } from "react";
 import Editor from "@monaco-editor/react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../redux/store";
-import { UpdateData } from "../../../redux/functions/UpdateData";
+import { UpdateData } from "../../../redux/functions/UpdateData.action";
 import { instance } from "../../../api/instance";
 import toast from "react-hot-toast";
-import { Button, Typography } from "@mui/material";
+import { Box, Button, Grid, Stack, Typography } from "@mui/material";
+import { blueGrey, grey } from "@mui/material/colors";
+import { fontWeight } from "@mui/system";
 
 function FunctionEditor() {
   const [CodeRunner, setCodeRunner] = useState({
@@ -62,18 +64,34 @@ function FunctionEditor() {
 
   return (
     <div className="my-2">
-      {activeCard?.data.function.outdated ? (
-        <div
-          style={{
+      {!activeCard?.data.editable ? (
+        <Grid
+          container
+          sx={{
             height: "60vh",
+            width: "90%",
+            m: 2,
+            backgroundColor: blueGrey[900],
+            color: "white",
+            borderRadius: "10px",
           }}
-          className="bg-slate-900 rounded-md text-white flex flex-col justify-center items-center"
+          alignItems={"center"}
+          justifyContent={"center"}
         >
-          <div>You have to generate a new function for this card.</div>
-          <button className="p-3 px-5 shadow-lg hover:shadow-blue-500/20 my-4 bg-blue-500 hover:bg-blue-600 rounded-lg transition-all">
-            Generate function
-          </button>
-        </div>
+          <Grid item alignItems={"center"} justifyContent={"center"}>
+            <Stack textAlign={"center"} spacing={1}>
+              <Typography variant="h4">This card is not editable.</Typography>
+              <Typography
+                variant="body1"
+                sx={{
+                  fontWeight: 100,
+                }}
+              >
+                This is a generated card. You can not edit it.
+              </Typography>
+            </Stack>
+          </Grid>
+        </Grid>
       ) : (
         <Editor
           height="60vh"

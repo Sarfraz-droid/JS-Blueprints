@@ -12,10 +12,10 @@ export const UpdateData = createAsyncThunk(
     thunkApi
   ) => {
     const node: RootState = thunkApi.getState() as RootState;
-    let activeNode: activeNodestate = node.activeNode;
-    let newNode = node.nodes.find((node) => node.id === activeNode.activeNode);
+    let newNode = node.nodes.find((node) => node.id === action.id);
 
-    if (newNode === undefined) return;
+    if (newNode === undefined)
+      return thunkApi.rejectWithValue("Node not found");
 
     newNode = {
       ...newNode,

@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import React, { MouseEventHandler } from "react";
+import React, { MouseEventHandler, useEffect } from "react";
 import ReactFlow, {
   useNodesState,
   useEdgesState,
@@ -10,26 +10,24 @@ import ReactFlow, {
   Edge,
   NodeChange,
   EdgeChange,
+  ReactFlowProvider,
+  useUpdateNodeInternals,
 } from "react-flow-renderer";
 import { useDispatch, useSelector } from "react-redux";
-import { TextUpdaterNode } from "../../components/cards/TextNode";
+import { TextUpdaterNode } from "../../components/cards/NodeTypes/TextNode";
+import { nodeTypes } from "../../PredefinedComponents";
 import { setNode } from "../../redux/features/activeNodeSlice";
 import { addEdgeReducer, setEdgeReducer } from "../../redux/features/edgeSlice";
 import { UpdateNode } from "../../redux/features/NodeSlice";
 import { addEdgeThunk } from "../../redux/functions/addEdge.action";
 import { AppDispatch, RootState } from "../../redux/store";
 import { CardInterface, CardType, Parameters } from "../../types/Card";
-import { EventHandlerNode } from "../cards/EventStart";
+import { EventHandlerNode } from "../cards/NodeTypes/EventStart";
+import { OutputNode } from "../cards/NodeTypes/OutputNode";
 
 const initialEdges = [
   { id: "e1-2", source: "1", target: "2", label: "updatable edge" },
 ];
-
-const nodeTypes = {
-  [CardType.input]: TextUpdaterNode,
-  [CardType.EventStart]: EventHandlerNode,
-  [CardType.EventEnd]: EventHandlerNode,
-};
 
 const NodeComponent = () => {
   const nodes = useSelector((state: RootState) => state.nodes);
@@ -40,11 +38,18 @@ const NodeComponent = () => {
     console.log("onEdgeUpdate", oldEdge, newConnection);
     // setEdges((els) => updateEdge(oldEdge, newConnection, els));
   };
+  const updateNodeInternals = useUpdateNodeInternals();
   const onConnect = (params: Edge<any> | Connection) => {
     console.log("onConnect", params);
-    dispatch(addEdgeThunk(params))
+    dispatch(addEdgeThunk(params));
   };
   console.log(nodes, edges);
+
+  useEffect(() => {
+    nodes.forEach((node) => {
+      updateNodeInternals(node.id);
+    });
+  }, [nodes]);
 
   return (
     <ReactFlow

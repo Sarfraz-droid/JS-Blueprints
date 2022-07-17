@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { IOPBody } from "../interface/function.types";
+import { runCodeService } from "../services/functions.service";
 
 export const generate = (req: Request, res: Response) => {
   try {
@@ -25,27 +26,10 @@ export const runCode = (req: Request, res: Response) => {
 
   try {
     const input: Array<IOPBody> = body.input;
-    const patameters: Array<IOPBody> = body.parameter;
+    const parameters: Array<IOPBody> = body.parameter;
     const code: string = body?.code ? body.code : "return  {};";
 
-    let params: {
-      [key: string]: any;
-    } = {};
-    patameters.forEach((param) => {
-      params[param.name] = param.value;
-    });
-
-    const _input: {
-      [key: string]: any;
-    } = {};
-
-    input.forEach((inp) => {
-      _input[inp.name] = inp.value;
-    });
-
-    const output = eval(code)(_input, params);
-
-    console.log(output);
+    const output = runCodeService(input, parameters, code);
 
     res.json({
       status: "success",

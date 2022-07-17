@@ -4,10 +4,10 @@ import { Box } from "@mui/system";
 import React, { ChangeEvent, useCallback } from "react";
 import { Handle, Position } from "react-flow-renderer";
 import { useDispatch } from "react-redux";
-import { UpdateData } from "../../redux/functions/UpdateData";
-import { AppDispatch } from "../../redux/store";
-import { CardInterface, CardType } from "../../types/Card";
-import InputHandler from "./UI/InputHandler";
+import { UpdateData } from "../../../redux/functions/UpdateData.action";
+import { AppDispatch } from "../../../redux/store";
+import { CardInterface, CardType } from "../../../types/Card";
+import InputHandler from "../UI/InputHandler";
 
 export function EventHandlerNode(props: CardInterface) {
   console.log(props);
@@ -33,7 +33,7 @@ export function EventHandlerNode(props: CardInterface) {
           border: `1px solid red`,
         })}
       >
-        {props.type === CardType.EventStart && (
+        {props.type === CardType.basic_EventStart && (
           <React.Fragment>
             <Handle
               type="source"
@@ -85,7 +85,7 @@ export function EventHandlerNode(props: CardInterface) {
               color: "white",
             }}
           >
-            {CardType[props.type]}
+            {props.data.label}
           </Typography>
         </Box>
         <Box
@@ -121,7 +121,7 @@ export function EventHandlerNode(props: CardInterface) {
             ))}
         </Box>
 
-        {props.type === CardType.EventEnd && (
+        {props.type === CardType.basic_EventEnd && (
           <React.Fragment>
             <Handle
               type="target"

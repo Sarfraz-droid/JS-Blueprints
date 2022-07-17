@@ -1,0 +1,126 @@
+{
+    "card": [
+        {
+            "type": "EventEnd",
+            "data": {
+                "error": {
+                    "code": "",
+                    "message": ""
+                },
+                "function": {
+                    "content": "\n  /*\n    the object should be returned as value of the ouput\n    if ouput has \n    {\n      type: \"string\",\n      value: \"Hello\"\n    }\n\n    then the function should return {\n      Hello: \"Output String\"\n    }\n  */\n  \n(input, parameter) => {\n  return {};\n}",
+                    "outdated": false,
+                    "old": ""
+                },
+                "output": [],
+                "parameters": [],
+                "input": [],
+                "start": "root__P_jOCkSwfDBnCFQKaEtux",
+                "end": "root__-wc7pdahnhVlWsDS1IB34"
+            },
+            "positionAbsolute": {
+                "x": 180,
+                "y": -30
+            },
+            "id": "F5dGaAiwdKJfCzyYuvv1a",
+            "position": {
+                "x": 180,
+                "y": -30
+            }
+        },
+        {
+            "type": "EventStart",
+            "data": {
+                "error": {
+                    "code": "",
+                    "message": ""
+                },
+                "function": {
+                    "content": "\n  /*\n    the object should be returned as value of the ouput\n    if ouput has \n    {\n      type: \"string\",\n      value: \"Hello\"\n    }\n\n    then the function should return {\n      Hello: \"Output String\"\n    }\n  */\n  \n(input, parameter) => {\n  return {};\n}",
+                    "outdated": false,
+                    "old": ""
+                },
+                "output": [],
+                "parameters": [],
+                "input": [],
+                "start": "root__P_jOCkSwfDBnCFQKaEtux",
+                "end": "root__-wc7pdahnhVlWsDS1IB34"
+            },
+            "positionAbsolute": {
+                "x": -315,
+                "y": -15
+            },
+            "id": "hTIT2MekQ81TMqdQXi8K5",
+            "position": {
+                "x": -315,
+                "y": -15
+            }
+        },
+        {
+            "type": "input",
+            "data": {
+                "error": {
+                    "code": "",
+                    "message": ""
+                },
+                "function": {
+                    "content": "\n  /*\n    the object should be returned as value of the ouput\n    if ouput has \n    {\n      type: \"string\",\n      value: \"Hello\"\n    }\n\n    then the function should return {\n      Hello: \"Output String\"\n    }\n  */\n  \n(input, parameter) => {\n  return {};\n}",
+                    "outdated": false,
+                    "old": ""
+                },
+                "label": "Heading",
+                "output": [
+                    {
+                        "type": "string",
+                        "value": "string",
+                        "name": "Output#1",
+                        "id": "string__output__RB9kW3tWoGYN1V_4I4grk"
+                    }
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "value": "string",
+                        "name": "Parameter#1",
+                        "id": "string__parameter__bjVdeu_1Ei1JdsFO22nQH"
+                    }
+                ],
+                "input": [
+                    {
+                        "id": "string__input__N5-fjV-rAQcqUmKeJubpw",
+                        "type": "string",
+                        "value": "string",
+                        "name": "Input#1"
+                    }
+                ],
+                "start": "root__dzQ-Vbsp1wNPDshdqMR7W",
+                "end": "root__KdLX-o81t-f6d2ZJvWP7N"
+            },
+            "positionAbsolute": {
+                "x": -165,
+                "y": -15
+            },
+            "id": "yQb5x3LOTbyeaoy3sAXnn",
+            "position": {
+                "x": -165,
+                "y": -15
+            }
+        }
+    ],
+    "edges": [
+        {
+            "source": "hTIT2MekQ81TMqdQXi8K5",
+            "sourceHandle": "root__P_jOCkSwfDBnCFQKaEtux",
+            "target": "yQb5x3LOTbyeaoy3sAXnn",
+            "targetHandle": "root__KdLX-o81t-f6d2ZJvWP7N",
+            "id": "reactflow__edge-hTIT2MekQ81TMqdQXi8K5root__P_jOCkSwfDBnCFQKaEtux-yQb5x3LOTbyeaoy3sAXnnroot__KdLX-o81t-f6d2ZJvWP7N"
+        },
+        {
+            "source": "yQb5x3LOTbyeaoy3sAXnn",
+            "sourceHandle": "root__dzQ-Vbsp1wNPDshdqMR7W",
+            "target": "F5dGaAiwdKJfCzyYuvv1a",
+            "targetHandle": "root__-wc7pdahnhVlWsDS1IB34",
+            "id": "reactflow__edge-yQb5x3LOTbyeaoy3sAXnnroot__dzQ-Vbsp1wNPDshdqMR7W-F5dGaAiwdKJfCzyYuvv1aroot__-wc7pdahnhVlWsDS1IB34"
+        }
+    ]
+}
