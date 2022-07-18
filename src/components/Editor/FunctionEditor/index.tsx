@@ -1,13 +1,23 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Editor from "@monaco-editor/react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../redux/store";
 import { UpdateData } from "../../../redux/functions/UpdateData.action";
 import { instance } from "../../../api/instance";
 import toast from "react-hot-toast";
-import { Box, Button, Grid, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Divider,
+  Grid,
+  Input,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { blueGrey, grey } from "@mui/material/colors";
 import { fontWeight } from "@mui/system";
+import { Parameters } from "../../../types/Card";
 
 function FunctionEditor() {
   const [CodeRunner, setCodeRunner] = useState({
@@ -24,42 +34,6 @@ function FunctionEditor() {
   });
 
   const dispatch = useDispatch<AppDispatch>();
-
-  const TestState = useCallback(async () => {
-    try {
-      setCodeRunner({
-        ...CodeRunner,
-        running: true,
-      });
-
-      const data = {
-        input: activeCard?.data.input,
-        parameter: activeCard?.data.parameters,
-        code: activeCard?.data.function.content,
-      };
-
-      console.log(data);
-
-      const res = await instance.post("/function/run", data);
-
-      if (res.status === 200) {
-        setCodeRunner({
-          running: false,
-          output: JSON.stringify(res.data.data, null, 2),
-          data: res.data.data,
-        });
-      }
-    } catch (err) {
-      console.log(err);
-      setCodeRunner({
-        running: false,
-        output: "Error Occured",
-        data: {},
-      });
-      toast.error("Error in running code");
-    }
-  }, [activeCard, CodeRunner]);
-
   if (!activeCard) return <>Please Choose a card</>;
 
   return (
@@ -115,22 +89,7 @@ function FunctionEditor() {
         />
       )}
 
-      <Button variant="contained" onClick={TestState} sx={{ my: 2 }}>
-        {CodeRunner.running ? "Running..." : "Run"}
-      </Button>
-
-      <div className="p-1">
-        <Typography
-          sx={{
-            fontWeight: 700,
-          }}
-        >
-          Output
-        </Typography>
-        <pre className="p-3 h-40 bg-slate-200 font-mono">
-          {CodeRunner.output}
-        </pre>
-      </div>
+      <Divider />
     </div>
   );
 }

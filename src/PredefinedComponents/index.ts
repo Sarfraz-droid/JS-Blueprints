@@ -14,12 +14,13 @@ import { number_MultiplyNumbers } from "./Number/MultiplyNumbers";
 import { number_DivideNumbers } from "./Number/DivideNumbers";
 
 const PredefinedComponents = {
+  [CardType.Custom]: InputCard,
   [CardType.input]: InputCard,
   [CardType.basic_EventStart]: () => EventHandler("Event Start"),
   [CardType.basic_EventEnd]: () => EventHandler("Event End"),
   [CardType.basic_Output]: OutputCard,
   [CardType.string_AddStrings]: string_AddStrings,
-  [CardType.input_StringInput]: input_StringInput,
+  [CardType.input_String]: input_StringInput,
   [CardType.string_Repeater]: string_Repeater,
   [CardType.input_Number]: input_numberInput,
   [CardType.number_AddNumbers]: number_AddNumbers,

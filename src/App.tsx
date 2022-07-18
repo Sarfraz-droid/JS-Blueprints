@@ -43,51 +43,6 @@ function App() {
           </Button>
 
           <Button
-            color="success"
-            variant="contained"
-            onClick={() => {
-              dispatch(
-                addCard({
-                  type: CardType.basic_EventStart,
-                })
-              );
-            }}
-          >
-            <AddIcon />
-            Add Event Start
-          </Button>
-
-          <Button
-            color="warning"
-            variant="contained"
-            onClick={() => {
-              dispatch(
-                addCard({
-                  type: CardType.basic_EventEnd,
-                })
-              );
-            }}
-          >
-            <AddIcon />
-            Add Event End
-          </Button>
-
-          <Button
-            color="error"
-            variant="contained"
-            onClick={() => {
-              dispatch(
-                addCard({
-                  type: CardType.basic_Output,
-                })
-              );
-            }}
-          >
-            <AddIcon />
-            Add Output Card
-          </Button>
-
-          <Button
             color="secondary"
             onClick={() => {
               console.log({

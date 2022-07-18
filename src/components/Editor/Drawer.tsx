@@ -42,7 +42,7 @@ function Drawer({ children }: { children: React.ReactNode }) {
         <motion.div
           className={styles.drawer}
           style={{
-            height: "100vh",
+            height: "100%",
             width: 20,
             cursor: "col-resize",
           }}

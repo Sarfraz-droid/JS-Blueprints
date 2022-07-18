@@ -181,6 +181,19 @@ function MultiLevelMenu({
               </AccordionDetails>
             </Accordion>
           ))}
+
+          <MenuItem
+            onClick={() => {
+              dispatch(
+                addCard({
+                  type: CardType.input,
+                })
+              );
+              onClose();
+            }}
+          >
+            Custom
+          </MenuItem>
         </Stack>
       </Menu>
     </React.Fragment>

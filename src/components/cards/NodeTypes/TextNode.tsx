@@ -26,8 +26,12 @@ export function TextUpdaterNode(props: CardInterface) {
         <Card
           sx={(theme) => ({
             minHeight:
-              Math.max(props.data.output.length, props.data.parameters.length) *
-                5 +
+              Math.max(
+                props.data.output.length,
+                props.data.parameters.length,
+                props.data.input.length
+              ) *
+                8 +
               50,
             "&:focus": {
               boxShadow: theme.shadows[6],

@@ -1,9 +1,10 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import Drawer from "./Drawer";
 import CardInfo from "./CardInfo";
 import FunctionEditor from "./FunctionEditor";
 import { Tabs, Tab, Box } from "@mui/material";
 import { theme } from "../theme/theme";
+import TestRun from "./TestRun";
 
 const EditorTabs = [
   {
@@ -14,6 +15,11 @@ const EditorTabs = [
     name: "Function Editor",
     component: FunctionEditor,
   },
+  {
+    name: "Test Runner",
+    component: TestRun,
+    props: [],
+  },
 ];
 
 function TabPanel({ value }: { value: number }) {
@@ -22,7 +28,8 @@ function TabPanel({ value }: { value: number }) {
     <Box
       sx={{
         padding: "0.3rem",
-        width: "100%",
+        height: "92vh",
+        overflow: "auto",
       }}
     >
       <TabComponent />
@@ -32,6 +39,7 @@ function TabPanel({ value }: { value: number }) {
 
 function EditorComponent() {
   const [tab, setTab] = React.useState(0);
+  const [SampleInput, setSampleInput] = useState<{ [key: string]: string }>({});
 
   return (
     <React.Fragment>

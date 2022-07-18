@@ -1,10 +1,11 @@
 export enum CardType {
+  Custom = "Custom",
   input = "input",
   basic_EventStart = "basic_EventStart",
   basic_EventEnd = "basic_EventEnd",
   basic_Output = "basic_Output",
   string_AddStrings = "string_AddStrings",
-  input_StringInput = "input_StringInput",
+  input_String = "input_String",
   string_Repeater = "string_Repeater",
   input_Number = "input_Number",
   number_AddNumbers = "number_AddNumbers",
@@ -15,7 +16,7 @@ export enum CardType {
 export enum Parameters {
   string = "string",
   number = "number",
-  object = "object",
+  // object = "object",
 }
 
 export const ParameterColor: object = {

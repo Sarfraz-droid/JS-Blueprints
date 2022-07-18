@@ -1,4 +1,5 @@
-import { Grid, InputBase } from "@mui/material";
+import { Grid, InputBase, Typography } from "@mui/material";
+import { red } from "@mui/material/colors";
 import React from "react";
 import ReactSelect from "react-select";
 import { ICardIO, Parameters } from "../../types/Card";
@@ -19,7 +20,7 @@ function FormHandler(props: IProps) {
     case Parameters.string:
       return (
         <React.Fragment>
-          <ReactSelect
+          {/* <ReactSelect
             value={{
               value: props.data.type as string,
               label: props.data.type as string,
@@ -33,7 +34,17 @@ function FormHandler(props: IProps) {
                   type: e.value as Parameters,
                 });
             }}
-          />
+          /> */}
+          <Typography
+            sx={{
+              width: 100,
+              fontWeight: 600,
+              color: red[600],
+            }}
+            alignSelf={"center"}
+          >
+            {props.data.type}
+          </Typography>
           <InputBase
             value={props.data.name}
             sx={{
@@ -53,21 +64,16 @@ function FormHandler(props: IProps) {
     case Parameters.number:
       return (
         <React.Fragment>
-          <ReactSelect
-            value={{
-              value: props.data.type.toString(),
-              label: props.data.type.toString(),
+          <Typography
+            sx={{
+              width: 100,
+              fontWeight: 600,
+              color: red[600],
             }}
-            options={options}
-            className={styles.select}
-            onChange={(e) => {
-              if (e)
-                props.onChange(props.data, {
-                  ...props.data,
-                  type: e.value as Parameters,
-                });
-            }}
-          />
+            alignSelf={"center"}
+          >
+            {props.data.type}
+          </Typography>
           <InputBase
             value={props.data.name}
             sx={{
