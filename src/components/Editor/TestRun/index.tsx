@@ -7,11 +7,80 @@ import {
   Divider,
   Grid,
   Input,
+  InputLabel,
+  MenuItem,
+  Select,
   Stack,
   TextField,
   Typography,
 } from "@mui/material";
 import { runCodeService } from "../../../services/functions.service";
+import { ICardIO, Parameters } from "../../../types/Card";
+
+function Handler({
+  item,
+  SampleInput,
+  setSampleInput,
+}: {
+  item: ICardIO;
+  SampleInput: { [key: string]: string };
+  setSampleInput: (value: any) => void;
+}) {
+  switch (item.type) {
+    case Parameters.string:
+    case Parameters.number:
+      return (
+        <React.Fragment>
+          <InputLabel id={`testinput_label_${item.id}`}>{item.name}</InputLabel>
+
+          <TextField
+            variant="filled"
+            label={item.name}
+            placeholder={`Enter ${item.type}`}
+            type={item.type}
+            sx={{
+              p: 0.4,
+              width: "60%",
+            }}
+            value={SampleInput?.[item.name] ? SampleInput[item.name] : ""}
+            onChange={(e) => {
+              setSampleInput({
+                ...SampleInput,
+                [item.name]: e.target.value,
+              });
+            }}
+          />
+        </React.Fragment>
+      );
+
+    case Parameters.boolean:
+      return (
+        <React.Fragment>
+          <InputLabel id={`testinput_label_${item.id}`}>{item.name}</InputLabel>
+          <Select
+            variant="filled"
+            labelId={`testinput_label_${item.id}`}
+            id={`testinput_${item.id}`}
+            label={"Input"}
+            placeholder={item.name}
+            value={
+              SampleInput?.[item.name] !== undefined
+                ? SampleInput[item.name]
+                : ""
+            }
+            onChange={(e) => {
+              setSampleInput({
+                ...SampleInput,
+                [item.name]: e.target.value === "true" ? true : false,
+              });
+            }}>
+            <MenuItem value={"true"}>True</MenuItem>
+            <MenuItem value={"false"}>False</MenuItem>
+          </Select>
+        </React.Fragment>
+      );
+  }
+}
 
 function TestRun() {
   const [CodeRunner, setCodeRunner] = useState({
@@ -83,33 +152,19 @@ function TestRun() {
       style={{
         height: "95vh",
         overflow: "auto",
-      }}
-    >
+      }}>
       <Stack
         direction={"column"}
         spacing={1}
         sx={{
           p: 2,
-        }}
-      >
+        }}>
         {activeCard.data.input.map((item, index) => (
           <React.Fragment>
-            <TextField
-              variant="filled"
-              label={item.name}
-              placeholder={`Enter ${item.type}`}
-              type={item.type}
-              sx={{
-                p: 0.4,
-                width: "60%",
-              }}
-              value={SampleInput?.[item.name] ? SampleInput[item.name] : ""}
-              onChange={(e) => {
-                setSampleInput({
-                  ...SampleInput,
-                  [item.name]: e.target.value,
-                });
-              }}
+            <Handler
+              item={item}
+              SampleInput={SampleInput}
+              setSampleInput={setSampleInput}
             />
           </React.Fragment>
         ))}
@@ -121,8 +176,7 @@ function TestRun() {
         <Typography
           sx={{
             fontWeight: 700,
-          }}
-        >
+          }}>
           Output
         </Typography>
         <pre className="p-3 h-40 bg-slate-200 font-mono">

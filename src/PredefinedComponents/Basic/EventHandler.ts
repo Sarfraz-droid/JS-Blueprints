@@ -1,6 +1,7 @@
 import { CardData, CardInterface, Parameters } from "../../types/Card";
 import { defaultComment, main } from "../../utils/default";
 import { nanoid } from "nanoid";
+import React from "react";
 
 export const EventHandler = (Heading: string) =>
   ({
@@ -15,6 +16,7 @@ export const EventHandler = (Heading: string) =>
     },
     editable: false,
     label: Heading,
+    renderer: null,
     output: [],
     parameters: [],
     input: [],

@@ -39,8 +39,7 @@ export function TextUpdaterNode(props: CardInterface) {
             boxShadow: theme.shadows[0],
             background: grey[100],
             border: `1px solid ${theme.palette.primary.main}`,
-          })}
-        >
+          })}>
           <Handle
             type="source"
             position={Position.Right}
@@ -65,8 +64,7 @@ export function TextUpdaterNode(props: CardInterface) {
               fontSize: "0.3rem",
               marginTop: "-0.2rem",
               color: "gray",
-            }}
-          >
+            }}>
             Event
           </Typography>
 
@@ -93,8 +91,7 @@ export function TextUpdaterNode(props: CardInterface) {
                   fontSize: "0.3rem",
                   marginTop: "-0.2rem",
                   color: (ParameterColor as any)[_.type],
-                }}
-              >
+                }}>
                 {_.name}
               </Typography>
             </React.Fragment>
@@ -107,8 +104,7 @@ export function TextUpdaterNode(props: CardInterface) {
               borderRadius: "0.2rem",
               mt: 0.1,
               ml: 0.01,
-            })}
-          >
+            })}>
             <Typography
               sx={{
                 fontSize: "0.3rem",
@@ -116,8 +112,7 @@ export function TextUpdaterNode(props: CardInterface) {
                 pl: 1,
                 fontWeight: "bold",
                 color: "white",
-              }}
-            >
+              }}>
               {props.data.label}
             </Typography>
           </Box>
@@ -126,8 +121,8 @@ export function TextUpdaterNode(props: CardInterface) {
               pl: 4,
               pr: 5,
               py: 1,
-            })}
-          >
+            })}>
+            {props.data.renderer !== null ? props.data.renderer() : ""}
             {props.data.parameters.map((item, index) => (
               <InputHandler
                 item={item}
@@ -176,8 +171,7 @@ export function TextUpdaterNode(props: CardInterface) {
                     fontSize: "0.3rem",
                     marginTop: "-0.2rem",
                     color: (ParameterColor as any)[_.type],
-                  }}
-                >
+                  }}>
                   {_.name}
                 </Typography>
               </React.Fragment>
@@ -208,8 +202,7 @@ export function TextUpdaterNode(props: CardInterface) {
               fontSize: "0.3rem",
               marginTop: "-0.2rem",
               color: "gray",
-            }}
-          >
+            }}>
             Event
           </Typography>
         </Card>

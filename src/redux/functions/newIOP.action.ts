@@ -17,11 +17,10 @@ function getField(field: Parameters, type: string) {
         value: "",
         id: `${field}__${type}__${nanoid()}`,
       };
-
-    case Parameters.object:
+    case Parameters.boolean:
       return {
-        type: Parameters.object,
-        value: {},
+        type: Parameters.boolean,
+        value: false,
         id: `${field}__${type}__${nanoid()}`,
       };
   }

@@ -15,6 +15,7 @@ export const InputCard = () =>
     },
     editable: true,
     label: "Heading",
+    renderer: null,
     output: [
       {
         type: Parameters.string,

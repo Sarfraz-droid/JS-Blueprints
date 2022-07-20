@@ -1,3 +1,5 @@
+import React from "react";
+
 export enum CardType {
   Custom = "Custom",
   input = "input",
@@ -8,6 +10,7 @@ export enum CardType {
   input_String = "input_String",
   string_Repeater = "string_Repeater",
   input_Number = "input_Number",
+  input_Boolean = "input_Boolean",
   number_AddNumbers = "number_AddNumbers",
   number_MultiplyNumbers = "number_MultiplyNumbers",
   number_DivideNumbers = "number_DivideNumbers",
@@ -16,6 +19,7 @@ export enum CardType {
 export enum Parameters {
   string = "string",
   number = "number",
+  boolean = "boolean",
   // object = "object",
 }
 
@@ -23,11 +27,12 @@ export const ParameterColor: object = {
   string: "green",
   number: "blue",
   object: "orange",
+  boolean: "purple",
 };
 
 export interface ICardIO {
   type: Parameters;
-  value: string | number | object;
+  value: string | number | object | boolean;
   name: string;
   id: string;
 }
@@ -37,6 +42,7 @@ export interface CardData {
   input: Array<ICardIO>;
   parameters: Array<ICardIO>;
   output: Array<ICardIO>;
+  renderer: null | (() => React.ReactNode);
   error: {
     message: string;
     code: string;

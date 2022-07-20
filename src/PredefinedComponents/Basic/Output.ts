@@ -17,6 +17,7 @@ export const OutputCard = () =>
     label: "Heading",
     output: [],
     parameters: [],
+    renderer: null,
     input: [
       {
         id: `${Parameters.string}__input__${nanoid()}`,

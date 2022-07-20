@@ -19,6 +19,7 @@ export const StringDefault = (
       outdated: false,
       old: "",
     },
+    renderer: null,
     editable: false,
     label: label,
     output: output,

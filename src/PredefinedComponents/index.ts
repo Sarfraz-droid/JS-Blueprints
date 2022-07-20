@@ -12,6 +12,7 @@ import { input_numberInput } from "./Input/NumberInput";
 import { number_AddNumbers } from "./Number/addNumber";
 import { number_MultiplyNumbers } from "./Number/MultiplyNumbers";
 import { number_DivideNumbers } from "./Number/DivideNumbers";
+import { input_BooleanInput } from "./Input/BooleanInput";
 
 const PredefinedComponents = {
   [CardType.Custom]: InputCard,
@@ -20,9 +21,10 @@ const PredefinedComponents = {
   [CardType.basic_EventEnd]: () => EventHandler("Event End"),
   [CardType.basic_Output]: OutputCard,
   [CardType.string_AddStrings]: string_AddStrings,
-  [CardType.input_String]: input_StringInput,
   [CardType.string_Repeater]: string_Repeater,
   [CardType.input_Number]: input_numberInput,
+  [CardType.input_String]: input_StringInput,
+  [CardType.input_Boolean]: input_BooleanInput,
   [CardType.number_AddNumbers]: number_AddNumbers,
   [CardType.number_MultiplyNumbers]: number_MultiplyNumbers,
   [CardType.number_DivideNumbers]: number_DivideNumbers,
