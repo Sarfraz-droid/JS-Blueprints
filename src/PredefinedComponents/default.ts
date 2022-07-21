@@ -7,7 +7,8 @@ export const StringDefault = (
   functions: string,
   input: ICardIO[],
   output: ICardIO[],
-  parameters: ICardIO[]
+  parameters: ICardIO[],
+  renderer: null | (() => any) = null
 ) =>
   ({
     error: {
@@ -19,7 +20,7 @@ export const StringDefault = (
       outdated: false,
       old: "",
     },
-    renderer: null,
+    renderer: renderer,
     editable: false,
     label: label,
     output: output,

@@ -122,7 +122,9 @@ export function TextUpdaterNode(props: CardInterface) {
               pr: 5,
               py: 1,
             })}>
-            {props.data.renderer !== null ? props.data.renderer() : ""}
+            {props.data.renderer !== null && props.data.renderer != undefined
+              ? props.data?.renderer()
+              : ""}
             {props.data.parameters.map((item, index) => (
               <InputHandler
                 item={item}

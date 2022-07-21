@@ -13,9 +13,11 @@ import { number_AddNumbers } from "./Number/addNumber";
 import { number_MultiplyNumbers } from "./Number/MultiplyNumbers";
 import { number_DivideNumbers } from "./Number/DivideNumbers";
 import { input_BooleanInput } from "./Input/BooleanInput";
+import { condition_GreaterThan } from "./Conditionals/Greaterthan";
+import { condition_Equalto } from "./Conditionals/Equalto";
 
 const PredefinedComponents = {
-  [CardType.Custom]: InputCard,
+  [CardType.CustomOperation]: InputCard,
   [CardType.input]: InputCard,
   [CardType.basic_EventStart]: () => EventHandler("Event Start"),
   [CardType.basic_EventEnd]: () => EventHandler("Event End"),
@@ -28,6 +30,8 @@ const PredefinedComponents = {
   [CardType.number_AddNumbers]: number_AddNumbers,
   [CardType.number_MultiplyNumbers]: number_MultiplyNumbers,
   [CardType.number_DivideNumbers]: number_DivideNumbers,
+  [CardType.condition_greaterThan]: condition_GreaterThan,
+  [CardType.condition_equalTo]: condition_Equalto,
 };
 
 export default PredefinedComponents;

@@ -12,7 +12,9 @@ import { UpdateData } from "../functions/UpdateData.action";
 import { newIOP } from "../functions/newIOP.action";
 import { RunCode } from "../functions/run.action";
 import toast from "react-hot-toast";
-const initialState: Array<CardInterface> = [];
+import { DuplicateNodes } from "../functions/Duplicate.action";
+import { Demo } from "./state";
+const initialState: Array<CardInterface> = Demo.nodes as Array<CardInterface>;
 
 export const NodeSlice = createSlice({
   name: "card",
@@ -103,6 +105,12 @@ export const NodeSlice = createSlice({
     builder.addCase(RunCode.rejected, (state, action) => {
       toast.error("Code execution failed");
       return state;
+    });
+    builder.addCase(DuplicateNodes.fulfilled, (state, action) => {
+      if (action.payload === undefined) return state;
+      const newNode: CardInterface | undefined = action.payload;
+      if (newNode === undefined) return state;
+      return [...state, newNode];
     });
   },
 });

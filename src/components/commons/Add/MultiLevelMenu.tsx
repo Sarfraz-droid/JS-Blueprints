@@ -10,7 +10,14 @@ import React, { useMemo } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
-import { blue, green, orange, purple, yellow } from "@mui/material/colors";
+import {
+  blue,
+  cyan,
+  green,
+  orange,
+  purple,
+  yellow,
+} from "@mui/material/colors";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../redux/store";
@@ -55,23 +62,23 @@ function MultiLevelMenu({
           onClose();
         },
       },
-      {
-        id: nanoid(),
-        type: "basic",
-        title: "Basic Operators",
-        backgroundColor: blue[500],
-        data: Object.keys(PredefinedComponents).filter((key) =>
-          key.startsWith("basic")
-        ),
-        onClick: (item: string) => {
-          dispatch(
-            addCard({
-              type: CardType[item as keyof typeof PredefinedComponents],
-            })
-          );
-          onClose();
-        },
-      },
+      // {
+      //   id: nanoid(),
+      //   type: "basic",
+      //   title: "Basic Operators",
+      //   backgroundColor: blue[500],
+      //   data: Object.keys(PredefinedComponents).filter((key) =>
+      //     key.startsWith("basic")
+      //   ),
+      //   onClick: (item: string) => {
+      //     dispatch(
+      //       addCard({
+      //         type: CardType[item as keyof typeof PredefinedComponents],
+      //       })
+      //     );
+      //     onClose();
+      //   },
+      // },
       {
         id: nanoid(),
         type: "input",
@@ -106,6 +113,46 @@ function MultiLevelMenu({
           onClose();
         },
       },
+      {
+        id: nanoid(),
+        type: "condition",
+        title: "Conditionals",
+        backgroundColor: cyan[800],
+        data: Object.keys(PredefinedComponents).filter((key) =>
+          key.startsWith("condition")
+        ),
+        onClick: (item: string) => {
+          dispatch(
+            addCard({
+              type: CardType[item as keyof typeof PredefinedComponents],
+            })
+          );
+          onClose();
+        },
+      },
+    ],
+    []
+  );
+
+  const MenuData = useMemo(
+    () => [
+      {
+        id: nanoid(),
+        type: "basic",
+        title: "Basic Operators",
+        backgroundColor: blue[500],
+        data: Object.keys(PredefinedComponents).filter((key) =>
+          key.startsWith("basic")
+        ),
+        onClick: (item: string) => {
+          dispatch(
+            addCard({
+              type: CardType[item as keyof typeof PredefinedComponents],
+            })
+          );
+          onClose();
+        },
+      },
     ],
     []
   );
@@ -131,8 +178,7 @@ function MultiLevelMenu({
         }}
         sx={{
           my: 0,
-        }}
-      >
+        }}>
         {/* <TextField
           id="standard-basic"
           variant="filled"
@@ -164,8 +210,7 @@ function MultiLevelMenu({
                       color: "white",
                     }}
                   />
-                }
-              >
+                }>
                 <Typography>{item.title}</Typography>
               </AccordionSummary>
               <AccordionDetails>
@@ -173,8 +218,7 @@ function MultiLevelMenu({
                   <MenuItem
                     onClick={() => {
                       item.onClick(_);
-                    }}
-                  >
+                    }}>
                     {_.replace(item.type, "").replace(/[^a-z0-9]/gi, "")}
                   </MenuItem>
                 ))}
@@ -190,10 +234,22 @@ function MultiLevelMenu({
                 })
               );
               onClose();
-            }}
-          >
-            Custom
+            }}>
+            Custom Operation
           </MenuItem>
+
+          {MenuData.map((item, index) => (
+            <React.Fragment>
+              {item.data.map((_, index) => (
+                <MenuItem
+                  onClick={() => {
+                    item.onClick(_);
+                  }}>
+                  {_.replace(item.type, "").replace(/[^a-z0-9]/gi, "")}
+                </MenuItem>
+              ))}
+            </React.Fragment>
+          ))}
         </Stack>
       </Menu>
     </React.Fragment>

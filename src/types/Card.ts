@@ -1,7 +1,7 @@
 import React from "react";
 
 export enum CardType {
-  Custom = "Custom",
+  CustomOperation = "CustomOperation",
   input = "input",
   basic_EventStart = "basic_EventStart",
   basic_EventEnd = "basic_EventEnd",
@@ -14,6 +14,8 @@ export enum CardType {
   number_AddNumbers = "number_AddNumbers",
   number_MultiplyNumbers = "number_MultiplyNumbers",
   number_DivideNumbers = "number_DivideNumbers",
+  condition_greaterThan = "condition_greaterThan",
+  condition_equalTo = "condition_equalTo",
 }
 
 export enum Parameters {

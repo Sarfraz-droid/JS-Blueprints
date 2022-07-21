@@ -30,7 +30,7 @@ export const number_DivideNumbers = () =>
       },
     ],
     []
-  );
+);
 
 // const temp = {
 //   type: "input",

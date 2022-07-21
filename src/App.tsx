@@ -13,6 +13,8 @@ import AddIcon from "@mui/icons-material/Add";
 import { RunCode } from "./redux/functions/run.action";
 import { ReactFlowProvider } from "react-flow-renderer";
 import AddButton from "./components/commons/Add/AddButton";
+import { red } from "@mui/material/colors";
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 
 function App() {
   const card = useSelector((state: RootState) => state.nodes);
@@ -27,7 +29,7 @@ function App() {
       <div className="App h-screen bg-white">
         <Stack direction="row" spacing={3}>
           <AddButton />
-          <Button
+          {/* <Button
             color="primary"
             variant="contained"
             onClick={() => {
@@ -36,14 +38,19 @@ function App() {
                   type: CardType.input,
                 })
               );
-            }}
-          >
+            }}>
             <AddIcon />
             Add Card
-          </Button>
+          </Button> */}
 
           <Button
-            color="secondary"
+            variant="contained"
+            sx={(theme) => ({
+              backgroundColor: red[500],
+              "&:hover": {
+                backgroundColor: red[700],
+              },
+            })}
             onClick={() => {
               console.log({
                 card,
@@ -51,9 +58,9 @@ function App() {
               });
 
               dispatch(RunCode({}));
-            }}
-          >
-            Run
+            }}>
+            <ArrowRightIcon scale={1.5} />
+            Run Code
           </Button>
         </Stack>
 

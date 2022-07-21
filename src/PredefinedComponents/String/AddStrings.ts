@@ -29,5 +29,6 @@ export const string_AddStrings = () =>
         id: `${Parameters.string}__output__${nanoid()}`,
       },
     ],
-    []
+    [],
+    null
   );

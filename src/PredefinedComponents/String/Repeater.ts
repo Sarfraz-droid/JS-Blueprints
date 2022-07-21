@@ -30,5 +30,6 @@ export const string_Repeater = () =>
         value: 1,
         name: `count`,
       },
-    ]
+    ],
+    null
   );
