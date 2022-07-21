@@ -16,5 +16,14 @@
   "bugs": {
     "url": "https://github.com/Sarfraz-droid/fflow/issues"
   },
-  "homepage": "https://github.com/Sarfraz-droid/fflow#readme"
+  "homepage": "https://github.com/Sarfraz-droid/fflow#readme",
+  "devDependencies": {
+    "lerna": "^5.1.8"
+  },
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  }
 }
