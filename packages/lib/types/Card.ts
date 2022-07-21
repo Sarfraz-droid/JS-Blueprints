@@ -22,7 +22,6 @@ export enum Parameters {
   string = "string",
   number = "number",
   boolean = "boolean",
-  // object = "object",
 }
 
 export const ParameterColor: object = {

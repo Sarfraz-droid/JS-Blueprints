@@ -5,16 +5,17 @@ import Drawer from "./components/Editor/Drawer";
 import NodeComponent from "./components/NodeComponent";
 import { addCard } from "./redux/features/NodeSlice";
 import { AppDispatch, RootState } from "./redux/store";
-import { CardType } from "./types/Card";
+import { CardType } from "@workspace/lib/types/Card";
 import { Toaster } from "react-hot-toast";
 import Button from "@mui/material/Button";
-import { Icon, Stack } from "@mui/material";
+import { Box, Icon, Stack } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { RunCode } from "./redux/functions/run.action";
 import { ReactFlowProvider } from "react-flow-renderer";
 import AddButton from "./components/commons/Add/AddButton";
 import { red } from "@mui/material/colors";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import Logo from "./assets/brand/JSBlueprints.png";
 
 function App() {
   const card = useSelector((state: RootState) => state.nodes);
@@ -26,6 +27,38 @@ function App() {
 
   return (
     <ReactFlowProvider>
+      <Box
+        sx={{
+          position: "fixed",
+          width: "100vw",
+          height: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}>
+        <img
+          src={Logo}
+          style={{
+            width: 500,
+            opacity: 0.1,
+          }}
+        />
+      </Box>
+      <Box
+        sx={{
+          position: "fixed",
+          zIndex: 9999,
+          right: 0,
+          background: "white",
+        }}>
+        <img
+          src={Logo}
+          style={{
+            width: 100,
+          }}
+        />
+      </Box>
       <div className="App h-screen bg-white">
         <Stack direction="row" spacing={3}>
           <AddButton />
