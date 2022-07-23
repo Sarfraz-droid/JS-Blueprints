@@ -1,7 +1,7 @@
 import { Menu, MenuItem, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import { CardInterface } from "../@workspace/lib/types/Card";
+import { CardInterface } from "@workspace/lib/types/Card";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../redux/store";
 import { DeleteNode } from "../../../../redux/features/NodeSlice";

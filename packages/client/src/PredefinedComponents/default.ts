@@ -1,5 +1,10 @@
 import { nanoid } from "nanoid";
-import { CardData, CardInterface, ICardIO, Parameters } from "../types/Card";
+import {
+  CardData,
+  CardInterface,
+  ICardIO,
+  Parameters,
+} from "@workspace/lib/types/Card";
 import { defaultComment, main } from "../utils/default";
 
 export const StringDefault = (

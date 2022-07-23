@@ -1,5 +1,5 @@
 import { NodeChange } from "react-flow-renderer";
-import { CardInterface } from "../types/Card";
+import { CardInterface } from "@workspace/lib/types/Card";
 
 export default function NodeChangeHandler(
   nodeChange: NodeChange,

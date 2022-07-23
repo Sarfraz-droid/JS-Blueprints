@@ -1,5 +1,5 @@
-import { ICardIO } from "../types/Card";
-import { IOPBody } from "../types/function.types";
+import { ICardIO } from "@workspace/lib/types/Card";
+import { IOPBody } from "@workspace/lib/types/function.types";
 
 export const runCodeService = (
   input: Array<ICardIO>,

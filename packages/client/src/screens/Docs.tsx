@@ -84,7 +84,7 @@ function Docs() {
         }}>
         <Grid
           item
-          xs={2}
+          sm={2}
           sx={{
             borderRight: "3px solid #e0e0e0",
           }}>
@@ -112,7 +112,8 @@ function Docs() {
         </Grid>
         <Grid
           item
-          xs={10}
+          xs={5}
+          sm={10}
           sx={{
             p: 2,
           }}>

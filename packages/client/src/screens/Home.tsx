@@ -1,4 +1,4 @@
-import { Button, Grid, Stack, Typography } from "@mui/material";
+import { Button, Grid, Stack, Typography, useMediaQuery } from "@mui/material";
 import React from "react";
 import Logo from "../assets/brand/JSBlueprints.png";
 import { motion } from "framer-motion";
@@ -10,8 +10,12 @@ import { Box } from "@mui/system";
 
 import Bg from "../assets/Home/bg.png";
 import Github from "../assets/brand/GitHub-Mark-32px.png";
+import { useTheme } from "@mui/material/styles";
 function Home() {
   const Navigate = useNavigate();
+
+  const theme = useTheme();
+  const matches = useMediaQuery(theme?.breakpoints.down("md"));
 
   return (
     <React.Fragment>
@@ -28,7 +32,7 @@ function Home() {
       <Grid
         container
         sx={{
-          height: "100vh",
+          height: !matches ? "100vh" : "80vh",
           width: "100vw",
         }}
         direction="column"
@@ -46,7 +50,7 @@ function Home() {
             <img
               src={Logo}
               style={{
-                width: 400,
+                width: matches ? 200 : 400,
               }}
             />
           </motion.div>
@@ -56,6 +60,7 @@ function Home() {
             variant="h5"
             sx={{
               p: 3,
+              fontSize: matches ? "0.8rem" : "2rem",
             }}>
             BLOCK BASED JAVASCRIPT BLUEPRINTS
           </Typography>
@@ -63,10 +68,14 @@ function Home() {
         <Grid
           item
           sx={{
-            width: "60%",
-            m: 4,
+            width: matches ? "100%" : "60%",
+            m: matches ? 0 : 4,
+            p: matches ? 2 : 0,
           }}>
-          <Stack direction="row" spacing={3} justifyContent={"space-evenly"}>
+          <Stack
+            direction={matches ? "column" : "row"}
+            spacing={3}
+            justifyContent={"space-evenly"}>
             <Button
               sx={{
                 p: 1,
@@ -112,22 +121,26 @@ function Home() {
         </Grid>
       </Grid>
       <Box
-        sx={{
-          position: "absolute",
+        sx={(theme) => ({
+          position: matches ? "relative" : "absolute",
           bottom: 0,
           p: 2,
-        }}>
-        <Grid container>
+        })}>
+        <Grid
+          container
+          sx={{
+            justifyContent: matches ? "center" : "flex-start",
+          }}>
           <Grid item>
             <Button
-              sx={{
+              sx={(theme) => ({
                 textTransform: "none",
                 "&:hover": {
                   boxShadow: "none",
                   transform: "scale(0.9)",
                 },
                 transition: "all 0.2s ease-in-out",
-              }}
+              })}
               onClick={() => {
                 window.open("https://github.com/Sarfraz-droid/fflow");
               }}>

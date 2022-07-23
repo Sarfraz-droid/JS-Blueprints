@@ -8,7 +8,14 @@ import { AppDispatch, RootState } from "../redux/store";
 import { CardType } from "@workspace/lib/types/Card";
 import { Toaster } from "react-hot-toast";
 import Button from "@mui/material/Button";
-import { Box, Grid, Icon, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Icon,
+  Stack,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { RunCode } from "../redux/functions/run.action";
 import { ReactFlowProvider } from "react-flow-renderer";
@@ -17,12 +24,15 @@ import { orange, red } from "@mui/material/colors";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import Logo from "../assets/brand/JSBlueprints.png";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { useTheme } from "@mui/material/styles";
 
 function Editor() {
   const card = useSelector((state: RootState) => state.nodes);
   const edges = useSelector((state: RootState) => state.edges);
   const activeCard = useSelector((state: RootState) => state.activeNode);
   console.log(card);
+  const theme = useTheme();
+  const matches = useMediaQuery(theme?.breakpoints.down("md"));
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -50,7 +60,7 @@ function Editor() {
       </Box>
       <Box
         sx={{
-          position: "fixed",
+          position: matches ? "relatve" : "fixed",
           zIndex: 10,
           right: 0,
           background: "white",
@@ -70,9 +80,9 @@ function Editor() {
         style={{
           padding: "5px",
         }}>
-        <Grid container spacing={3}>
+        <Grid container spacing={3} direction={matches ? "column" : "row"}>
           <Grid item xs={8}>
-            <Stack direction="row" spacing={3}>
+            <Stack direction={matches ? "column" : "row"} spacing={3}>
               <AddButton />
               {/* <Button
             color="primary"
@@ -134,7 +144,15 @@ function Editor() {
             </Stack>
           </Grid>
         </Grid>
-        <NodeComponent />
+        {matches ? (
+          <Box>
+            <Typography>
+              Please use the desktop version of the editor to add cards.
+            </Typography>
+          </Box>
+        ) : (
+          <NodeComponent />
+        )}
         <AnimatePresence>
           {activeCard.active && <EditorComponent />}
         </AnimatePresence>
