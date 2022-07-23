@@ -9,13 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@workspace/lib": "1.0.0",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@monaco-editor/react": "^4.4.5",
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.8.7",
     "@reduxjs/toolkit": "^1.8.2",
+    "@workspace/lib": "1.0.0",
     "axios": "^0.27.2",
     "framer-motion": "^6.3.16",
     "nanoid": "^4.0.0",
@@ -25,7 +25,9 @@
     "react-flow-renderer": "^10.3.8",
     "react-hot-toast": "^2.2.0",
     "react-json-view": "^1.21.3",
+    "react-markdown": "^8.0.3",
     "react-redux": "^8.0.2",
+    "react-router-dom": "6",
     "react-select": "^5.4.0",
     "sass": "^1.53.0"
   },
@@ -35,6 +37,7 @@
     "@vitejs/plugin-react": "^1.3.0",
     "autoprefixer": "^10.4.7",
     "postcss": "^8.4.14",
+    "raw.macro": "^0.6.1",
     "typescript": "^4.6.3",
     "vite": "^2.9.9"
   }

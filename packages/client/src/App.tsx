@@ -16,6 +16,11 @@ import AddButton from "./components/commons/Add/AddButton";
 import { red } from "@mui/material/colors";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import Logo from "./assets/brand/JSBlueprints.png";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Editor from "./screens/Editor";
+import Docs from "./screens/Docs";
+import Home from "./screens/Home";
 
 function App() {
   const card = useSelector((state: RootState) => state.nodes);
@@ -24,6 +29,24 @@ function App() {
   console.log(card);
 
   const dispatch = useDispatch<AppDispatch>();
+
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/">
+          <Route index element={<Home />} />
+          <Route path="editor" element={<Editor />} />
+          <Route path="docs" element={<Docs />} />
+          {/* <Route index element={<Home />} />
+          <Route path="teams" element={<Teams />}>
+            <Route path=":teamId" element={<Team />} />
+            <Route path="new" element={<NewTeamForm />} />
+            <Route index element={<LeagueStandings />} />
+          </Route> */}
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
 
   return (
     <ReactFlowProvider>
