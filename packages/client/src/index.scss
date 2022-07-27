@@ -4,14 +4,13 @@ body {
 
 .markdown-body {
   font-family: "Roboto", sans-serif;
-  
 }
 
 .react-flow__node {
-  padding: 0px;
+  padding: 0px !important;
   border-radius: 5px;
-  margin: 0px;
-  border: none;
+  margin: 0px !important;
+  border: none !important;
 }
 
 .react-flow__node.selected {
