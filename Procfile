@@ -1,0 +1,1 @@
+web: cd packages/server && tsc && node build/index.js
