@@ -7,7 +7,10 @@ const Introduction = (baseurl: string) => {
 This a Block Based Javascript Builder built on React and Node.js.
 
 ### Get Started
-[Basic Nodes](${baseurl}/basic-nodes)`;
+[Basic Nodes](${baseurl}/docs/basic-nodes)
+
+[Demo](${baseurl}/docs/demo)
+`;
 };
 
 export default Introduction;

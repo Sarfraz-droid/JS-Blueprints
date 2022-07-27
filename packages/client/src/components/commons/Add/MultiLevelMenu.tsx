@@ -21,7 +21,7 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../redux/store";
-import { addCard } from "../../../redux/features/NodeSlice";
+import { addCard } from "../../../redux/features/Node.slice";
 import { CardType } from "@workspace/lib/types/Card";
 import PredefinedComponents from "../../../PredefinedComponents";
 import { nanoid } from "nanoid";

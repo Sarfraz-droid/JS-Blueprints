@@ -1,7 +1,7 @@
 import { AnimatePresence } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
+import NodeInfo from "../components/NodeInfo";
 import EditorComponent from "../components/Editor";
-import NodeComponent from "../components/NodeComponent";
 import { AppDispatch, RootState } from "../redux/store";
 import toast, { Toaster } from "react-hot-toast";
 import Button from "@mui/material/Button";
@@ -14,15 +14,21 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { RunCode } from "../redux/functions/run.action";
-import { ReactFlowProvider } from "react-flow-renderer";
+import { Edge, ReactFlowProvider } from "react-flow-renderer";
 import AddButton from "../components/commons/Add/AddButton";
 import { orange, purple, red } from "@mui/material/colors";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import Logo from "../assets/brand/JSBlueprints.png";
 import { useNavigate, useParams } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
-import { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { loadData, saveData } from "../redux/functions/db.action";
+import { setNodes } from "../redux/features/Node.slice";
+import { Demo } from "../redux/features/state";
+import { CardInterface } from "@workspace/lib/types/Card";
+import { setEdges } from "../redux/features/edge.slice";
+import Renderer from "../components/Editor/Renderer";
+import { setProjectId } from "../redux/features/projectId.slice";
 
 function Editor() {
   const { id } = useParams();
@@ -32,6 +38,7 @@ function Editor() {
   const activeCard = useSelector((state: RootState) => state.activeNode);
   const theme = useTheme();
   const matches = useMediaQuery(theme?.breakpoints.down("md"));
+  const [isLoading, setIsLoading] = useState(true);
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -53,8 +60,20 @@ function Editor() {
 
   useEffect(() => {
     if (id) {
-      console.log("id", id);
-      dispatch(loadData(id));
+      dispatch(setProjectId(id));
+      dispatch(
+        loadData({
+          id: id,
+          cb: () => {
+            setIsLoading(false);
+          },
+        })
+      );
+    } else {
+      dispatch(setProjectId(""));
+      setIsLoading(false);
+      dispatch(setNodes(Demo.nodes as Array<CardInterface>));
+      dispatch(setEdges(Demo.edges as Array<Edge>));
     }
   }, [id]);
 
@@ -123,6 +142,12 @@ function Editor() {
                 <ArrowRightIcon scale={1.5} />
                 Run Code
               </Button>
+              <Button
+                onClick={() => {
+                  Navigate("/editor");
+                }}>
+                Create New Blueprint
+              </Button>
             </Stack>
           </Grid>
           <Grid item xs={4}>
@@ -168,18 +193,8 @@ function Editor() {
             </Stack>
           </Grid>
         </Grid>
-        {matches ? (
-          <Box>
-            <Typography>
-              Please use the desktop version of the editor to add cards.
-            </Typography>
-          </Box>
-        ) : (
-          <NodeComponent />
-        )}
-        <AnimatePresence>
-          {activeCard.active && <EditorComponent />}
-        </AnimatePresence>
+        <Renderer matches={matches} isLoading={isLoading} />
+        <AnimatePresence>{activeCard.active && <NodeInfo />}</AnimatePresence>
         <Toaster />
       </div>
     </ReactFlowProvider>

@@ -11,11 +11,15 @@ import { Box } from "@mui/system";
 import Bg from "../assets/Home/bg.png";
 import Github from "../assets/brand/GitHub-Mark-32px.png";
 import { useTheme } from "@mui/material/styles";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 function Home() {
   const Navigate = useNavigate();
 
   const theme = useTheme();
   const matches = useMediaQuery(theme?.breakpoints.down("md"));
+
+  const projectId = useSelector((state: RootState) => state.projectId);
 
   return (
     <React.Fragment>
@@ -86,7 +90,7 @@ function Home() {
               }}
               variant="contained"
               onClick={() => {
-                Navigate("/editor");
+                Navigate(`/editor/${projectId}`);
               }}
               disableRipple={false}>
               <PlayArrowIcon
@@ -94,7 +98,7 @@ function Home() {
                   p: 1,
                 }}
               />
-              Editor
+              Continue Editor
             </Button>
             <Button
               variant="contained"

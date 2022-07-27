@@ -1,93 +1,84 @@
-import React, { Fragment, useState } from "react";
-import Drawer from "./Drawer";
-import CardInfo from "./CardInfo";
-import FunctionEditor from "./FunctionEditor";
-import { Tabs, Tab, Box } from "@mui/material";
-import { theme } from "../theme/theme";
-import TestRun from "./TestRun";
+import { nanoid } from "nanoid";
+import React, { MouseEventHandler, useEffect } from "react";
+import ReactFlow, {
+  useNodesState,
+  useEdgesState,
+  Controls,
+  updateEdge,
+  addEdge,
+  Connection,
+  Edge,
+  NodeChange,
+  EdgeChange,
+  ReactFlowProvider,
+  useUpdateNodeInternals,
+} from "react-flow-renderer";
+import { useDispatch, useSelector } from "react-redux";
+import { TextUpdaterNode } from "../cards/NodeTypes/TextNode";
+import { nodeTypes } from "../../PredefinedComponents";
+import { setNode } from "../../redux/features/activeNode.slice";
+import { addEdgeReducer, setEdgeReducer } from "../../redux/features/edge.slice";
+import { UpdateNode } from "../../redux/features/Node.slice";
+import { addEdgeThunk } from "../../redux/functions/addEdge.action";
+import { AppDispatch, RootState } from "../../redux/store";
+import { CardInterface, CardType, Parameters } from "@workspace/lib/types/Card";
+import { EventHandlerNode } from "../cards/NodeTypes/EventStart";
+import { OutputNode } from "../cards/NodeTypes/OutputNode";
 
-const EditorTabs = [
-  {
-    name: "Card Info",
-    component: CardInfo,
-  },
-  {
-    name: "Function Editor",
-    component: FunctionEditor,
-  },
-  {
-    name: "Test Runner",
-    component: TestRun,
-    props: [],
-  },
+const initialEdges = [
+  { id: "e1-2", source: "1", target: "2", label: "updatable edge" },
 ];
 
-function TabPanel({ value }: { value: number }) {
-  const TabComponent = EditorTabs[value].component;
+const EditorComponent = () => {
+  const nodes = useSelector((state: RootState) => state.nodes);
+  const edges = useSelector((state: RootState) => state.edges);
+  const dispatch = useDispatch<AppDispatch>();
+  // gets called after end of edge gets dragged to another source or target
+  const onEdgeUpdate = (oldEdge: Edge<any>, newConnection: Connection) => {
+    console.log("onEdgeUpdate", oldEdge, newConnection);
+    // setEdges((els) => updateEdge(oldEdge, newConnection, els));
+  };
+  const updateNodeInternals = useUpdateNodeInternals();
+  const onConnect = (params: Edge<any> | Connection) => {
+    console.log("onConnect", params);
+    dispatch(addEdgeThunk(params));
+  };
+  console.log(nodes, edges);
+
+  useEffect(() => {
+    nodes.forEach((node) => {
+      updateNodeInternals(node.id);
+    });
+  }, [nodes]);
+
   return (
-    <Box
-      sx={{
-        padding: "0.3rem",
-        height: "92vh",
-        overflow: "auto",
+    <ReactFlow
+      nodes={nodes}
+      edges={edges}
+      onNodesChange={(nodes: NodeChange[]) => {
+        console.log("onNodesChange", nodes);
+        dispatch(UpdateNode(nodes));
       }}
-    >
-      <TabComponent />
-    </Box>
+      onEdgesChange={(edges: EdgeChange[]) => {
+        console.log("onEdgesChange", edges);
+      }}
+      snapToGrid
+      onEdgeUpdate={onEdgeUpdate}
+      onConnect={onConnect}
+      onNodeClick={(node) => console.log(node)}
+      fitView
+      attributionPosition="top-right"
+      nodeTypes={nodeTypes as any}
+      onNodeDoubleClick={(event, node) => {
+        console.log(node);
+        dispatch(setNode(node));
+      }}
+      style={{
+        height: "90vh",
+      }}>
+      <Controls />
+    </ReactFlow>
   );
-}
-
-function EditorComponent() {
-  const [tab, setTab] = React.useState(0);
-  const [SampleInput, setSampleInput] = useState<{ [key: string]: string }>({});
-
-  return (
-    <React.Fragment>
-      <Drawer>
-        <Box
-          sx={{
-            flexGrow: 1,
-          }}
-        >
-          <Tabs
-            value={tab}
-            TabIndicatorProps={{
-              children: <span className="MuiTabs-indicatorSpan" />,
-            }}
-            sx={{
-              "& .MuiTabs-indicator": {
-                display: "flex",
-                justifyContent: "center",
-                backgroundColor: "transparent",
-                height: "5px",
-                borderRadius: "10px",
-              },
-              "& .MuiTabs-indicatorSpan": {
-                maxWidth: 40,
-                width: "100%",
-                height: "20px",
-                backgroundColor: theme.palette.primary.main,
-              },
-            }}
-          >
-            {EditorTabs.map((item, index) => (
-              <Tab
-                key={index}
-                label={item.name}
-                sx={{
-                  fontWeight: "bold",
-                }}
-                disableRipple
-                onClick={() => setTab(index)}
-              />
-            ))}
-          </Tabs>
-
-          <TabPanel value={tab} />
-        </Box>
-      </Drawer>
-    </React.Fragment>
-  );
-}
+};
 
 export default EditorComponent;

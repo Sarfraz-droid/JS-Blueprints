@@ -4,8 +4,8 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { CardInterface } from "@workspace/lib/types/Card";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../redux/store";
-import { DeleteNode } from "../../../../redux/features/NodeSlice";
-import { DeleteEdges } from "../../../../redux/features/edgeSlice";
+import { DeleteNode } from "../../../../redux/features/Node.slice";
+import { DeleteEdges } from "../../../../redux/features/edge.slice";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { DuplicateNodes } from "../../../../redux/functions/Duplicate.action";
 

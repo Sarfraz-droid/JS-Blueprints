@@ -17,6 +17,8 @@ import { NavLink, useNavigate, useParams } from "react-router-dom";
 import Logo from "../assets/brand/JSBlueprints.png";
 import { docs as docsRoutes } from "@workspace/lib/docs/routes";
 import DisplayDocument from "../components/Docs/displayDoc";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 function Docs() {
   const [ActiveRoute, setActiveRoute] = useState<{
@@ -25,6 +27,7 @@ function Docs() {
     path: string;
   } | null>(null);
 
+  const projectId = useSelector((state: RootState) => state.projectId);
   const { id } = useParams();
 
   useEffect(() => {
@@ -70,7 +73,7 @@ function Docs() {
             spacing={3}>
             <Typography>
               <NavLink
-                to={`/editor`}
+                to={`/editor/${projectId}`}
                 style={({ isActive }) => ({
                   textDecoration: "none",
                   backgroundColor: isActive ? orange[200] : "transparent",

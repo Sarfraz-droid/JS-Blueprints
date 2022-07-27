@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Node } from "react-flow-renderer";
 import { CardInterface, CardType } from "@workspace/lib/types/Card";
-import { UpdateData } from "../functions/UpdateData.action";
 
 export interface activeNodestate {
   activeNode: string | null;

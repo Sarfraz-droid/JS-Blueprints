@@ -5,7 +5,7 @@ import { addEdgeThunk } from "../functions/addEdge.action";
 import { loadData } from "../functions/db.action";
 import { Demo } from "./state";
 
-export const initialState: Array<Edge> = Demo.edges as Array<Edge>;
+export const initialState: Array<Edge> = [];
 
 export const EdgeSlice = createSlice({
   name: "edge",
@@ -31,6 +31,10 @@ export const EdgeSlice = createSlice({
         (_) => _.source != action.payload || _.target != action.payload
       );
 
+      return state;
+    },
+    setEdges: (state: Array<Edge>, action: PayloadAction<Array<Edge>>) => {
+      state = action.payload;
       return state;
     },
   },
@@ -62,6 +66,6 @@ export const EdgeSlice = createSlice({
   },
 });
 
-export const { addEdgeReducer, setEdgeReducer, DeleteEdges } =
+export const { addEdgeReducer, setEdgeReducer, DeleteEdges, setEdges } =
   EdgeSlice.actions;
 export default EdgeSlice.reducer;

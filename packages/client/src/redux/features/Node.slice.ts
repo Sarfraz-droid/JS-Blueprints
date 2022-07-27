@@ -15,7 +15,7 @@ import toast from "react-hot-toast";
 import { DuplicateNodes } from "../functions/Duplicate.action";
 import { Demo } from "./state";
 import { loadData } from "../functions/db.action";
-const initialState: Array<CardInterface> = Demo.nodes as Array<CardInterface>;
+const initialState: Array<CardInterface> = [];
 
 export const NodeSlice = createSlice({
   name: "card",
@@ -59,6 +59,14 @@ export const NodeSlice = createSlice({
       action: PayloadAction<CardInterface>
     ) => {
       state = state.filter((_) => _.id != action.payload.id);
+
+      return state;
+    },
+    setNodes: (
+      state: Array<CardInterface>,
+      action: PayloadAction<Array<CardInterface>>
+    ) => {
+      state = action.payload;
 
       return state;
     },
@@ -121,5 +129,5 @@ export const NodeSlice = createSlice({
   },
 });
 
-export const { addCard, UpdateNode, DeleteNode } = NodeSlice.actions;
+export const { addCard, UpdateNode, DeleteNode, setNodes } = NodeSlice.actions;
 export default NodeSlice.reducer;

@@ -5,9 +5,16 @@ import { instance } from "../../api/instance";
 
 export const loadData = createAsyncThunk(
   "loadData",
-  async (actions: string, thunkApi) => {
+  async (
+    actions: {
+      id: string;
+      cb: () => void;
+    },
+    thunkApi
+  ) => {
     console.log("loadData");
-    const { data } = await instance.get(`/node/${actions}`);
+    const { data } = await instance.get(`/node/${actions.id}`);
+    actions.cb();
     return data;
   }
 );

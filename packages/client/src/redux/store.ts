@@ -1,7 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import NodeReducer from "./features/NodeSlice";
-import EdgeReducer from "./features/edgeSlice";
-import ActiveNodeReducer from "./features/activeNodeSlice";
+import NodeReducer from "./features/Node.slice";
+import EdgeReducer from "./features/edge.slice";
+import ActiveNodeReducer from "./features/activeNode.slice";
+import ProjectIdReducer from "./features/projectId.slice";
 import thunkMiddleware from "redux-thunk";
 
 export const store = configureStore({
@@ -9,6 +10,7 @@ export const store = configureStore({
     nodes: NodeReducer,
     edges: EdgeReducer,
     activeNode: ActiveNodeReducer,
+    projectId: ProjectIdReducer,
   },
 });
 
