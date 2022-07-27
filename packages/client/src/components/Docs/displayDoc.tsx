@@ -7,7 +7,7 @@ function DisplayDocument({
 }: {
   ActiveRoute: {
     name: string;
-    text: string;
+    text: (text: string) => string;
     path: string;
   };
 }) {
@@ -16,7 +16,7 @@ function DisplayDocument({
   return (
     <div>
       <ReactMarkdown className="markdown-body">
-        {ActiveRoute.text}
+        {ActiveRoute.text(window.location.origin)}
       </ReactMarkdown>
     </div>
   );

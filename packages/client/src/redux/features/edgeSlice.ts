@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { addEdge, Connection, Edge } from "react-flow-renderer";
 import toast from "react-hot-toast";
 import { addEdgeThunk } from "../functions/addEdge.action";
+import { loadData } from "../functions/db.action";
 import { Demo } from "./state";
 
 export const initialState: Array<Edge> = Demo.edges as Array<Edge>;
@@ -51,6 +52,11 @@ export const EdgeSlice = createSlice({
         toast.error(action.payload as string);
       }
 
+      return state;
+    });
+    builder.addCase(loadData.fulfilled, (state, action) => {
+      if (action.payload === undefined) return state;
+      state = action.payload?.edges;
       return state;
     });
   },

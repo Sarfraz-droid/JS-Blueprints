@@ -14,6 +14,7 @@ import { RunCode } from "../functions/run.action";
 import toast from "react-hot-toast";
 import { DuplicateNodes } from "../functions/Duplicate.action";
 import { Demo } from "./state";
+import { loadData } from "../functions/db.action";
 const initialState: Array<CardInterface> = Demo.nodes as Array<CardInterface>;
 
 export const NodeSlice = createSlice({
@@ -111,6 +112,11 @@ export const NodeSlice = createSlice({
       const newNode: CardInterface | undefined = action.payload;
       if (newNode === undefined) return state;
       return [...state, newNode];
+    });
+    builder.addCase(loadData.fulfilled, (state, action) => {
+      if (action.payload === undefined) return state;
+      state = action.payload?.nodes;
+      return state;
     });
   },
 });

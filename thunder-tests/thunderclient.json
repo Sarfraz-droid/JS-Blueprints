@@ -1,0 +1,21 @@
+[
+  {
+    "_id": "6e6c747a-ce19-4c21-bdd4-e5cfc21c56d9",
+    "colId": "0dbf0c4b-4e67-42b0-8ed0-7eca8f3e9b97",
+    "containerId": "",
+    "name": "Save",
+    "url": "http://localhost:5000/node/save",
+    "method": "POST",
+    "sortNum": 10000,
+    "created": "2022-07-24T09:00:50.388Z",
+    "modified": "2022-07-24T09:01:41.489Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n    \"nodes\" : [],\n    \"edges\" : []\n}",
+      "form": []
+    },
+    "tests": []
+  }
+]

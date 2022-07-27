@@ -1,12 +1,9 @@
 import { AnimatePresence } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import EditorComponent from "../components/Editor";
-import Drawer from "../components/Editor/Drawer";
 import NodeComponent from "../components/NodeComponent";
-import { addCard } from "../redux/features/NodeSlice";
 import { AppDispatch, RootState } from "../redux/store";
-import { CardType } from "@workspace/lib/types/Card";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import Button from "@mui/material/Button";
 import {
   Box,
@@ -16,27 +13,50 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
 import { RunCode } from "../redux/functions/run.action";
 import { ReactFlowProvider } from "react-flow-renderer";
 import AddButton from "../components/commons/Add/AddButton";
-import { orange, red } from "@mui/material/colors";
+import { orange, purple, red } from "@mui/material/colors";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import Logo from "../assets/brand/JSBlueprints.png";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
+import { useCallback, useEffect } from "react";
+import { loadData, saveData } from "../redux/functions/db.action";
 
 function Editor() {
+  const { id } = useParams();
+
   const card = useSelector((state: RootState) => state.nodes);
   const edges = useSelector((state: RootState) => state.edges);
   const activeCard = useSelector((state: RootState) => state.activeNode);
-  console.log(card);
   const theme = useTheme();
   const matches = useMediaQuery(theme?.breakpoints.down("md"));
 
   const dispatch = useDispatch<AppDispatch>();
 
   const Navigate = useNavigate();
+
+  const saveOperation = useCallback(() => {
+    saveData({
+      nodes: card,
+      edges: edges,
+    })
+      .then((data) => {
+        toast.success("Saved");
+        Navigate(`/editor/${data["_id"]}`);
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
+  }, [card, edges]);
+
+  useEffect(() => {
+    if (id) {
+      console.log("id", id);
+      dispatch(loadData(id));
+    }
+  }, [id]);
 
   return (
     <ReactFlowProvider>
@@ -84,20 +104,6 @@ function Editor() {
           <Grid item xs={8}>
             <Stack direction={matches ? "column" : "row"} spacing={3}>
               <AddButton />
-              {/* <Button
-            color="primary"
-            variant="contained"
-            onClick={() => {
-              dispatch(
-                addCard({
-                  type: CardType.input,
-                })
-              );
-            }}>
-            <AddIcon />
-            Add Card
-          </Button> */}
-
               <Button
                 variant="contained"
                 sx={(theme) => ({
@@ -140,6 +146,24 @@ function Editor() {
                   Navigate("/docs");
                 }}>
                 Documentation
+              </Button>
+              <Button
+                disableElevation={true}
+                sx={{
+                  fontWeight: 500,
+                  letterSpacing: "2.5px",
+                  p: 1,
+                  px: 2,
+                  backgroundColor: purple[500],
+                  color: "white",
+                  "&:hover": {
+                    boxShadow: "none",
+                    color: "black",
+                    backgroundColor: purple[700],
+                  },
+                }}
+                onClick={saveOperation}>
+                Save
               </Button>
             </Stack>
           </Grid>

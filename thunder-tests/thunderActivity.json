@@ -1,0 +1,21 @@
+[
+  {
+    "_id": "800422ed-ac4b-41e4-b5ae-19cfbe1f149c",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:5000/node/save",
+    "url": "http://localhost:5000/node/save",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2022-07-24T09:01:41.377Z",
+    "modified": "2022-07-24T09:01:41.491Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n    \"nodes\" : [],\n    \"edges\" : []\n}",
+      "form": []
+    },
+    "tests": []
+  }
+]

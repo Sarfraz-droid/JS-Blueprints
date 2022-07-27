@@ -1,6 +1,13 @@
-const Introduction = `
+import { docs } from "./routes";
+
+const Introduction = (baseurl: string) => {
+  return `
+
 # Introduction
-this is the introduction page
-`;
+This a Block Based Javascript Builder built on React and Node.js.
+
+### Get Started
+[Basic Nodes](${baseurl}/basic-nodes)`;
+};
 
 export default Introduction;

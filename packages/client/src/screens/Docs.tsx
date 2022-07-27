@@ -12,16 +12,39 @@ import {
   Typography,
 } from "@mui/material";
 import { orange, red } from "@mui/material/colors";
-import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import Logo from "../assets/brand/JSBlueprints.png";
 import { docs as docsRoutes } from "@workspace/lib/docs/routes";
 import DisplayDocument from "../components/Docs/displayDoc";
 
 function Docs() {
-  const [ActiveRoute, setActiveRoute] = useState(docsRoutes[0]);
+  const [ActiveRoute, setActiveRoute] = useState<{
+    name: string;
+    text: (baseurl: string) => string;
+    path: string;
+  } | null>(null);
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    if (id) {
+      const route = docsRoutes.find((route) => route.path === id);
+      if (route) {
+        setActiveRoute(route);
+      } else {
+        setActiveRoute(docsRoutes[0]);
+      }
+    } else {
+      setActiveRoute(docsRoutes[0]);
+    }
+  }, [id]);
 
   const Navigate = useNavigate();
+
+  if (ActiveRoute === null) {
+    return <>Please wait</>;
+  }
 
   return (
     <React.Fragment>
@@ -92,7 +115,9 @@ function Docs() {
             {docsRoutes.map((route, index) => (
               <ListItemButton
                 key={index}
-                onClick={() => setActiveRoute(route)}
+                onClick={() => {
+                  Navigate(`../${route.path}`);
+                }}
                 sx={{
                   p: 2,
                 }}>

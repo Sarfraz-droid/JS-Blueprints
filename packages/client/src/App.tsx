@@ -35,14 +35,14 @@ function App() {
       <Routes>
         <Route path="/">
           <Route index element={<Home />} />
-          <Route path="editor" element={<Editor />} />
-          <Route path="docs" element={<Docs />} />
-          {/* <Route index element={<Home />} />
-          <Route path="teams" element={<Teams />}>
-            <Route path=":teamId" element={<Team />} />
-            <Route path="new" element={<NewTeamForm />} />
-            <Route index element={<LeagueStandings />} />
-          </Route> */}
+          <Route path="editor">
+            <Route index element={<Editor />} />
+            <Route path=":id" element={<Editor />} />
+          </Route>
+          <Route path="docs">
+            <Route index element={<Docs />} />
+            <Route path=":id" element={<Docs />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
