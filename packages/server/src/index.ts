@@ -1,19 +1,32 @@
+import "dotenv/config";
 import express from "express";
-import functionRoutes from "./routes/function.route";
 import NodeRoutes from "./routes/nodes.route";
+import mongoose from "mongoose";
 import cors from "cors";
-import { CardInterface } from "@workspace/lib/types/Card";
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+  })
+);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+mongoose
+  .connect(
+    `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@cluster0.2cmink6.mongodb.net/?retryWrites=true&w=majority`
+  )
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-app.use("/function", functionRoutes);
 app.use("/node", NodeRoutes);
 
 app.listen(process.env.PORT || 5000, () => {

@@ -1,21 +1,32 @@
 import { Request, Response } from "express";
-import { CardInterface } from "../interface/card.types";
-import { FlowService } from "../services/nodes.service";
-import { test1Data, test2Data } from "../test";
+import { NodeModel } from "../models/Nodes.model";
 
-export const run = (req: Request, res: Response) => {};
-export const test = (req: Request, res: Response) => {
-  const { id } = req.query;
+export const save = async (req: Request, res: Response) => {
+  const body = req.body;
 
-  const data = id === "1" ? test1Data : test2Data;
+  if (!body) {
+    res.status(400).send("No body found");
+    return;
+  }
 
-  const flowService = new FlowService(
-    data.card as Array<CardInterface>,
-    data.edges
-  );
-  const temp = flowService.runFlowService();
+  try {
+    const node = await NodeModel.create(body);
+    res.status(200).send(node);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send(err);
+  }
+};
 
-  res.json({
-    ...temp,
-  });
+export const getNodes = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    const nodes = await NodeModel.findById(id);
+    if (!nodes)
+      return res.status(404).send("Node with id " + id + " not found");
+    res.status(200).send(nodes);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send(err);
+  }
 };

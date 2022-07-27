@@ -1,9 +1,8 @@
 import express from "express";
-import { run, test } from "../controller/node.controller";
+import { save, getNodes } from "../controller/node.controller";
 
 const router = express.Router();
 
-router.post("/run", run);
-router.post("/test/:id", test);
-
+router.post("/save", save);
+router.get("/:id", getNodes);
 export default router;
