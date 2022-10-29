@@ -1,11 +1,43 @@
-![JSBlueprints](https://user-images.githubusercontent.com/73013838/180638218-c5af675e-9fb8-4eb8-8d63-313737e2e8a8.png)
+![v1vpW6fWwt](https://user-images.githubusercontent.com/73013838/180638472-1d207273-11c6-4d23-9504-aea0d7c93cf9.gif)
 
 ### BLOCK BASED JAVASCRIPT BLUEPRINTS
 
 Block based Javascript Builder, Built on Typescript, React. 
 Managed with Lerna.
 
-
 [Website Link](https://fflow-kohl.vercel.app/)
 
-![v1vpW6fWwt](https://user-images.githubusercontent.com/73013838/180638472-1d207273-11c6-4d23-9504-aea0d7c93cf9.gif)
+The app uses ```lerna```. If lerna CLI isn't set up. Get started on [Getting Started | Lerna](https://lerna.js.org/docs/getting-started)
+
+### Tech Stack
+- Typescript
+- React.JS
+- Node.JS
+- Lerna
+- Firebase
+
+### Folder Structure
+
+-  packages
+	- client
+	- lib
+	- server
+
+**Client**
+- This contains the client side react application
+
+**Lib**
+- the `lib` folder shares the common types and documentation for the application
+
+**Server**
+- the `server` folder contains the express application as a server.
+
+---
+### SETTING UP THE APPLICATION
+1. Setup
+```lerna bootstrap --use-workspaces```
+		*This installs all the dependencies needed*
+
+2. Run by
+```lerna dev```
+*Runs the client and the server in development mode*
