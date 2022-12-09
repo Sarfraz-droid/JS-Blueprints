@@ -35,9 +35,9 @@ The app uses ```lerna```. If lerna CLI isn't set up. Get started on [Getting Sta
 ---
 ### SETTING UP THE APPLICATION
 1. Setup
-```lerna bootstrap --use-workspaces```
+```npx lerna bootstrap --use-workspaces```
 		*This installs all the dependencies needed*
 
 2. Run by
-```lerna dev```
+```npx lerna run dev```
 *Runs the client and the server in development mode*
