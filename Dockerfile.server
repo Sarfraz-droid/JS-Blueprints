@@ -1,0 +1,21 @@
+FROM node:14.21.1-alpine
+
+WORKDIR /app
+
+COPY package.json ./
+
+RUN yarn
+
+COPY /packages/server ./packages/server
+COPY /packages/lib ./packages/lib
+
+WORKDIR /app/packages/lib
+
+RUN yarn
+
+WORKDIR /app/packages/server
+
+RUN yarn
+RUN yarn build
+
+CMD ["yarn", "start"]

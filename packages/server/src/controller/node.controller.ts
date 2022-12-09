@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { NodeModel } from "../models/Nodes.model";
+import { NodeModel } from "../models/nodes.model";
 
 export const save = async (req: Request, res: Response) => {
   const body = req.body;
