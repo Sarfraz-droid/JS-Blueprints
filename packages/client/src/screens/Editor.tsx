@@ -30,22 +30,26 @@ import { setEdges } from "../redux/features/edge.slice";
 import Renderer from "../components/Editor/Renderer";
 import { setProjectId } from "../redux/features/projectId.slice";
 
+/**
+ * @description Editor Screen
+ * @returns JSX.Element
+ */
 function Editor() {
-  const { id } = useParams();
+	const { id } = useParams();
+	const card = useSelector((state: RootState) => state.nodes);
+	const edges = useSelector((state: RootState) => state.edges);
+	const activeCard = useSelector((state: RootState) => state.activeNode);
+	const theme = useTheme();
+	const matches = useMediaQuery(theme?.breakpoints.down("md"));
+	const [isLoading, setIsLoading] = useState(true);
 
-  const card = useSelector((state: RootState) => state.nodes);
-  const edges = useSelector((state: RootState) => state.edges);
-  const activeCard = useSelector((state: RootState) => state.activeNode);
-  const theme = useTheme();
-  const matches = useMediaQuery(theme?.breakpoints.down("md"));
-  const [isLoading, setIsLoading] = useState(true);
+	const dispatch = useDispatch<AppDispatch>();
 
-  const dispatch = useDispatch<AppDispatch>();
+	const Navigate = useNavigate();
 
-  const Navigate = useNavigate();
-
-  const saveOperation = useCallback(() => {
-    saveData({
+	// ? Save the Project
+	const saveOperation = useCallback(() => {
+		saveData({
 			nodes: card,
 			edges: edges as Array<Edge>,
 		})
@@ -56,28 +60,29 @@ function Editor() {
 			.catch((err) => {
 				toast.error(err.message);
 			});
-  }, [card, edges]);
+	}, [card, edges]);
 
-  useEffect(() => {
-    if (id) {
-      dispatch(setProjectId(id));
-      dispatch(
-        loadData({
-          id: id,
-          cb: () => {
-            setIsLoading(false);
-          },
-        })
-      );
-    } else {
-      dispatch(setProjectId(""));
-      setIsLoading(false);
-      dispatch(setNodes(Demo.nodes as Array<CardInterface>));
-      dispatch(setEdges(Demo.edges as Array<Edge>));
-    }
-  }, [id]);
+	useEffect(() => {
+		// ? Initialize the Project
+		if (id) {
+			dispatch(setProjectId(id));
+			dispatch(
+				loadData({
+					id: id,
+					cb: () => {
+						setIsLoading(false);
+					},
+				})
+			);
+		} else {
+			dispatch(setProjectId(""));
+			setIsLoading(false);
+			dispatch(setNodes(Demo.nodes as Array<CardInterface>));
+			dispatch(setEdges(Demo.edges as Array<Edge>));
+		}
+	}, [id]);
 
-  return (
+	return (
 		<ReactFlowProvider>
 			<Box
 				sx={{

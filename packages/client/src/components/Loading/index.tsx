@@ -3,6 +3,7 @@ import LoopOutlinedIcon from "@mui/icons-material/LoopOutlined";
 import { motion } from "framer-motion";
 import { Box } from "@mui/system";
 
+// Loading component
 function Loading() {
   return (
     <Box

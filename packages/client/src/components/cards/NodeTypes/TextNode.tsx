@@ -16,15 +16,11 @@ import NodeWrapper from "./common/NodeWrapper";
 
 const handleStyle = { top: 10 };
 
+// ? Node used to update text
 export function TextUpdaterNode(props: CardInterface) {
-  console.log(props);
-  const onChange = useCallback((evt: ChangeEvent<HTMLInputElement>) => {
-    console.log(evt.target.value);
-  }, []);
+	const dispatch = useDispatch<AppDispatch>();
 
-  const dispatch = useDispatch<AppDispatch>();
-
-  return (
+	return (
 		<>
 			<NodeWrapper card={props}>
 				<Card
@@ -72,6 +68,9 @@ export function TextUpdaterNode(props: CardInterface) {
 						Event
 					</Typography>
 
+					{/* 
+            Right side of node
+          */}
 					{props.data.output.map((_, index) => (
 						<React.Fragment>
 							<Handle
@@ -151,6 +150,9 @@ export function TextUpdaterNode(props: CardInterface) {
 						))}
 					</Box>
 
+					{/* 
+            Left Side of Node
+          */}
 					{props.data.input.map((_, index) => {
 						return (
 							<React.Fragment>

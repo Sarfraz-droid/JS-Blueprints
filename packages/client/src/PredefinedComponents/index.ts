@@ -39,7 +39,9 @@ const PredefinedComponents = {
 
 export default PredefinedComponents;
 
-export const HaveIOP: {
+// ? Have IOP : This is used to determine if a card has input, output or parameters
+// ? This is used to determine if a card has input, output or parameters
+export const HaveInputOutputParam: {
   [key in any]: {
     input: boolean;
     parameters: boolean;
@@ -78,6 +80,7 @@ export const HaveIOP: {
   },
 };
 
+// Generating Predefined Nodes
 const PredefinedToNode = () => {
   const result: any = {};
   Object.keys(PredefinedComponents).forEach((key) => {
@@ -89,6 +92,7 @@ const PredefinedToNode = () => {
 
 const nodes = PredefinedToNode();
 
+// Define the node types
 export const nodeTypes = {
   ...PredefinedToNode(),
   [CardType.basic_EventStart]: EventHandlerNode,

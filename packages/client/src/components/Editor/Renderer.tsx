@@ -14,10 +14,11 @@ function Renderer({
   }
 
   if (matches) {
-    return (
-      <div>Please use the desktop version of the editor to add cards.</div>
-    );
-  }
+		// TODO: Add a mobile editor
+		return (
+			<div>Please use the desktop version of the editor to add cards.</div>
+		);
+	}
 
   return <EditorComponent />;
 }

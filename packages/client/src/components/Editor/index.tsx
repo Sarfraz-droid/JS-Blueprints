@@ -47,9 +47,9 @@ const EditorComponent = () => {
 		console.log("onConnect", params);
 		dispatch(addEdgeThunk(params));
 	};
-	console.log(nodes, edges);
 
 	useEffect(() => {
+		// Optimization: only update the nodes that changed
 		nodes.forEach((node) => {
 			updateNodeInternals(node.id);
 		});
@@ -80,7 +80,6 @@ const EditorComponent = () => {
 			style={{
 				height: "90vh",
 			}}>
-			{/* <Controls /> */}
 			<Background gap={12} size={1} color={"#f0f0f020"} />
 		</ReactFlow>
 	);

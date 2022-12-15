@@ -19,6 +19,7 @@ import { blueGrey, grey } from "@mui/material/colors";
 import { fontWeight } from "@mui/system";
 import { Parameters } from "@workspace/lib/types/Card";
 
+// ? Function Editor Node
 function FunctionEditor() {
   const [CodeRunner, setCodeRunner] = useState({
     running: false,

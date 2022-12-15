@@ -28,7 +28,7 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import { red } from "@mui/material/colors";
 import AddIcon from "@mui/icons-material/Add";
-import { HaveIOP } from "../../../PredefinedComponents";
+import { HaveInputOutputParam } from "../../../PredefinedComponents";
 const CardMenu = ({
   activeCard,
   type,
@@ -174,28 +174,28 @@ function CardInfo() {
   useEffect(() => {
     if (activeCard) {
       const card = [
-        {
-          title: "Input",
-          name: "input",
-          activeCard: activeCard.data.input,
-          id: activeCard?.id,
-          allowed: HaveIOP[activeCard.type]?.input,
-        },
-        {
-          title: "Output",
-          name: "output",
-          activeCard: activeCard.data.output,
-          id: activeCard?.id,
-          allowed: HaveIOP[activeCard.type]?.output,
-        },
-        {
-          title: "Parameters",
-          name: "parameters",
-          activeCard: activeCard.data.parameters,
-          id: activeCard?.id,
-          allowed: HaveIOP[activeCard.type]?.parameters,
-        },
-      ];
+				{
+					title: "Input",
+					name: "input",
+					activeCard: activeCard.data.input,
+					id: activeCard?.id,
+					allowed: HaveInputOutputParam[activeCard.type]?.input,
+				},
+				{
+					title: "Output",
+					name: "output",
+					activeCard: activeCard.data.output,
+					id: activeCard?.id,
+					allowed: HaveInputOutputParam[activeCard.type]?.output,
+				},
+				{
+					title: "Parameters",
+					name: "parameters",
+					activeCard: activeCard.data.parameters,
+					id: activeCard?.id,
+					allowed: HaveInputOutputParam[activeCard.type]?.parameters,
+				},
+			];
 
       setCardData(() => card.filter((i) => i.allowed));
     }

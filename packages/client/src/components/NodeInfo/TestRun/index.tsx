@@ -17,7 +17,8 @@ import {
 import { runCodeService } from "../../../services/functions.service";
 import { ICardIO, Parameters } from "@workspace/lib/types/Card";
 
-function Handler({
+// ? Test Runner
+function TestRunner({
   item,
   SampleInput,
   setSampleInput,
@@ -161,7 +162,7 @@ function TestRun() {
         }}>
         {activeCard.data.input.map((item, index) => (
           <React.Fragment>
-            <Handler
+            <TestRunner
               item={item}
               SampleInput={SampleInput}
               setSampleInput={setSampleInput}
