@@ -5,7 +5,6 @@
 Block based Javascript Builder, Built on Typescript, React. 
 Managed with Lerna.
 
-[Website Link](https://fflow-kohl.vercel.app/)
 
 The app uses ```lerna```. If lerna CLI isn't set up. Get started on [Getting Started | Lerna](https://lerna.js.org/docs/getting-started)
 
