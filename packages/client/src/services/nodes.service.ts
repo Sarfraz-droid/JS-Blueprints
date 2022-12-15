@@ -40,20 +40,20 @@ export class FlowService {
 
         nodeData.input = nodeData.input.map((_input) => {
             const input = { ..._input };
-            const connectedinput = this.edges.find((edge) => edge.target === node.id && edge.targetHandle === input.id);
+            const connectedInput = this.edges.find((edge) => edge.target === node.id && edge.targetHandle === input.id);
 
-            if (connectedinput) {
-                const connectedNode = this.GetNodeById(connectedinput.source);
+            if (connectedInput) {
+                const connectedNode = this.GetNodeById(connectedInput.source);
 
                 if (connectedNode) {
-                    const connectedNodeValue = this.FlowMap.get(connectedinput.sourceHandle!);
+                    const connectedNodeValue = this.FlowMap.get(connectedInput.sourceHandle!);
                     if (connectedNodeValue != undefined) {
                         this.FlowMap.set(input.id, connectedNodeValue);
                         input.value = connectedNodeValue;
                     } else {
                         this.pathFinding(connectedNode);
-                        this.FlowMap.set(input.id, this.FlowMap.get(connectedinput.sourceHandle!));
-                        input.value = this.FlowMap.get(connectedinput.sourceHandle!);
+                        this.FlowMap.set(input.id, this.FlowMap.get(connectedInput.sourceHandle!));
+                        input.value = this.FlowMap.get(connectedInput.sourceHandle!);
                     }
                 }
             }

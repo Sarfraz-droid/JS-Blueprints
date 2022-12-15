@@ -7,7 +7,7 @@ import { AppDispatch } from "../../../../redux/store";
 import { DeleteNode } from "../../../../redux/features/Node.slice";
 import { DeleteEdges } from "../../../../redux/features/edge.slice";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import { DuplicateNodes } from "../../../../redux/functions/Duplicate.action";
+import { DuplicateNodes } from "../../../../redux/functions/duplicate.action";
 
 function NodeWrapper({
   children,

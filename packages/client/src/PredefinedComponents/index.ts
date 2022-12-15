@@ -16,6 +16,9 @@ import { input_BooleanInput } from "./Input/BooleanInput";
 import { condition_GreaterThan } from "./Conditionals/Greaterthan";
 import { condition_Equalto } from "./Conditionals/Equalto";
 
+/**
+ * This file contains all the predefined components that are available to the user
+ */
 const PredefinedComponents = {
   [CardType.CustomOperation]: InputCard,
   [CardType.input]: InputCard,

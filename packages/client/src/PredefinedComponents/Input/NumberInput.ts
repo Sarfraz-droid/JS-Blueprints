@@ -6,10 +6,10 @@ import {
   Parameters,
 } from "@workspace/lib/types/Card";
 import { defaultComment, main } from "../../utils/default";
-import { StringDefault } from "../default";
+import { DefaultComponent } from "../default";
 
 export const input_numberInput = () =>
-  StringDefault(
+  DefaultComponent(
     "Number Input",
     '\n  /*\n    the object should be returned as value of the ouput\n    if ouput has \n    {\n      type: "string",\n      value: "Hello"\n    }\n\n    then the function should return {\n      Hello: "Output String"\n    }\n  */\n  \n(input, parameter) => {\n  return {\n    \'out\' : parameter[\'in\']\n  };\n}',
     [],

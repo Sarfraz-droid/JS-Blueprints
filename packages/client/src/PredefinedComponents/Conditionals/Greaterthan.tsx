@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 import React from "react";
 import { Parameters } from "@workspace/lib/types/Card";
-import { StringDefault } from "../default";
+import { DefaultComponent } from "../default";
 
 // {
 //     "error": {
@@ -44,35 +44,35 @@ import { StringDefault } from "../default";
 // }
 
 export const condition_GreaterThan = () =>
-  StringDefault(
-    "Greater Than",
-    "\n  /*\n    the object should be returned as value of the ouput\n    if ouput has \n    {\n      type: \"string\",\n      value: \"Hello\"\n    }\n\n    then the function should return {\n      Hello: \"Output String\"\n    }\n  */\n  \n(input, parameter) => {\n  return {\n    'out' : input['A'] > input['B']\n  };\n}",
-    [
-      {
-        type: Parameters.number,
-        value: 0,
-        id: `${Parameters.number}__input__${nanoid()}`,
-        name: "A",
-      },
-      {
-        type: Parameters.number,
-        value: 0,
-        id: `${Parameters.number}__input__${nanoid()}`,
-        name: "B",
-      },
-    ],
-    [
-      {
-        type: Parameters.boolean,
-        value: false,
-        id: `${Parameters.boolean}__output__${nanoid()}`,
-        name: "out",
-      },
-    ],
-    [],
-    () => (
-      <div>
-        <p>A{" > "}B</p>
-      </div>
-    )
-  );
+	DefaultComponent(
+		"Greater Than",
+		"\n  /*\n    the object should be returned as value of the ouput\n    if ouput has \n    {\n      type: \"string\",\n      value: \"Hello\"\n    }\n\n    then the function should return {\n      Hello: \"Output String\"\n    }\n  */\n  \n(input, parameter) => {\n  return {\n    'out' : input['A'] > input['B']\n  };\n}",
+		[
+			{
+				type: Parameters.number,
+				value: 0,
+				id: `${Parameters.number}__input__${nanoid()}`,
+				name: "A",
+			},
+			{
+				type: Parameters.number,
+				value: 0,
+				id: `${Parameters.number}__input__${nanoid()}`,
+				name: "B",
+			},
+		],
+		[
+			{
+				type: Parameters.boolean,
+				value: false,
+				id: `${Parameters.boolean}__output__${nanoid()}`,
+				name: "out",
+			},
+		],
+		[],
+		() => (
+			<div>
+				<p>A{" > "}B</p>
+			</div>
+		)
+	);

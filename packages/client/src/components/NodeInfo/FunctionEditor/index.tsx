@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import Editor from "@monaco-editor/react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../redux/store";
-import { UpdateData } from "../../../redux/functions/UpdateData.action";
+import { UpdateData } from "../../../redux/functions/updateData.action";
 import { instance } from "../../../api/instance";
 import toast from "react-hot-toast";
 import {

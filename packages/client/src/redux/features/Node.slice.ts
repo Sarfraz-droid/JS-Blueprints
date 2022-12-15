@@ -8,11 +8,11 @@ import {
   useUpdateNodeInternals,
 } from "react-flow-renderer";
 import NodeChangeHandler from "../../utils/NodeChangeHandler";
-import { UpdateData } from "../functions/UpdateData.action";
+import { UpdateData } from "../functions/updateData.action";
 import { newIOP } from "../functions/newIOP.action";
 import { RunCode } from "../functions/run.action";
 import toast from "react-hot-toast";
-import { DuplicateNodes } from "../functions/Duplicate.action";
+import { DuplicateNodes } from "../functions/duplicate.action";
 import { Demo } from "./state";
 import { loadData } from "../functions/db.action";
 const initialState: Array<CardInterface> = [];

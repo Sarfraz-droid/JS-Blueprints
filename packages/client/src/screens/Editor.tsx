@@ -46,16 +46,16 @@ function Editor() {
 
   const saveOperation = useCallback(() => {
     saveData({
-      nodes: card,
-      edges: edges,
-    })
-      .then((data) => {
-        toast.success("Saved");
-        Navigate(`/editor/${data["_id"]}`);
-      })
-      .catch((err) => {
-        toast.error(err.message);
-      });
+			nodes: card,
+			edges: edges as Array<Edge>,
+		})
+			.then((data) => {
+				toast.success("Saved");
+				Navigate(`/editor/${data["_id"]}`);
+			})
+			.catch((err) => {
+				toast.error(err.message);
+			});
   }, [card, edges]);
 
   useEffect(() => {
@@ -78,127 +78,128 @@ function Editor() {
   }, [id]);
 
   return (
-    <ReactFlowProvider>
-      <Box
-        sx={{
-          position: "fixed",
-          width: "100vw",
-          height: "100vh",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-        }}>
-        <img
-          src={Logo}
-          style={{
-            width: 500,
-            opacity: 0.1,
-          }}
-        />
-      </Box>
-      <Box
-        sx={{
-          position: matches ? "relatve" : "fixed",
-          zIndex: 10,
-          right: 0,
-          background: "white",
-        }}>
-        <img
-          src={Logo}
-          style={{
-            width: 100,
-          }}
-          onClick={() => {
-            Navigate("/");
-          }}
-        />
-      </Box>
-      <div
-        className="App h-screen bg-white"
-        style={{
-          padding: "5px",
-        }}>
-        <Grid container spacing={3} direction={matches ? "column" : "row"}>
-          <Grid item xs={8}>
-            <Stack direction={matches ? "column" : "row"} spacing={3}>
-              <AddButton />
-              <Button
-                variant="contained"
-                sx={(theme) => ({
-                  backgroundColor: red[500],
-                  "&:hover": {
-                    backgroundColor: red[700],
-                  },
-                })}
-                onClick={() => {
-                  console.log({
-                    card,
-                    edges,
-                  });
+		<ReactFlowProvider>
+			<Box
+				sx={{
+					position: "fixed",
+					width: "100vw",
+					height: "100vh",
+					display: "flex",
+					flexDirection: "column",
+					justifyContent: "center",
+					alignItems: "center",
+					backgroundColor: "background.default",
+				}}>
+				<img
+					src={Logo}
+					style={{
+						width: 500,
+						opacity: 0.1,
+					}}
+				/>
+			</Box>
+			<Box
+				sx={{
+					position: matches ? "relatve" : "fixed",
+					zIndex: 10,
+					right: 0,
+					background: "white",
+				}}>
+				<img
+					src={Logo}
+					style={{
+						width: 100,
+					}}
+					onClick={() => {
+						Navigate("/");
+					}}
+				/>
+			</Box>
+			<div
+				className="App h-screen bg-white"
+				style={{
+					padding: "5px",
+				}}>
+				<Grid container spacing={3} direction={matches ? "column" : "row"}>
+					<Grid item xs={8}>
+						<Stack direction={matches ? "column" : "row"} spacing={3}>
+							<AddButton />
+							<Button
+								variant="contained"
+								sx={(theme) => ({
+									backgroundColor: red[500],
+									"&:hover": {
+										backgroundColor: red[700],
+									},
+								})}
+								onClick={() => {
+									console.log({
+										card,
+										edges,
+									});
 
-                  dispatch(RunCode({}));
-                }}>
-                <ArrowRightIcon scale={1.5} />
-                Run Code
-              </Button>
-              <Button
-                onClick={() => {
-                  Navigate("/editor");
-                }}>
-                Create New Blueprint
-              </Button>
-            </Stack>
-          </Grid>
-          <Grid item xs={4}>
-            <Stack direction="row" spacing={3}>
-              <Button
-                disableElevation={true}
-                sx={{
-                  fontWeight: 500,
-                  letterSpacing: "2.5px",
-                  p: 1,
-                  px: 2,
-                  backgroundColor: orange[500],
-                  color: "white",
-                  "&:hover": {
-                    boxShadow: "none",
-                    color: "black",
-                    backgroundColor: orange[700],
-                  },
-                }}
-                onClick={() => {
-                  Navigate("/docs");
-                }}>
-                Documentation
-              </Button>
-              <Button
-                disableElevation={true}
-                sx={{
-                  fontWeight: 500,
-                  letterSpacing: "2.5px",
-                  p: 1,
-                  px: 2,
-                  backgroundColor: purple[500],
-                  color: "white",
-                  "&:hover": {
-                    boxShadow: "none",
-                    color: "black",
-                    backgroundColor: purple[700],
-                  },
-                }}
-                onClick={saveOperation}>
-                Save
-              </Button>
-            </Stack>
-          </Grid>
-        </Grid>
-        <Renderer matches={matches} isLoading={isLoading} />
-        <AnimatePresence>{activeCard.active && <NodeInfo />}</AnimatePresence>
-        <Toaster />
-      </div>
-    </ReactFlowProvider>
-  );
+									dispatch(RunCode({}));
+								}}>
+								<ArrowRightIcon scale={1.5} />
+								Run Code
+							</Button>
+							<Button
+								onClick={() => {
+									Navigate("/editor");
+								}}>
+								Create New Blueprint
+							</Button>
+						</Stack>
+					</Grid>
+					<Grid item xs={4}>
+						<Stack direction="row" spacing={3}>
+							<Button
+								disableElevation={true}
+								sx={{
+									fontWeight: 500,
+									letterSpacing: "2.5px",
+									p: 1,
+									px: 2,
+									backgroundColor: orange[500],
+									color: "white",
+									"&:hover": {
+										boxShadow: "none",
+										color: "black",
+										backgroundColor: orange[700],
+									},
+								}}
+								onClick={() => {
+									Navigate("/docs");
+								}}>
+								Documentation
+							</Button>
+							<Button
+								disableElevation={true}
+								sx={{
+									fontWeight: 500,
+									letterSpacing: "2.5px",
+									p: 1,
+									px: 2,
+									backgroundColor: purple[500],
+									color: "white",
+									"&:hover": {
+										boxShadow: "none",
+										color: "black",
+										backgroundColor: purple[700],
+									},
+								}}
+								onClick={saveOperation}>
+								Save
+							</Button>
+						</Stack>
+					</Grid>
+				</Grid>
+				<Renderer matches={matches} isLoading={isLoading} />
+				<AnimatePresence>{activeCard.active && <NodeInfo />}</AnimatePresence>
+				<Toaster />
+			</div>
+		</ReactFlowProvider>
+	);
 }
 
 export default Editor;

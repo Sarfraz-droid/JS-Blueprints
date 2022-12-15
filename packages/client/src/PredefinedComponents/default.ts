@@ -7,7 +7,7 @@ import {
 } from "@workspace/lib/types/Card";
 import { defaultComment, main } from "../utils/default";
 
-export const StringDefault = (
+export const DefaultComponent = (
   label: string,
   functions: string,
   input: ICardIO[],

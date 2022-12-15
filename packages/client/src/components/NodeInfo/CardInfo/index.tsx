@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { newIOP } from "../../../redux/functions/newIOP.action";
-import { UpdateData } from "../../../redux/functions/UpdateData.action";
+import { UpdateData } from "../../../redux/functions/updateData.action";
 import { AppDispatch, RootState } from "../../../redux/store";
 import {
   CardData,
