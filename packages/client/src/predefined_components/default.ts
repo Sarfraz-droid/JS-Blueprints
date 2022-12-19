@@ -15,22 +15,22 @@ export const DefaultComponent = (
   parameters: ICardIO[],
   renderer: null | (() => any) = null
 ) =>
-  ({
-    error: {
-      code: "",
-      message: "",
-    },
-    function: {
-      content: functions,
-      outdated: false,
-      old: "",
-    },
-    renderer: renderer,
-    editable: false,
-    label: label,
-    output: output,
-    parameters: parameters,
-    input: input,
-    start: `root__${nanoid()}`,
-    end: `root__${nanoid()}`,
-  } as CardData);
+({
+  error: {
+    code: "",
+    message: "",
+  },
+  function: {
+    content: functions,
+    outdated: false,
+    old: "",
+  },
+  renderer: renderer,
+  editable: false,
+  label: label,
+  output: output,
+  parameters: parameters,
+  input: input,
+  start: `event__${nanoid()}`,
+  end: `event__${nanoid()}`,
+} as CardData);

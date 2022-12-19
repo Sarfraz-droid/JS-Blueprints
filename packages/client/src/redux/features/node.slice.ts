@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import PredefinedComponents from "../../PredefinedComponents";
+import PredefinedComponents from "../../predefined_components";
 import { CardInterface, CardType } from "@workspace/lib/types/Card";
 import { nanoid } from "nanoid";
 import {
@@ -9,7 +9,7 @@ import {
 } from "react-flow-renderer";
 import NodeChangeHandler from "../../utils/NodeChangeHandler";
 import { UpdateData } from "../functions/updateData.action";
-import { newIOP } from "../functions/newIOP.action";
+import { newIOP } from "../functions/new_iop.action";
 import { RunCode } from "../functions/run.action";
 import toast from "react-hot-toast";
 import { DuplicateNodes } from "../functions/duplicate.action";

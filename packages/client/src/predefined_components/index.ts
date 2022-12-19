@@ -41,7 +41,7 @@ export default PredefinedComponents;
 
 // ? Have IOP : This is used to determine if a card has input, output or parameters
 // ? This is used to determine if a card has input, output or parameters
-export const HaveInputOutputParam: {
+export const haveInputOutputParam: {
   [key in any]: {
     input: boolean;
     parameters: boolean;

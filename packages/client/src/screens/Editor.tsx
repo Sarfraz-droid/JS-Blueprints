@@ -23,11 +23,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import React, { useCallback, useEffect, useState } from "react";
 import { loadData, saveData } from "../redux/functions/db.action";
-import { setNodes } from "../redux/features/Node.slice";
+import { setNodes } from "../redux/features/node.slice";
 import { Demo } from "../redux/features/state";
 import { CardInterface } from "@workspace/lib/types/Card";
 import { setEdges } from "../redux/features/edge.slice";
-import Renderer from "../components/Editor/Renderer";
+import Renderer from "../components/Renderer";
 import { setProjectId } from "../redux/features/projectId.slice";
 
 /**
@@ -38,7 +38,7 @@ function Editor() {
 	const { id } = useParams();
 	const card = useSelector((state: RootState) => state.nodes);
 	const edges = useSelector((state: RootState) => state.edges);
-	const activeCard = useSelector((state: RootState) => state.activeNode);
+	const activeCard = useSelector((state: RootState) => state.active);
 	const theme = useTheme();
 	const matches = useMediaQuery(theme?.breakpoints.down("md"));
 	const [isLoading, setIsLoading] = useState(true);

@@ -21,9 +21,9 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../redux/store";
-import { addCard } from "../../../redux/features/Node.slice";
+import { addCard } from "../../../redux/features/node.slice";
 import { CardType } from "@workspace/lib/types/Card";
-import PredefinedComponents from "../../../PredefinedComponents";
+import PredefinedComponents from "../../../predefined_components";
 import { nanoid } from "nanoid";
 
 function MultiLevelMenu({

@@ -7,9 +7,9 @@ import { useDispatch } from "react-redux";
 import { UpdateData } from "../../../redux/functions/updateData.action";
 import { AppDispatch } from "../../../redux/store";
 import {
-  CardInterface,
-  ParameterColor,
-  Parameters,
+	CardInterface,
+	parameterColor,
+	Parameters,
 } from "@workspace/lib/types/Card";
 import InputHandler from "../UI/InputHandler";
 import NodeWrapper from "./common/NodeWrapper";
@@ -37,8 +37,8 @@ export function TextUpdaterNode(props: CardInterface) {
 							boxShadow: theme.shadows[6],
 						},
 						boxShadow: theme.shadows[0],
-						background: "background.paper",
-						border: `1px solid ${theme.palette.primary.main}`,
+						background: theme.palette.grey[200],
+						pt: 0,
 					})}>
 					<Handle
 						type="source"
@@ -80,7 +80,7 @@ export function TextUpdaterNode(props: CardInterface) {
 									top: (index + 1) * 10 + 25,
 									padding: 1,
 									marginLeft: -1.5,
-									backgroundColor: (ParameterColor as any)[_.type],
+									backgroundColor: (parameterColor as any)[_.type],
 									width: 3,
 									height: 3,
 								}}
@@ -93,7 +93,7 @@ export function TextUpdaterNode(props: CardInterface) {
 									right: 3,
 									fontSize: "0.3rem",
 									marginTop: "-0.2rem",
-									color: (ParameterColor as any)[_.type],
+									color: (parameterColor as any)[_.type],
 								}}>
 								{_.name}
 							</Typography>
@@ -163,7 +163,7 @@ export function TextUpdaterNode(props: CardInterface) {
 										top: (index + 1) * 10 + 25,
 										padding: 1,
 										marginLeft: 1,
-										backgroundColor: (ParameterColor as any)[_.type],
+										backgroundColor: (parameterColor as any)[_.type],
 										width: 3,
 										height: 3,
 									}}

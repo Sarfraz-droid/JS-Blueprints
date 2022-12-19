@@ -22,15 +22,19 @@ export enum Parameters {
   string = "string",
   number = "number",
   boolean = "boolean",
+  event = "event",
 }
 
-export const ParameterColor: object = {
+// ? Color of different parameters
+export const parameterColor = {
   string: "green",
   number: "blue",
   object: "orange",
   boolean: "purple",
+  event: "red"
 };
 
+// ? Basic Input/Output/Parameters for a card
 export interface ICardIO {
   type: Parameters;
   value: string | number | object | boolean;
@@ -38,6 +42,7 @@ export interface ICardIO {
   id: string;
 }
 
+// ? Data for a card
 export interface CardData {
   label: string | undefined;
   input: Array<ICardIO>;
@@ -58,12 +63,14 @@ export interface CardData {
   end: string | undefined;
 }
 
+// ? IOP : This is used to determine if a card has input, output or parameters
 export enum ICardIOP {
   input = "input",
   parameters = "parameters",
   output = "output",
 }
 
+// ? Card Interface
 export interface CardInterface {
   id: string;
   data: CardData;

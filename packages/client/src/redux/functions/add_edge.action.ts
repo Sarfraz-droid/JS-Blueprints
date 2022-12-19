@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { addEdge, Edge, Connection } from "react-flow-renderer";
+import { edgeStyles } from "../../utils/default";
 import { RootState } from "../store";
 
 export const addEdgeThunk = createAsyncThunk(
@@ -30,6 +31,11 @@ export const addEdgeThunk = createAsyncThunk(
     const target_node = nodes.find((node) => node.id === actions.target);
 
     edges = edges.filter((edge) => edge.targetHandle !== actions.targetHandle);
+
+    actions = {
+      ...actions,
+      style: (edgeStyles[source_id as string] || edgeStyles.default),
+    }
 
     const newEdge: Edge<any>[] = addEdge(actions, edges);
 

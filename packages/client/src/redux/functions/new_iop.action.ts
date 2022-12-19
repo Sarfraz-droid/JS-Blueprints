@@ -36,7 +36,7 @@ export const newIOP = createAsyncThunk(
     thunkApi
   ) => {
     const node: RootState = thunkApi.getState() as RootState;
-    const activeId: string | null = node.activeNode.activeNode;
+    const activeId: string | null = node.active.activeNode;
 
     if (activeId === null) return;
 

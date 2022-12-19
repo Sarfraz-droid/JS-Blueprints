@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { activeNodestate } from "../features/activeNode.slice";
+import { activeEdgeNodeState } from "../features/active.slice";
 import { RootState } from "../store";
 
 export const UpdateData = createAsyncThunk(

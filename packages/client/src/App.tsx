@@ -8,7 +8,7 @@ import Home from "./screens/Home";
 function App() {
   const card = useSelector((state: RootState) => state.nodes);
   const edges = useSelector((state: RootState) => state.edges);
-  const activeCard = useSelector((state: RootState) => state.activeNode);
+  const activeCard = useSelector((state: RootState) => state.active);
   console.log(card);
 
   const dispatch = useDispatch<AppDispatch>();

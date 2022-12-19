@@ -8,7 +8,7 @@ import { UpdateData } from "../../../redux/functions/updateData.action";
 import { AppDispatch } from "../../../redux/store";
 import {
 	CardInterface,
-	ParameterColor,
+	parameterColor,
 	Parameters,
 } from "@workspace/lib/types/Card";
 import InputHandler from "../UI/InputHandler";
@@ -37,8 +37,7 @@ export function OutputNode(props: CardInterface) {
 							boxShadow: theme.shadows[6],
 						},
 						boxShadow: theme.shadows[0],
-						background: theme.palette.background.paper,
-						border: `1px solid ${theme.palette.primary.main}`,
+						background: theme.palette.grey[200],
 					})}>
 					<Box
 						sx={(theme) => ({
@@ -56,7 +55,7 @@ export function OutputNode(props: CardInterface) {
 								pl: 1,
 								fontWeight: "bold",
 								color: "text.primary",
-              }}>
+							}}>
 							{props.data.label}
 						</Typography>
 					</Box>
@@ -96,7 +95,7 @@ export function OutputNode(props: CardInterface) {
 										top: (index + 1) * 10 + 25,
 										padding: 1,
 										marginLeft: 1,
-										backgroundColor: (ParameterColor as any)[_.type],
+										backgroundColor: (parameterColor as any)[_.type],
 										width: 3,
 										height: 3,
 									}}
@@ -111,7 +110,7 @@ export function OutputNode(props: CardInterface) {
 										top: (index + 1) * 10 + 25,
 										fontSize: "0.3rem",
 										marginTop: "-0.2rem",
-										color: (ParameterColor as any)[_.type],
+										color: (parameterColor as any)[_.type],
 									}}>
 									{_.name}
 								</Typography>

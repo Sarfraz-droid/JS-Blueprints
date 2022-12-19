@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion, PanInfo, useMotionValue } from "framer-motion";
 import ArrowLeft from "../../assets/svg/ArrowLeft.svg";
 import { useDispatch } from "react-redux";
-import { deleteNode } from "../../redux/features/activeNode.slice";
+import { deleteNode } from "../../redux/features/active.slice";
 import styles from "./styles.module.scss";
 import { style } from "@mui/system";
 

@@ -27,7 +27,7 @@ function FunctionEditor() {
     data: {},
   });
 
-  const activeNode = useSelector((state: RootState) => state.activeNode);
+  const activeNode = useSelector((state: RootState) => state.active);
 
   const activeCard = useSelector((state: RootState) => {
     const card = state.nodes.find((card) => card.id === activeNode.activeNode);

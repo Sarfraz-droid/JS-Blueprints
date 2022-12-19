@@ -31,8 +31,7 @@ export function EventHandlerNode(props: CardInterface) {
 							boxShadow: theme.shadows[6],
 						},
 						boxShadow: theme.shadows[0],
-						background: theme.palette.background.paper,
-						border: `1px solid red`,
+						background: theme.palette.grey[200],
 					})}>
 					{props.type === CardType.basic_EventStart && (
 						<React.Fragment>
