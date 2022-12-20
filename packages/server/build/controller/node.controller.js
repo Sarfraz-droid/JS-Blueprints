@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getNodes = exports.save = void 0;
-const Nodes_model_1 = require("../models/Nodes.model");
+const nodes_model_1 = require("../models/nodes.model");
 const save = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const body = req.body;
     if (!body) {
@@ -18,7 +18,7 @@ const save = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         return;
     }
     try {
-        const node = yield Nodes_model_1.NodeModel.create(body);
+        const node = yield nodes_model_1.NodeModel.create(body);
         res.status(200).send(node);
     }
     catch (err) {
@@ -30,7 +30,7 @@ exports.save = save;
 const getNodes = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     try {
-        const nodes = yield Nodes_model_1.NodeModel.findById(id);
+        const nodes = yield nodes_model_1.NodeModel.findById(id);
         if (!nodes)
             return res.status(404).send("Node with id " + id + " not found");
         res.status(200).send(nodes);

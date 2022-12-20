@@ -2,7 +2,7 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var _a;
+var _a, _b;
 Object.defineProperty(exports, "__esModule", { value: true });
 require("dotenv/config");
 const express_1 = __importDefault(require("express"));
@@ -10,13 +10,16 @@ const nodes_route_1 = __importDefault(require("./routes/nodes.route"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
-app.use((0, cors_1.default)({
-    origin: [
-        "http://localhost:3000",
-        "https://fflow-kohl.vercel.app",
-        ((_a = process === null || process === void 0 ? void 0 : process.env) === null || _a === void 0 ? void 0 : _a.DEPLOY) || "",
-    ],
-}));
+if (!((_a = process === null || process === void 0 ? void 0 : process.env) === null || _a === void 0 ? void 0 : _a.OPEN))
+    app.use((0, cors_1.default)({
+        origin: [
+            "http://localhost:3000",
+            "https://fflow-kohl.vercel.app",
+            ((_b = process === null || process === void 0 ? void 0 : process.env) === null || _b === void 0 ? void 0 : _b.DEPLOY) || "",
+        ],
+    }));
+else
+    app.use((0, cors_1.default)());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.json());
 mongoose_1.default
