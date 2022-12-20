@@ -50,11 +50,7 @@ export const DefaultComponent = (
 
 
 export const functionCreator = (code: string) => `
-/*
-  the object should be returned as value of the ouput
-*/  
-
-(input, parameter) => {
+return function (input, parameter,call) {
   ${code}
 }
 

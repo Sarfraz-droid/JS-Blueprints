@@ -37,8 +37,11 @@ export const runCodeService = (
   input.forEach((inp) => {
     _input[inp.name] = inp.value;
   });
-  console.log("Evaluating", _input);
-  eval(code)(_input, params);
-  console.log("Output", outputCalls);
+  console.log("Evaluating", _input, params, code);
+  // eval(code)(_input, params);
+  const run = new Function("input", "parameter", "call", code)();
+  console.log("Running", run);
+  run(_input, params, call);
+  // console.log("Output", outputCalls);
   return outputCalls;
 };

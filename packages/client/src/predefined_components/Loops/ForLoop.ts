@@ -7,6 +7,10 @@ export const loops_ForLoop = () =>
     DefaultComponent(
         "For Loop",
         functionCreator(`
+            for (let i = input['Start']; i <= input['End']; i++) {
+                call('Event', {Index: i})
+            }
+
     `),
         [
             {
