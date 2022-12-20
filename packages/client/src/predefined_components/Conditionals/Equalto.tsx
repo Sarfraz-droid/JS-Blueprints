@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 import React from "react";
 import { Parameters } from "@workspace/lib/types/Card";
-import { DefaultComponent } from "../default";
+import { DefaultComponent, functionCreator } from "../default";
 
 // {
 //     "error": {
@@ -43,11 +43,25 @@ import { DefaultComponent } from "../default";
 //     "end": "root__fzZYmGW6dpqD4-w16ulJx"
 // }
 
-export const condition_Equalto = () =>
+export const condition_EqualTo = () =>
 	DefaultComponent(
 		"Equal To",
-		"\n  /*\n    the object should be returned as value of the ouput\n    if ouput has \n    {\n      type: \"string\",\n      value: \"Hello\"\n    }\n\n    then the function should return {\n      Hello: \"Output String\"\n    }\n  */\n  \n(input, parameter) => {\n  return {\n    'out' : input['A'] === input['B']\n  };\n}",
+		functionCreator(`
+			const a = parseFloat(input['A']);
+			const b = parseFloat(input['B']);
+
+			if(a === b) {
+				call('True', {out: true})
+			}else{
+				call('False', {out: false})
+			}
+		`),
 		[
+			{
+				type: Parameters.event,
+				name: "Event",
+				id: `${Parameters.event}__output__${nanoid()}`,
+			},
 			{
 				type: Parameters.number,
 				value: 0,
@@ -63,6 +77,16 @@ export const condition_Equalto = () =>
 		],
 		[
 			{
+				type: Parameters.event,
+				name: "True",
+				id: `${Parameters.event}__output__${nanoid()}`,
+			},
+			{
+				type: Parameters.event,
+				name: "False",
+				id: `${Parameters.event}__output__${nanoid()}`,
+			},
+			{
 				type: Parameters.boolean,
 				value: false,
 				id: `${Parameters.boolean}__output__${nanoid()}`,
@@ -74,5 +98,6 @@ export const condition_Equalto = () =>
 			<div>
 				<p>A{" === "}B</p>
 			</div>
-		)
+		),
+		false
 	);

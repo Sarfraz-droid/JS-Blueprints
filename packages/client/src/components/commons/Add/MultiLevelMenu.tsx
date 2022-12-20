@@ -44,95 +44,112 @@ function MultiLevelMenu({
   const dispatch = useDispatch<AppDispatch>();
 
   const AccordionData = useMemo(
-    () => [
-      {
-        id: nanoid(),
-        type: "string",
-        title: "String Functions",
-        backgroundColor: green[500],
-        data: Object.keys(PredefinedComponents).filter((key) =>
-          key.startsWith("string")
-        ),
-        onClick: (item: string) => {
-          dispatch(
-            addCard({
-              type: CardType[item as keyof typeof PredefinedComponents],
-            })
-          );
-          onClose();
-        },
-      },
-      // {
-      //   id: nanoid(),
-      //   type: "basic",
-      //   title: "Basic Operators",
-      //   backgroundColor: blue[500],
-      //   data: Object.keys(PredefinedComponents).filter((key) =>
-      //     key.startsWith("basic")
-      //   ),
-      //   onClick: (item: string) => {
-      //     dispatch(
-      //       addCard({
-      //         type: CardType[item as keyof typeof PredefinedComponents],
-      //       })
-      //     );
-      //     onClose();
-      //   },
-      // },
-      {
-        id: nanoid(),
-        type: "input",
-        title: "Input Operators",
-        backgroundColor: orange[500],
-        data: Object.keys(PredefinedComponents).filter((key) =>
-          key.startsWith("input")
-        ),
-        onClick: (item: string) => {
-          dispatch(
-            addCard({
-              type: CardType[item as keyof typeof PredefinedComponents],
-            })
-          );
-          onClose();
-        },
-      },
-      {
-        id: nanoid(),
-        type: "number",
-        title: "Number Functions",
-        backgroundColor: purple[500],
-        data: Object.keys(PredefinedComponents).filter((key) => {
-          return key.startsWith("number");
-        }),
-        onClick: (item: string) => {
-          dispatch(
-            addCard({
-              type: CardType[item as keyof typeof PredefinedComponents],
-            })
-          );
-          onClose();
-        },
-      },
-      {
-        id: nanoid(),
-        type: "condition",
-        title: "Conditionals",
-        backgroundColor: cyan[800],
-        data: Object.keys(PredefinedComponents).filter((key) =>
-          key.startsWith("condition")
-        ),
-        onClick: (item: string) => {
-          dispatch(
-            addCard({
-              type: CardType[item as keyof typeof PredefinedComponents],
-            })
-          );
-          onClose();
-        },
-      },
-    ],
-    []
-  );
+		() => [
+			{
+				id: nanoid(),
+				type: "string",
+				title: "String Functions",
+				backgroundColor: green[500],
+				data: Object.keys(PredefinedComponents).filter((key) =>
+					key.startsWith("string")
+				),
+				onClick: (item: string) => {
+					dispatch(
+						addCard({
+							type: CardType[item as keyof typeof PredefinedComponents],
+						})
+					);
+					onClose();
+				},
+			},
+			// {
+			//   id: nanoid(),
+			//   type: "basic",
+			//   title: "Basic Operators",
+			//   backgroundColor: blue[500],
+			//   data: Object.keys(PredefinedComponents).filter((key) =>
+			//     key.startsWith("basic")
+			//   ),
+			//   onClick: (item: string) => {
+			//     dispatch(
+			//       addCard({
+			//         type: CardType[item as keyof typeof PredefinedComponents],
+			//       })
+			//     );
+			//     onClose();
+			//   },
+			// },
+			{
+				id: nanoid(),
+				type: "input",
+				title: "Input Operators",
+				backgroundColor: orange[500],
+				data: Object.keys(PredefinedComponents).filter((key) =>
+					key.startsWith("input")
+				),
+				onClick: (item: string) => {
+					dispatch(
+						addCard({
+							type: CardType[item as keyof typeof PredefinedComponents],
+						})
+					);
+					onClose();
+				},
+			},
+			{
+				id: nanoid(),
+				type: "number",
+				title: "Number Functions",
+				backgroundColor: purple[500],
+				data: Object.keys(PredefinedComponents).filter((key) => {
+					return key.startsWith("number");
+				}),
+				onClick: (item: string) => {
+					dispatch(
+						addCard({
+							type: CardType[item as keyof typeof PredefinedComponents],
+						})
+					);
+					onClose();
+				},
+			},
+			{
+				id: nanoid(),
+				type: "condition",
+				title: "Conditionals",
+				backgroundColor: cyan[800],
+				data: Object.keys(PredefinedComponents).filter((key) =>
+					key.startsWith("condition")
+				),
+				onClick: (item: string) => {
+					dispatch(
+						addCard({
+							type: CardType[item as keyof typeof PredefinedComponents],
+						})
+					);
+					onClose();
+				},
+			},
+			{
+				id: nanoid(),
+				type: "loop",
+				title: "Loops",
+				backgroundColor: orange[800],
+				data: Object.keys(PredefinedComponents).filter((key) =>
+					key.startsWith("loops")
+				),
+				onClick: (item: string) => {
+					dispatch(
+						addCard({
+							type: CardType[item as keyof typeof PredefinedComponents],
+						})
+					);
+					onClose();
+				},
+			},
+		],
+		[]
+	);
 
   const MenuData = useMemo(
     () => [

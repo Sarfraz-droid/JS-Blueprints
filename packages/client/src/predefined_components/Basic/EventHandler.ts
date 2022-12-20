@@ -2,6 +2,7 @@ import { CardData, CardInterface, Parameters } from "@workspace/lib/types/Card";
 import { defaultComment, main } from "../../utils/default";
 import { nanoid } from "nanoid";
 import React from "react";
+import { functionCreator } from "../default";
 
 export const EventHandler = (Heading: string) =>
 ({
@@ -10,7 +11,7 @@ export const EventHandler = (Heading: string) =>
     message: "",
   },
   function: {
-    content: `${defaultComment}  \n${main.toString()}`,
+    content: "",
     outdated: false,
     old: "",
   },

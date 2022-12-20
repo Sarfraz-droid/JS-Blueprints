@@ -77,8 +77,8 @@ function Editor() {
 		} else {
 			dispatch(setProjectId(""));
 			setIsLoading(false);
-			dispatch(setNodes(Demo.nodes as Array<CardInterface>));
-			dispatch(setEdges(Demo.edges as Array<Edge>));
+			dispatch(setNodes([]));
+			dispatch(setEdges([]));
 		}
 	}, [id]);
 

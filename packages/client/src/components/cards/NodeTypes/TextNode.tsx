@@ -13,11 +13,12 @@ import {
 } from "@workspace/lib/types/Card";
 import InputHandler from "../UI/InputHandler";
 import NodeWrapper from "./common/NodeWrapper";
+import TagHandler from "./common/TagHandler";
 
 const handleStyle = { top: 10 };
 
 // ? Node used to update text
-export function TextUpdaterNode(props: CardInterface) {
+export function NodeTemplate(props: CardInterface) {
 	const dispatch = useDispatch<AppDispatch>();
 
 	return (
@@ -40,7 +41,7 @@ export function TextUpdaterNode(props: CardInterface) {
 						background: theme.palette.grey[200],
 						pt: 0,
 					})}>
-					<Handle
+					{/* <Handle
 						type="source"
 						position={Position.Right}
 						style={{
@@ -66,37 +67,19 @@ export function TextUpdaterNode(props: CardInterface) {
 							color: "gray",
 						}}>
 						Event
-					</Typography>
+					</Typography> */}
 
 					{/* 
             Right side of node
           */}
 					{props.data.output.map((_, index) => (
 						<React.Fragment>
-							<Handle
-								type="source"
+							<TagHandler
+								_={_}
+								index={index}
 								position={Position.Right}
-								style={{
-									top: (index + 1) * 10 + 25,
-									padding: 1,
-									marginLeft: -1.5,
-									backgroundColor: (parameterColor as any)[_.type],
-									width: 3,
-									height: 3,
-								}}
-								id={_.id}
+								key={_.id}
 							/>
-							<Typography
-								sx={{
-									position: "absolute",
-									top: (index + 1) * 10 + 25,
-									right: 3,
-									fontSize: "0.3rem",
-									marginTop: "-0.2rem",
-									color: (parameterColor as any)[_.type],
-								}}>
-								{_.name}
-							</Typography>
 						</React.Fragment>
 					))}
 					<Box
@@ -156,37 +139,17 @@ export function TextUpdaterNode(props: CardInterface) {
 					{props.data.input.map((_, index) => {
 						return (
 							<React.Fragment>
-								<Handle
-									type="target"
+								<TagHandler
 									position={Position.Left}
-									style={{
-										top: (index + 1) * 10 + 25,
-										padding: 1,
-										marginLeft: 1,
-										backgroundColor: (parameterColor as any)[_.type],
-										width: 3,
-										height: 3,
-									}}
-									id={`${_.id}`}
+									_={_}
+									index={index}
+									key={index}
 								/>
-								<Typography
-									className="absolute left-0 ml-1 font-extralight"
-									sx={{
-										position: "absolute",
-										left: 0,
-										ml: 0.6,
-										top: (index + 1) * 10 + 25,
-										fontSize: "0.3rem",
-										marginTop: "-0.2rem",
-										color: "text.secondary",
-									}}>
-									{_.name}
-								</Typography>
 							</React.Fragment>
 						);
 					})}
 
-					<Handle
+					{/* <Handle
 						type="target"
 						position={Position.Left}
 						style={{
@@ -212,7 +175,7 @@ export function TextUpdaterNode(props: CardInterface) {
 							color: "gray",
 						}}>
 						Event
-					</Typography>
+					</Typography> */}
 				</Card>
 			</NodeWrapper>
 		</>

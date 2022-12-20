@@ -13,6 +13,7 @@ import {
 } from "@workspace/lib/types/Card";
 import InputHandler from "../UI/InputHandler";
 import NodeWrapper from "./common/NodeWrapper";
+import TagHandler from "./common/TagHandler";
 
 const handleStyle = { top: 10 };
 
@@ -88,63 +89,15 @@ export function OutputNode(props: CardInterface) {
 					{props.data.input.map((_, index) => {
 						return (
 							<React.Fragment>
-								<Handle
-									type="target"
+								<TagHandler
+									_={_}
+									index={index}
 									position={Position.Left}
-									style={{
-										top: (index + 1) * 10 + 25,
-										padding: 1,
-										marginLeft: 1,
-										backgroundColor: (parameterColor as any)[_.type],
-										width: 3,
-										height: 3,
-									}}
-									id={_.id}
+									key={index}
 								/>
-								<Typography
-									className="absolute left-0 ml-1 font-extralight"
-									sx={{
-										position: "absolute",
-										left: 0,
-										ml: 0.6,
-										top: (index + 1) * 10 + 25,
-										fontSize: "0.3rem",
-										marginTop: "-0.2rem",
-										color: (parameterColor as any)[_.type],
-									}}>
-									{_.name}
-								</Typography>
 							</React.Fragment>
 						);
 					})}
-
-					<Handle
-						type="target"
-						position={Position.Left}
-						style={{
-							top: 25,
-							padding: 1,
-							marginLeft: 1,
-							backgroundColor: "red",
-							width: 3,
-							height: 3,
-							borderRadius: 0,
-						}}
-						id={props.data.end}
-					/>
-
-					<Typography
-						sx={{
-							position: "absolute",
-							top: 25,
-							left: 0,
-							ml: 0.6,
-							fontSize: "0.3rem",
-							marginTop: "-0.2rem",
-							color: "gray",
-						}}>
-						Event
-					</Typography>
 				</Card>
 			</NodeWrapper>
 		</>

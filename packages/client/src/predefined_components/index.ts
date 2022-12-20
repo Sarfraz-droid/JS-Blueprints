@@ -1,6 +1,6 @@
 import { EventHandlerNode } from "../components/cards/NodeTypes/EventStart";
 import { OutputNode } from "../components/cards/NodeTypes/OutputNode";
-import { TextUpdaterNode } from "../components/cards/NodeTypes/TextNode";
+import { NodeTemplate } from "../components/cards/NodeTypes/TextNode";
 import { CardType } from "@workspace/lib/types/Card";
 import { EventHandler } from "./Basic/EventHandler";
 import { InputCard } from "./Input";
@@ -14,7 +14,10 @@ import { number_MultiplyNumbers } from "./Number/MultiplyNumbers";
 import { number_DivideNumbers } from "./Number/DivideNumbers";
 import { input_BooleanInput } from "./Input/BooleanInput";
 import { condition_GreaterThan } from "./Conditionals/Greaterthan";
-import { condition_Equalto } from "./Conditionals/Equalto";
+import { condition_EqualTo as condition_EqualTo } from "./Conditionals/Equalto";
+import { EventStart } from "./Basic/EventStart";
+import { EventEnd } from "./Basic/EventEnd";
+import { loops_ForLoop } from "./Loops/ForLoop";
 
 /**
  * This file contains all the predefined components that are available to the user
@@ -22,8 +25,8 @@ import { condition_Equalto } from "./Conditionals/Equalto";
 const PredefinedComponents = {
   [CardType.CustomOperation]: InputCard,
   [CardType.input]: InputCard,
-  [CardType.basic_EventStart]: () => EventHandler("Event Start"),
-  [CardType.basic_EventEnd]: () => EventHandler("Event End"),
+  [CardType.basic_EventStart]: EventStart,
+  [CardType.basic_EventEnd]: EventEnd,
   [CardType.basic_Output]: OutputCard,
   [CardType.string_AddStrings]: string_AddStrings,
   [CardType.string_Repeater]: string_Repeater,
@@ -34,7 +37,8 @@ const PredefinedComponents = {
   [CardType.number_MultiplyNumbers]: number_MultiplyNumbers,
   [CardType.number_DivideNumbers]: number_DivideNumbers,
   [CardType.condition_greaterThan]: condition_GreaterThan,
-  [CardType.condition_equalTo]: condition_Equalto,
+  [CardType.condition_equalTo]: condition_EqualTo,
+  [CardType.loops_ForLoop]: loops_ForLoop
 };
 
 export default PredefinedComponents;
@@ -84,7 +88,7 @@ export const haveInputOutputParam: {
 const PredefinedToNode = () => {
   const result: any = {};
   Object.keys(PredefinedComponents).forEach((key) => {
-    result[key] = TextUpdaterNode;
+    result[key] = NodeTemplate;
   });
 
   return result;
@@ -95,7 +99,7 @@ const nodes = PredefinedToNode();
 // Define the node types
 export const nodeTypes = {
   ...PredefinedToNode(),
-  [CardType.basic_EventStart]: EventHandlerNode,
-  [CardType.basic_EventEnd]: EventHandlerNode,
+  [CardType.basic_EventStart]: NodeTemplate,
+  [CardType.basic_EventEnd]: NodeTemplate,
   [CardType.basic_Output]: OutputNode,
 };

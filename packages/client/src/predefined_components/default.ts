@@ -13,7 +13,8 @@ export const DefaultComponent = (
   input: ICardIO[],
   output: ICardIO[],
   parameters: ICardIO[],
-  renderer: null | (() => any) = null
+  renderer: null | (() => any) = null,
+  hasEvent = true
 ) =>
 ({
   error: {
@@ -22,15 +23,39 @@ export const DefaultComponent = (
   },
   function: {
     content: functions,
-    outdated: false,
-    old: "",
   },
   renderer: renderer,
   editable: false,
   label: label,
-  output: output,
+  output: hasEvent ? [
+    {
+      id: `${Parameters.event}__output__${nanoid()}`,
+      type: Parameters.event,
+      value: "",
+      name: `Event`,
+    },
+    ...output,
+  ] : output,
   parameters: parameters,
-  input: input,
-  start: `event__${nanoid()}`,
-  end: `event__${nanoid()}`,
+  input: hasEvent ? [
+    {
+      id: `${Parameters.event}__input__${nanoid()}`,
+      type: Parameters.event,
+      value: "",
+      name: `Event`,
+    },
+    ...input
+  ] : input,
 } as CardData);
+
+
+export const functionCreator = (code: string) => `
+/*
+  the object should be returned as value of the ouput
+*/  
+
+(input, parameter) => {
+  ${code}
+}
+
+`;

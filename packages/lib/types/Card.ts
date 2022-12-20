@@ -16,6 +16,7 @@ export enum CardType {
   number_DivideNumbers = "number_DivideNumbers",
   condition_greaterThan = "condition_greaterThan",
   condition_equalTo = "condition_equalTo",
+  loops_ForLoop = "loops_ForLoop",
 }
 
 export enum Parameters {
@@ -37,7 +38,7 @@ export const parameterColor = {
 // ? Basic Input/Output/Parameters for a card
 export interface ICardIO {
   type: Parameters;
-  value: string | number | object | boolean;
+  value?: string | number | object | boolean;
   name: string;
   id: string;
 }
@@ -56,11 +57,9 @@ export interface CardData {
   editable: boolean | undefined;
   function: {
     content: string;
-    outdated: boolean;
-    old: string;
   };
-  start: string | undefined;
-  end: string | undefined;
+  start?: string | undefined;
+  end?: string | undefined;
 }
 
 // ? IOP : This is used to determine if a card has input, output or parameters

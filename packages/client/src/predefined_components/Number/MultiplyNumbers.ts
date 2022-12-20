@@ -6,12 +6,14 @@ import {
   Parameters,
 } from "@workspace/lib/types/Card";
 import { defaultComment, main } from "../../utils/default";
-import { DefaultComponent } from "../default";
+import { DefaultComponent, functionCreator } from "../default";
 
 export const number_MultiplyNumbers = () =>
   DefaultComponent(
     "Multiply Numbers",
-    "\n  /*\n    the object should be returned as value of the ouput\n    if ouput has \n    {\n      type: \"string\",\n      value: \"Hello\"\n    }\n\n    then the function should return {\n      Hello: \"Output String\"\n    }\n  */\n  \n(input, parameter) => {\n  return {\n    'out' : input['A'] * input['B']\n  };\n}",
+    functionCreator(`
+      call('Event', {out: input['A'] * input['B']})
+    `),
     [
       {
         id: `${Parameters.number}__input__${nanoid()}`,

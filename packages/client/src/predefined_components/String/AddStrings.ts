@@ -6,13 +6,15 @@ import {
   Parameters,
 } from "@workspace/lib/types/Card";
 import { defaultComment, main } from "../../utils/default";
-import { DefaultComponent } from "../default";
+import { DefaultComponent, functionCreator } from "../default";
 
 // Adds two strings
 export const string_AddStrings = () =>
   DefaultComponent(
     "Add String",
-    "\n  /*\n    the object should be returned as value of the ouput\n    if ouput has \n    {\n      type: \"string\",\n      value: \"Hello\"\n    }\n\n    then the function should return {\n      Hello: \"Output String\"\n    }\n  */\n  \n(input, parameter) => {\n  return {\n    'out' : `${input['A']} ${input['B']}`\n  };\n}",
+    functionCreator(`
+      call('Event', {out: parameter['A'] + parameter['B']})
+    `),
     [
       {
         id: `${Parameters.string}__input__${nanoid()}`,

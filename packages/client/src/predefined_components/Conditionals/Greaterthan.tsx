@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 import React from "react";
-import { Parameters } from "@workspace/lib/types/Card";
-import { DefaultComponent } from "../default";
+import { CardData, Parameters } from "@workspace/lib/types/Card";
+import { DefaultComponent, functionCreator } from "../default";
 
 // {
 //     "error": {
@@ -44,10 +44,59 @@ import { DefaultComponent } from "../default";
 // }
 
 export const condition_GreaterThan = () =>
-	DefaultComponent(
-		"Greater Than",
-		"\n  /*\n    the object should be returned as value of the ouput\n    if ouput has \n    {\n      type: \"string\",\n      value: \"Hello\"\n    }\n\n    then the function should return {\n      Hello: \"Output String\"\n    }\n  */\n  \n(input, parameter) => {\n  return {\n    'out' : input['A'] > input['B']\n  };\n}",
-		[
+	({
+		error: {
+			code: "",
+			message: "",
+		},
+		function: {
+			content: functionCreator(`
+            let a = parseFloat(input['A']);
+			let b = parseFloat(input['B']);
+
+			if(a > b){
+				call('True',{
+					'out': true
+				})
+			}else{
+				call('False',{
+					'out': false
+				})
+			}
+        `),
+		},
+		editable: false,
+		label: "End",
+		renderer: () => (
+			<div>
+				<p>A{" > "}B</p>
+			</div>
+		),
+		output: [
+			{
+				type: Parameters.event,
+				name: "True",
+				id: `${Parameters.event}__output__${nanoid()}`,
+			},
+			{
+				type: Parameters.event,
+				name: "False",
+				id: `${Parameters.event}__output__${nanoid()}`,
+			},
+			{
+				type: Parameters.boolean,
+				value: false,
+				id: `${Parameters.boolean}__output__${nanoid()}`,
+				name: "out",
+			},
+		],
+		parameters: [],
+		input: [
+			{
+				type: Parameters.event,
+				name: "Start",
+				id: `${Parameters.event}__input__${nanoid()}`,
+			},
 			{
 				type: Parameters.number,
 				value: 0,
@@ -61,18 +110,4 @@ export const condition_GreaterThan = () =>
 				name: "B",
 			},
 		],
-		[
-			{
-				type: Parameters.boolean,
-				value: false,
-				id: `${Parameters.boolean}__output__${nanoid()}`,
-				name: "out",
-			},
-		],
-		[],
-		() => (
-			<div>
-				<p>A{" > "}B</p>
-			</div>
-		)
-	);
+	} as CardData);

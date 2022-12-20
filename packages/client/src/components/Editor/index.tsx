@@ -15,7 +15,7 @@ import ReactFlow, {
 	Background,
 } from "react-flow-renderer";
 import { useDispatch, useSelector } from "react-redux";
-import { TextUpdaterNode } from "../cards/NodeTypes/TextNode";
+import { NodeTemplate } from "../cards/NodeTypes/TextNode";
 import { nodeTypes } from "../../predefined_components";
 import { setNode } from "../../redux/features/active.slice";
 import {
@@ -31,9 +31,6 @@ import { OutputNode } from "../cards/NodeTypes/OutputNode";
 import useEditor from "./useEditor";
 import EdgeContextMenu from "./EdgeContextMenu";
 
-const initialEdges = [
-	{ id: "e1-2", source: "1", target: "2", label: "updatable edge" },
-];
 
 const EditorComponent = () => {
 	const {
@@ -53,9 +50,6 @@ const EditorComponent = () => {
 				nodes={nodes}
 				edges={edges}
 				onNodesChange={onNodesChange}
-				// onEdgesChange={(edges: EdgeChange[]) => {
-				// 	console.log("onEdgesChange", edges);
-				// }}
 				snapToGrid
 				onEdgeUpdate={onEdgeUpdate}
 				onConnect={onConnect}

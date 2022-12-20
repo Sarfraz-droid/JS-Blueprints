@@ -6,12 +6,14 @@ import {
   Parameters,
 } from "@workspace/lib/types/Card";
 import { defaultComment, main } from "../../utils/default";
-import { DefaultComponent } from "../default";
+import { DefaultComponent, functionCreator } from "../default";
 
 export const string_Repeater = () =>
   DefaultComponent(
     "String Repeater",
-    "\n  /*\n    the object should be returned as value of the ouput\n    if ouput has \n    {\n      type: \"string\",\n      value: \"Hello\"\n    }\n\n    then the function should return {\n      Hello: \"Output String\"\n    }\n  */\n  \n(input, parameter) => {\n  return {\n    'out' : input['in']?.repeat(parameter['count'])\n  };\n}",
+    functionCreator(`
+      call('Event', {out: parameter['in'].repeat(parameter['count'])})
+    `),
     [
       {
         id: `${Parameters.string}__input__${nanoid()}`,
