@@ -13,7 +13,7 @@ export const string_AddStrings = () =>
   DefaultComponent(
     "Add String",
     functionCreator(`
-      call('Event', {out: parameter['A'] + parameter['B']})
+      call('Event', {out: input['A'] + input['B']})
     `),
     [
       {

@@ -21,6 +21,27 @@ export enum CardType {
   variable_GetVariable = "variable_GetVariable",
 }
 
+export const CardMap = {
+  [CardType.CustomOperation]: "Custom Operation",
+  [CardType.input]: "Input",
+  [CardType.basic_EventStart]: "Event Start",
+  [CardType.basic_EventEnd]: "Event End",
+  [CardType.basic_Output]: "Output",
+  [CardType.string_AddStrings]: "Add Strings",
+  [CardType.string_Repeater]: "Repeater",
+  [CardType.input_String]: "String Input",
+  [CardType.input_Number]: "Number Input",
+  [CardType.input_Boolean]: "Boolean Input",
+  [CardType.number_AddNumbers]: "Add Numbers",
+  [CardType.number_MultiplyNumbers]: "Multiply Numbers",
+  [CardType.number_DivideNumbers]: "Divide Numbers",
+  [CardType.condition_greaterThan]: "Greater Than",
+  [CardType.condition_equalTo]: "Equal To",
+  [CardType.loops_ForLoop]: "For Loop",
+  [CardType.variable_SetVariable]: "Set Variable",
+  [CardType.variable_GetVariable]: "Get Variable",
+}
+
 export enum Parameters {
   string = "string",
   number = "number",

@@ -12,7 +12,7 @@ export const string_Repeater = () =>
   DefaultComponent(
     "String Repeater",
     functionCreator(`
-      call('Event', {out: parameter['in'].repeat(parameter['count'])})
+      call('Event', {out: input['in'].repeat(parameter['count'])})
     `),
     [
       {

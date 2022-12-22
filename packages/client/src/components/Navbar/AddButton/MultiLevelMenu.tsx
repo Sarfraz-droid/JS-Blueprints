@@ -22,7 +22,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../redux/store";
 import { addCard } from "../../../redux/features/node.slice";
-import { CardType } from "@workspace/lib/types/Card";
+import { CardMap, CardType } from "@workspace/lib/types/Card";
 import PredefinedComponents from "../../../predefined_components";
 import { nanoid } from "nanoid";
 
@@ -50,9 +50,12 @@ function MultiLevelMenu({
 				type: "string",
 				title: "String Functions",
 				backgroundColor: green[500],
-				data: Object.keys(PredefinedComponents).filter((key) =>
-					key.startsWith("string")
-				),
+				data: Object.keys(PredefinedComponents)
+					.filter((key) => key.startsWith("string"))
+					.map((key) => ({
+						title: CardMap[key as keyof typeof PredefinedComponents],
+						id: key,
+					})),
 				onClick: (item: string) => {
 					dispatch(
 						addCard({
@@ -62,31 +65,17 @@ function MultiLevelMenu({
 					onClose();
 				},
 			},
-			// {
-			//   id: nanoid(),
-			//   type: "basic",
-			//   title: "Basic Operators",
-			//   backgroundColor: blue[500],
-			//   data: Object.keys(PredefinedComponents).filter((key) =>
-			//     key.startsWith("basic")
-			//   ),
-			//   onClick: (item: string) => {
-			//     dispatch(
-			//       addCard({
-			//         type: CardType[item as keyof typeof PredefinedComponents],
-			//       })
-			//     );
-			//     onClose();
-			//   },
-			// },
 			{
 				id: nanoid(),
 				type: "input",
 				title: "Input Operators",
 				backgroundColor: orange[500],
-				data: Object.keys(PredefinedComponents).filter((key) =>
-					key.startsWith("input")
-				),
+				data: Object.keys(PredefinedComponents)
+					.filter((key) => key.startsWith("input"))
+					.map((key) => ({
+						title: CardMap[key as keyof typeof PredefinedComponents],
+						id: key,
+					})),
 				onClick: (item: string) => {
 					dispatch(
 						addCard({
@@ -101,9 +90,12 @@ function MultiLevelMenu({
 				type: "number",
 				title: "Number Functions",
 				backgroundColor: purple[500],
-				data: Object.keys(PredefinedComponents).filter((key) => {
-					return key.startsWith("number");
-				}),
+				data: Object.keys(PredefinedComponents)
+					.filter((key) => key.startsWith("number"))
+					.map((key) => ({
+						title: CardMap[key as keyof typeof PredefinedComponents],
+						id: key,
+					})),
 				onClick: (item: string) => {
 					dispatch(
 						addCard({
@@ -118,9 +110,12 @@ function MultiLevelMenu({
 				type: "condition",
 				title: "Conditionals",
 				backgroundColor: cyan[800],
-				data: Object.keys(PredefinedComponents).filter((key) =>
-					key.startsWith("condition")
-				),
+				data: Object.keys(PredefinedComponents)
+					.filter((key) => key.startsWith("condition"))
+					.map((key) => ({
+						title: CardMap[key as keyof typeof PredefinedComponents],
+						id: key,
+					})),
 				onClick: (item: string) => {
 					dispatch(
 						addCard({
@@ -135,9 +130,12 @@ function MultiLevelMenu({
 				type: "loop",
 				title: "Loops",
 				backgroundColor: orange[800],
-				data: Object.keys(PredefinedComponents).filter((key) =>
-					key.startsWith("loops")
-				),
+				data: Object.keys(PredefinedComponents)
+					.filter((key) => key.startsWith("loops"))
+					.map((key) => ({
+						title: CardMap[key as keyof typeof PredefinedComponents],
+						id: key,
+					})),
 				onClick: (item: string) => {
 					dispatch(
 						addCard({
@@ -220,9 +218,9 @@ function MultiLevelMenu({
 								{item.data.map((_, index) => (
 									<MenuItem
 										onClick={() => {
-											item.onClick(_);
+											item.onClick(_.id);
 										}}>
-										{_.replace(item.type, "").replace(/[^a-z0-9]/gi, "")}
+										{_.title}
 									</MenuItem>
 								))}
 							</AccordionDetails>
