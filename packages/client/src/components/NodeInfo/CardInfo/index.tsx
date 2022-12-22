@@ -125,6 +125,7 @@ const CardMenu = ({
 					.filter((state) => !notAdd.includes(state))
 					.map((item, index) => (
 						<MenuItem
+							key={index}
 							onClick={() => {
 								console.log("newIOP");
 								dispatch(

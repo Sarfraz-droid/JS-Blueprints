@@ -73,7 +73,7 @@ function AddVariableComp({
 							sx={{
 								width: "100%",
 							}}>
-							{Object.keys(VariableParams).map((val) => (
+							{VariableParams.map((val) => (
 								<MenuItem value={val}>{val}</MenuItem>
 							))}
 						</Select>
