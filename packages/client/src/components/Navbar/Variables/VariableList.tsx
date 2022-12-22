@@ -13,23 +13,12 @@ import { DeleteOutline } from "@mui/icons-material";
 import { Variable, VariableType } from "@workspace/lib/types/variables.types";
 import { updateVariableValue } from "../../../redux/features/variables.slice";
 import { generateVariableThunk } from "../../../redux/functions/variables.action";
+import VariableValueEdit from "./VariableValueEdit";
 
 function VariableList() {
-	const variablesState = useSelector((state: RootState) => state.variables);
+	const variableState = useSelector((state: RootState) => state.variables);
 
 	const dispatch = useDispatch<AppDispatch>();
-
-	const onUpdateVariableValue = (
-		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-		variable: Variable
-	) => {
-		dispatch(
-			updateVariableValue({
-				id: variable.id,
-				value: e.target.value,
-			})
-		);
-	};
 
 	const onGenerateVariable = (variable: Variable, type: VariableType) => {
 		dispatch(
@@ -42,8 +31,8 @@ function VariableList() {
 
 	return (
 		<React.Fragment>
-			<Grid container>
-				{variablesState.variables.map((variable) => {
+			<Grid container direction={"column"} spacing={1}>
+				{variableState.variables.map((variable) => {
 					return (
 						<Grid item container alignItems={"center"}>
 							<Grid
@@ -68,14 +57,7 @@ function VariableList() {
 								</Grid>
 							</Grid>
 							<Grid item xs={3}>
-								<TextField
-									variant="filled"
-									size="small"
-									placeholder="Value"
-									label="Value"
-									value={variable.value}
-									onChange={(e) => onUpdateVariableValue(e, variable)}
-								/>
+								<VariableValueEdit variable={variable} />
 							</Grid>
 							<Grid
 								item

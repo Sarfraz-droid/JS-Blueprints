@@ -29,6 +29,9 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { red } from "@mui/material/colors";
 import AddIcon from "@mui/icons-material/Add";
 import { haveInputOutputParam } from "../../../predefined_components";
+
+const notAdd = [Parameters.variable];
+
 const CardMenu = ({
 	activeCard,
 	type,
@@ -118,29 +121,31 @@ const CardMenu = ({
 				MenuListProps={{
 					"aria-labelledby": "basic-button",
 				}}>
-				{Object.values(Parameters).map((item, index) => (
-					<MenuItem
-						onClick={() => {
-							console.log("newIOP");
-							dispatch(
-								newIOP({
-									type: type,
-									field: item,
-								})
-							);
-							handleClose();
-						}}
-						sx={(theme) => {
-							return {
-								"&:hover": {
-									backgroundColor: theme.palette.primary.main,
-									color: "white",
-								},
-							};
-						}}>
-						{item}
-					</MenuItem>
-				))}
+				{Object.values(Parameters)
+					.filter((state) => !notAdd.includes(state))
+					.map((item, index) => (
+						<MenuItem
+							onClick={() => {
+								console.log("newIOP");
+								dispatch(
+									newIOP({
+										type: type,
+										field: item,
+									})
+								);
+								handleClose();
+							}}
+							sx={(theme) => {
+								return {
+									"&:hover": {
+										backgroundColor: theme.palette.primary.main,
+										color: "white",
+									},
+								};
+							}}>
+							{item}
+						</MenuItem>
+					))}
 			</Menu>
 		</React.Fragment>
 	);
@@ -179,21 +184,30 @@ function CardInfo() {
 					name: "input",
 					activeCard: activeCard.data.input,
 					id: activeCard?.id,
-					allowed: haveInputOutputParam[activeCard.type]?.input,
+					allowed:
+						haveInputOutputParam[
+							activeCard.type as keyof typeof haveInputOutputParam
+						]?.input,
 				},
 				{
 					title: "Output",
 					name: "output",
 					activeCard: activeCard.data.output,
 					id: activeCard?.id,
-					allowed: haveInputOutputParam[activeCard.type]?.output,
+					allowed:
+						haveInputOutputParam[
+							activeCard.type as keyof typeof haveInputOutputParam
+						]?.output,
 				},
 				{
 					title: "Parameters",
 					name: "parameters",
 					activeCard: activeCard.data.parameters,
 					id: activeCard?.id,
-					allowed: haveInputOutputParam[activeCard.type]?.parameters,
+					allowed:
+						haveInputOutputParam[
+							activeCard.type as keyof typeof haveInputOutputParam
+						]?.parameters,
 				},
 			];
 

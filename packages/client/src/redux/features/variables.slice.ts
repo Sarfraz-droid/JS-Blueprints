@@ -36,9 +36,17 @@ export const variablesSlice = createSlice({
             const variables = state.variables.map((variable) => {
                 if (variable.id === id) {
                     console.log("Updating variable value");
-                    return {
-                        ...variable,
-                        value: value
+
+                    switch (variable.type) {
+                        case "string":
+                            variable.value = value;
+                            break;
+                        case "number":
+                            variable.value = Number(value);
+                            break;
+                        case "boolean":
+                            variable.value = Boolean(value);
+                            break;
                     }
                 }
                 return variable;

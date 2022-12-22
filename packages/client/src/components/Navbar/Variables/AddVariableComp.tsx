@@ -13,6 +13,12 @@ import {
 import { Parameters } from "@workspace/lib/types/Card";
 import React, { useMemo } from "react";
 
+const VariableParams = [
+	Parameters.string,
+	Parameters.number,
+	Parameters.boolean,
+];
+
 function AddVariableComp({
 	onAddVariable,
 }: {
@@ -67,7 +73,7 @@ function AddVariableComp({
 							sx={{
 								width: "100%",
 							}}>
-							{Object.keys(Parameters).map((val) => (
+							{Object.keys(VariableParams).map((val) => (
 								<MenuItem value={val}>{val}</MenuItem>
 							))}
 						</Select>
