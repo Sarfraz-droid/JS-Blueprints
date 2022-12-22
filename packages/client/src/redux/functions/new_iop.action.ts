@@ -23,6 +23,12 @@ function getField(field: Parameters, type: string) {
         value: false,
         id: `${field}__${type}__${nanoid()}`,
       };
+    case Parameters.event:
+      return {
+        type: Parameters.event,
+        value: "",
+        id: `${field}__${type}__${nanoid()}`,
+      }
   }
 }
 
@@ -37,6 +43,8 @@ export const newIOP = createAsyncThunk(
   ) => {
     const node: RootState = thunkApi.getState() as RootState;
     const activeId: string | null = node.active.activeNode;
+
+    console.log("IOP", action);
 
     if (activeId === null) return;
 
