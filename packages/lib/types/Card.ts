@@ -74,6 +74,7 @@ export enum ICardIOP {
 
 // ? Card Interface
 export interface CardInterface {
+  rid?: string;
   id: string;
   data: CardData;
   position: {

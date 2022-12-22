@@ -3,7 +3,7 @@ import { CardData, Parameters } from "@workspace/lib/types/Card";
 import { Variable, VariableType } from "@workspace/lib/types/variables.types"
 import { nanoid } from "nanoid";
 import { RootState } from "../store";
-import { createVariableNodeFunc } from "./node.action";
+import { createVariableNodeFunc, removeVariableNodeThunk } from "./node.action";
 import { createVariableNode } from "../features/node.slice";
 
 export const addVariableFunc = ({ type, name }: { type: string; name: string; }) => {
@@ -45,5 +45,27 @@ export const generateVariableThunk = createAsyncThunk(
             type: action.type,
             data: variable
         }))
+    }
+)
+
+export const deleteVariableThunk = createAsyncThunk(
+    "node/deleteVariable",
+    async (action: {
+        id: string | undefined;
+    }, thunkApi) => {
+        const state = thunkApi.getState() as RootState;
+
+        const variable = state.variables.variables.find((variable) => variable.id === action.id);
+
+        if (variable === undefined)
+            return thunkApi.rejectWithValue("Variable not found");
+
+        thunkApi.dispatch(
+            removeVariableNodeThunk({
+                variable: variable
+            })
+        );
+
+        return variable;
     }
 )

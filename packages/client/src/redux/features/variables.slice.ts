@@ -1,6 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { Variable } from "@workspace/lib/types/variables.types";
-import { addVariableFunc, generateVariableThunk } from "../functions/variables.action";
+import { addVariableFunc, deleteVariableThunk, generateVariableThunk } from "../functions/variables.action";
 import { loadDataThunk } from "../functions/db.action";
 
 interface VariableSliceInterface {
@@ -76,6 +76,17 @@ export const variablesSlice = createSlice({
 
             state.variables = action.payload?.variables || [];
             return state;
+        });
+        builder.addCase(deleteVariableThunk.fulfilled,
+            (state, action) => {
+                if (action.payload === undefined) return state;
+
+                const index = state.variables.findIndex((variable) => variable.id === action.payload.id);
+                if (index !== -1) {
+                    state.variables.splice(index, 1);
+                }
+
+                return state;
         })
     }
 });

@@ -15,7 +15,7 @@ import toast from "react-hot-toast";
 import { DuplicateNodes } from "../functions/duplicate.action";
 import { Demo } from "./state";
 import { loadDataThunk } from "../functions/db.action";
-import { createVariableNodeFunc } from "../functions/node.action";
+import { createVariableNodeFunc, removeVariableNodeThunk } from "../functions/node.action";
 const initialState: Array<CardInterface> = [];
 
 export const NodeSlice = createSlice({
@@ -131,6 +131,10 @@ export const NodeSlice = createSlice({
       state = action.payload?.nodes;
       return state;
     });
+    builder.addCase(removeVariableNodeThunk.fulfilled, (state, action) => {
+
+      return state;
+    })
   },
 });
 

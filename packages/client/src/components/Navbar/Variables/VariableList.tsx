@@ -12,7 +12,10 @@ import { AppDispatch, RootState } from "../../../redux/store";
 import { DeleteOutline } from "@mui/icons-material";
 import { Variable, VariableType } from "@workspace/lib/types/variables.types";
 import { updateVariableValue } from "../../../redux/features/variables.slice";
-import { generateVariableThunk } from "../../../redux/functions/variables.action";
+import {
+	deleteVariableThunk,
+	generateVariableThunk,
+} from "../../../redux/functions/variables.action";
 import VariableValueEdit from "./VariableValueEdit";
 
 function VariableList() {
@@ -25,6 +28,14 @@ function VariableList() {
 			generateVariableThunk({
 				id: variable.id,
 				type: type,
+			})
+		);
+	};
+
+	const onDeleteVariable = (variable: Variable) => {
+		dispatch(
+			deleteVariableThunk({
+				id: variable.id,
 			})
 		);
 	};
@@ -80,7 +91,11 @@ function VariableList() {
 										}>
 										Set
 									</Button>
-									<IconButton color="warning">
+									<IconButton
+										color="warning"
+										onClick={() => {
+											onDeleteVariable(variable);
+										}}>
 										<DeleteOutline />
 									</IconButton>
 								</Stack>
