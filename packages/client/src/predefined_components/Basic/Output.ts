@@ -15,7 +15,7 @@ export const OutputCard = () =>
     old: "",
   },
   editable: false,
-  label: "Heading",
+  label: "Output Node",
   output: [{
     id: `${Parameters.event}__output__${nanoid()}`,
     type: Parameters.event,

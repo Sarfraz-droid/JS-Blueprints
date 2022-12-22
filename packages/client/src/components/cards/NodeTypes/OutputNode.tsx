@@ -39,6 +39,12 @@ export function OutputNode(props: CardInterface) {
 						"&:focus": {
 							boxShadow: theme.shadows[6],
 						},
+						"&:hover": {
+							boxShadow: theme.shadows[3],
+						},
+						"&:active": {
+							boxShadow: theme.shadows[6],
+						},
 						boxShadow: theme.shadows[0],
 						background: theme.palette.grey[200],
 					})}>
@@ -46,18 +52,16 @@ export function OutputNode(props: CardInterface) {
 						sx={(theme) => ({
 							width: "100%",
 							py: 0.4,
-							bgcolor: yellow[800],
-							borderRadius: "0.2rem",
+							bgcolor: yellow[900],
 							mt: 0.1,
 							ml: 0.01,
 						})}>
 						<Typography
 							sx={{
-								fontSize: "0.3rem",
+								fontSize: "0.35rem",
 								textAlign: "left",
 								pl: 1,
-								fontWeight: "bold",
-								color: "text.primary",
+								color: "white",
 							}}>
 							{props.data.label}
 						</Typography>

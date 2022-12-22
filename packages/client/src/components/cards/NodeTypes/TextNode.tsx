@@ -14,6 +14,7 @@ import {
 import InputHandler from "../UI/InputHandler";
 import NodeWrapper from "./common/NodeWrapper";
 import TagHandler from "./common/TagHandler";
+import { theme } from "../../theme/theme";
 
 const handleStyle = { top: 10 };
 
@@ -36,39 +37,18 @@ export function NodeTemplate(props: CardInterface) {
 							50,
 						"&:focus": {
 							boxShadow: theme.shadows[6],
+							background: theme.palette.grey[300],
+						},
+						"&:hover": {
+							boxShadow: theme.shadows[3],
+						},
+						"&:active": {
+							boxShadow: theme.shadows[6],
 						},
 						boxShadow: theme.shadows[0],
-						background: theme.palette.grey[200],
+						background: theme.palette.grey[300],
 						pt: 0,
 					})}>
-					{/* <Handle
-						type="source"
-						position={Position.Right}
-						style={{
-							top: 25,
-							padding: 1,
-							marginLeft: -1.5,
-							backgroundColor: "red",
-							width: 3,
-							height: 3,
-							borderRadius: 0,
-						}}
-						id={props.data.start}
-					/>
-
-					<Typography
-						sx={{
-							position: "absolute",
-							top: 25,
-							right: 3,
-							px: 1,
-							fontSize: "0.3rem",
-							marginTop: "-0.2rem",
-							color: "gray",
-						}}>
-						Event
-					</Typography> */}
-
 					{/* 
             Right side of node
           */}
@@ -87,16 +67,15 @@ export function NodeTemplate(props: CardInterface) {
 							width: "100%",
 							py: 0.4,
 							bgcolor: theme.palette.primary.main,
-							borderRadius: "0.2rem",
 							mt: 0.1,
 							ml: 0.01,
 						})}>
 						<Typography
 							sx={{
-								fontSize: "0.3rem",
+								fontSize: ".34rem",
 								textAlign: "left",
 								pl: 1,
-								fontWeight: "bold",
+								fontWeight: theme.typography.fontWeightRegular,
 								color: "white",
 							}}>
 							{props.data.label}
@@ -148,34 +127,6 @@ export function NodeTemplate(props: CardInterface) {
 							</React.Fragment>
 						);
 					})}
-
-					{/* <Handle
-						type="target"
-						position={Position.Left}
-						style={{
-							top: 25,
-							padding: 1,
-							marginLeft: 1,
-							backgroundColor: "red",
-							width: 3,
-							height: 3,
-							borderRadius: 0,
-						}}
-						id={props.data.end}
-					/>
-
-					<Typography
-						sx={{
-							position: "absolute",
-							top: 25,
-							left: 0,
-							ml: 0.6,
-							fontSize: "0.3rem",
-							marginTop: "-0.2rem",
-							color: "gray",
-						}}>
-						Event
-					</Typography> */}
 				</Card>
 			</NodeWrapper>
 		</>

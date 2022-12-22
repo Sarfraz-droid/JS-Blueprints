@@ -45,7 +45,7 @@ export const variableSetterCard = (variable: Variable) => {
                 })
             `)
         },
-        label: `Set ${name}`,
+        label: `Set ${variable.name}`,
         output: [
             {
                 id: `${Parameters.event}__output_${nanoid()}`,

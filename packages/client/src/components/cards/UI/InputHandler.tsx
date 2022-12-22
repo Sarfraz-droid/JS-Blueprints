@@ -1,4 +1,10 @@
-import { MenuItem, Select, TextField, Typography } from "@mui/material";
+import {
+	MenuItem,
+	Select,
+	TextField,
+	Typography,
+	useTheme,
+} from "@mui/material";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { UpdateData } from "../../../redux/functions/updateData.action";
@@ -13,6 +19,8 @@ function InputHandler({
 	item: ICardIO;
 	onChange: (value: any) => void;
 }) {
+	const theme = useTheme();
+
 	const [Boolean, setBoolean] = useState(false);
 	switch (item.type) {
 		case Parameters.string:
@@ -31,12 +39,20 @@ function InputHandler({
 						style={{
 							fontSize: "0.5rem",
 						}}
+						placeholder={item.name}
 						onChange={(e) => {
 							onChange(e.target.value);
+						}}
+						inputProps={{
+							style: {
+								borderRadius: 2,
+								border: `1px dotted ${theme.palette.primary.main}`,
+							},
 						}}
 						value={item.value}
 						sx={{
 							p: 0,
+							width: 50,
 						}}
 					/>
 				</React.Fragment>
@@ -54,16 +70,23 @@ function InputHandler({
 					<Input
 						id={`${item.id}__input`}
 						type="number"
-						className="font-mono rounded-sm border-1 p-0"
 						style={{
 							fontSize: "0.5rem",
 						}}
+						placeholder={item.name}
 						onChange={(e) => {
 							onChange(parseInt(e.target.value));
 						}}
 						value={item.value}
+						inputProps={{
+							style: {
+								borderRadius: 2,
+								border: `1px dotted ${theme.palette.primary.main}`,
+							},
+						}}
 						sx={{
 							p: 0,
+							width: 50,
 						}}
 					/>
 				</React.Fragment>
@@ -95,7 +118,7 @@ function InputHandler({
 							p: 0,
 							fontSize: "0.5rem",
 							border: 0,
-							width: "100%",
+							width: 60,
 							"& .MuiInputBase-input": {
 								p: 0.5,
 								border: 0,
