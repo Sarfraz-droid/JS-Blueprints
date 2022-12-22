@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import PredefinedComponents from "../../predefined_components";
-import { CardInterface, CardType } from "@workspace/lib/types/Card";
+import { CardData, CardInterface, CardType } from "@workspace/lib/types/Card";
 import { nanoid } from "nanoid";
 import {
   NodeChange,
@@ -14,7 +14,8 @@ import { RunCode } from "../functions/run.action";
 import toast from "react-hot-toast";
 import { DuplicateNodes } from "../functions/duplicate.action";
 import { Demo } from "./state";
-import { loadData } from "../functions/db.action";
+import { loadDataThunk } from "../functions/db.action";
+import { createVariableNodeFunc } from "../functions/node.action";
 const initialState: Array<CardInterface> = [];
 
 export const NodeSlice = createSlice({
@@ -27,9 +28,12 @@ export const NodeSlice = createSlice({
         type: CardType;
       }>
     ) => {
+      if (action.payload.type in PredefinedComponents === false)
+        return state;
+
       const newCard: CardInterface = {
         type: action.payload.type,
-        data: PredefinedComponents[action.payload.type](),
+        data: PredefinedComponents[action.payload.type as keyof typeof PredefinedComponents](),
         positionAbsolute: {
           x: 0,
           y: 0,
@@ -44,6 +48,7 @@ export const NodeSlice = createSlice({
       return state;
     },
 
+    createVariableNode: createVariableNodeFunc,
     UpdateNode: (
       state: Array<CardInterface>,
       action: PayloadAction<NodeChange[]>
@@ -121,7 +126,7 @@ export const NodeSlice = createSlice({
       if (newNode === undefined) return state;
       return [...state, newNode];
     });
-    builder.addCase(loadData.fulfilled, (state, action) => {
+    builder.addCase(loadDataThunk.fulfilled, (state, action) => {
       if (action.payload === undefined) return state;
       state = action.payload?.nodes;
       return state;
@@ -129,5 +134,5 @@ export const NodeSlice = createSlice({
   },
 });
 
-export const { addCard, UpdateNode, DeleteNode, setNodes } = NodeSlice.actions;
+export const { addCard, UpdateNode, DeleteNode, setNodes, createVariableNode } = NodeSlice.actions;
 export default NodeSlice.reducer;

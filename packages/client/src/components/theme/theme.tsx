@@ -13,20 +13,11 @@ export const theme = createTheme({
 	},
 	components: {
 		MuiButton: {
-			defaultProps: {
-				disableRipple: true,
-			},
+			defaultProps: {},
 			styleOverrides: {
 				root: ({ ownerState, theme }) => ({
-					borderRadius: "8px",
+					borderRadius: ownerState.style?.borderRadius || 12,
 					boxShadow: "none",
-					color:
-						ownerState.variant === "contained"
-							? "white"
-							: theme.palette.secondary.main,
-					"&:hover": {
-						boxShadow: theme.shadows[2],
-					},
 				}),
 			},
 		},

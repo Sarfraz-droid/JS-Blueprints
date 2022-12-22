@@ -1,6 +1,7 @@
 import { Edge } from "react-flow-renderer";
 import { CardInterface, CardType, Parameters } from "@workspace/lib/types/Card";
 import { runCodeService } from "./functions.service";
+import { Variable } from "@workspace/lib/types/variables.types";
 
 const notBacktrackTypes = [
     Parameters.event
@@ -9,9 +10,11 @@ const notBacktrackTypes = [
 export class FlowService {
     FlowMap = new Map<string, any>;
     node:Array<CardInterface>;
-    edges : Array<Edge>;
+    edges: Array<Edge>;
+    variables: Array<Variable>;
 
-    constructor(node: Array<CardInterface>, edges: Array<Edge>) { 
+    constructor(node: Array<CardInterface>, edges: Array<Edge>, variables: Array<Variable>) {
+        this.variables = variables;
         this.node = node;
         this.edges = edges;
     }
@@ -23,6 +26,12 @@ export class FlowService {
         }
         return eventStart;
     };
+
+    private mapVariables = () => {
+        this.variables.forEach((variable) => {
+            this.FlowMap.set(`${variable.type}__${variable.id}`, variable.value);
+        })
+    }
 
     private GetNodeById = (id: string) => { 
         return this.node.find((card) => card.id === id);
@@ -112,6 +121,7 @@ export class FlowService {
     public runFlowService = async() => {
 
         const eventStart = this.findEventStart(this.node);
+        this.mapVariables();
 
         if (eventStart) {
             this.pathFinding(eventStart);

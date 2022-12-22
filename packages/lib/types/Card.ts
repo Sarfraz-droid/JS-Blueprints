@@ -17,6 +17,8 @@ export enum CardType {
   condition_greaterThan = "condition_greaterThan",
   condition_equalTo = "condition_equalTo",
   loops_ForLoop = "loops_ForLoop",
+  variable_SetVariable = "variable_SetVariable",
+  variable_GetVariable = "variable_GetVariable",
 }
 
 export enum Parameters {
@@ -24,6 +26,7 @@ export enum Parameters {
   number = "number",
   boolean = "boolean",
   event = "event",
+  variable = "variable",
 }
 
 // ? Color of different parameters
@@ -81,5 +84,5 @@ export interface CardInterface {
     x: number;
     y: number;
   };
-  type: CardType;
+  type?: CardType;
 }

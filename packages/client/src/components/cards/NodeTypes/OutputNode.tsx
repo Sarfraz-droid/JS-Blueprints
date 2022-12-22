@@ -17,6 +17,8 @@ import TagHandler from "./common/TagHandler";
 
 const handleStyle = { top: 10 };
 
+const doNotOutput = [Parameters.event];
+
 export function OutputNode(props: CardInterface) {
 	console.log(props);
 	const onChange = useCallback((evt: ChangeEvent<HTMLInputElement>) => {
@@ -67,22 +69,24 @@ export function OutputNode(props: CardInterface) {
 							py: 1,
 						})}>
 						<Typography>
-							{props.data.input.map((input, index) => (
-								<div>
-									<Typography
-										sx={{
-											fontSize: "0.4rem",
-										}}>
-										{input.name}
-									</Typography>
-									<pre
-										style={{
-											fontSize: "0.4rem",
-										}}>
-										{JSON.stringify(input.value, null, 2)}
-									</pre>
-								</div>
-							))}
+							{props.data.input
+								.filter((item) => !doNotOutput.includes(item.type))
+								.map((input, index) => (
+									<div>
+										<Typography
+											sx={{
+												fontSize: "0.4rem",
+											}}>
+											{input.name}
+										</Typography>
+										<pre
+											style={{
+												fontSize: "0.4rem",
+											}}>
+											{JSON.stringify(input.value, null, 2)}
+										</pre>
+									</div>
+								))}
 						</Typography>
 					</Box>
 

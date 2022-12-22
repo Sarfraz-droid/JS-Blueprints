@@ -25,11 +25,15 @@ import { Edge } from "react-flow-renderer";
 import FiberNewIcon from "@mui/icons-material/FiberNew";
 import SaveIcon from "@mui/icons-material/Save";
 import { CardInterface } from "@workspace/lib/types/Card";
+import Variables from "./Variables";
 
 function Navbar() {
 	const [newProjectModal, setNewProjectModal] = useState(false);
 	const card = useSelector((state: RootState) => state.nodes);
 	const edges = useSelector((state: RootState) => state.edges);
+	const variables = useSelector(
+		(state: RootState) => state.variables.variables
+	);
 	const theme = useTheme();
 	const matches = useMediaQuery(theme?.breakpoints.down("md"));
 
@@ -42,6 +46,7 @@ function Navbar() {
 		saveData({
 			nodes: card as Array<CardInterface>,
 			edges: edges as Array<Edge>,
+			variables: variables,
 		})
 			.then((data) => {
 				toast.success("Saved");
@@ -131,24 +136,19 @@ function Navbar() {
 						</Button>
 						<Divider orientation="vertical" />
 						<AddButton />
+						<Variables />
 					</Stack>
 				</Grid>
 				<Grid item xs={4}>
 					<Stack direction="row" spacing={3}>
 						<Button
-							disableElevation={true}
+							variant="contained"
+							color="info"
 							sx={{
 								fontWeight: 500,
 								letterSpacing: "2.5px",
 								p: 1,
 								px: 2,
-								backgroundColor: orange[500],
-								color: "white",
-								"&:hover": {
-									boxShadow: "none",
-									color: "black",
-									backgroundColor: orange[700],
-								},
 							}}
 							onClick={() => {
 								Navigate("/docs");

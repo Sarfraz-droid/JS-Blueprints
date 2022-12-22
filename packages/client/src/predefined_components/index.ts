@@ -94,11 +94,21 @@ const PredefinedToNode = () => {
   return result;
 };
 
+const CardTypeToNode = () => {
+  const result: any = {};
+  Object.values(CardType).forEach((key) => {
+    result[key] = NodeTemplate;
+  });
+
+  return result;
+}
+
 const nodes = PredefinedToNode();
 
 // Define the node types
 export const nodeTypes = {
-  ...PredefinedToNode(),
+  // ...PredefinedToNode(),
+  ...CardTypeToNode(),
   [CardType.basic_EventStart]: NodeTemplate,
   [CardType.basic_EventEnd]: NodeTemplate,
   [CardType.basic_Output]: OutputNode,

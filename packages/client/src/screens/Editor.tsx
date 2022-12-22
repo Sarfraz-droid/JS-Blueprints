@@ -10,7 +10,7 @@ import Logo from "../assets/brand/JSBlueprints.png";
 import { useNavigate, useParams } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import React, { useEffect, useState } from "react";
-import { loadData, saveData } from "../redux/functions/db.action";
+import { loadDataThunk, saveData } from "../redux/functions/db.action";
 import { setNodes } from "../redux/features/node.slice";
 import { setEdges } from "../redux/features/edge.slice";
 import Renderer from "../components/Renderer";
@@ -37,7 +37,7 @@ function Editor() {
 		if (id) {
 			dispatch(setProjectId(id));
 			dispatch(
-				loadData({
+				loadDataThunk({
 					id: id,
 					cb: () => {
 						setIsLoading(false);
