@@ -1,10 +1,10 @@
 import React, { MouseEvent, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../redux/store';
+import { AppDispatch, RootState } from '../redux/store';
 import { Connection, Edge, Node, NodeChange, useUpdateNodeInternals } from 'react-flow-renderer';
-import { addEdgeThunk } from '../../redux/functions/add_edge.action';
-import { UpdateNode } from '../../redux/features/node.slice';
-import { setEdge, setNode } from '../../redux/features/active.slice';
+import { addEdgeThunk } from '../redux/functions/add_edge.action';
+import { UpdateNode } from '../redux/features/node.slice';
+import { setEdge, setNode } from '../redux/features/active.slice';
 
 function useEditor() {
     const nodes = useSelector((state: RootState) => state.nodes);

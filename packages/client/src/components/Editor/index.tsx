@@ -28,7 +28,7 @@ import { AppDispatch, RootState } from "../../redux/store";
 import { CardInterface, CardType, Parameters } from "@workspace/lib/types/Card";
 import { EventHandlerNode } from "../cards/NodeTypes/EventStart";
 import { OutputNode } from "../cards/NodeTypes/OutputNode";
-import useEditor from "./useEditor";
+import useEditor from "../../hooks/useEditor";
 import EdgeContextMenu from "./EdgeContextMenu";
 
 

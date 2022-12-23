@@ -23,7 +23,7 @@ export const activeSlice = createSlice({
   name: "activeSlice",
   initialState,
   reducers: {
-    setNode(state: activeEdgeNodeState, action: PayloadAction<Node>) {
+    setNode(state: activeEdgeNodeState, action: PayloadAction<Node | CardInterface>) {
       const newCard = action.payload;
 
       const newState: CardInterface | null = {

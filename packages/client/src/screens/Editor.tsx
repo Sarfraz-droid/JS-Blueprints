@@ -16,6 +16,8 @@ import { setEdges } from "../redux/features/edge.slice";
 import Renderer from "../components/Renderer";
 import { setProjectId } from "../redux/features/projectId.slice";
 import Navbar from "../components/Navbar";
+import { CardInterface } from "@workspace/lib/types/Card";
+
 
 /**
  * @description Editor Screen

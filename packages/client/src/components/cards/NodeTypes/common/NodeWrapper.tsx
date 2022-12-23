@@ -8,6 +8,8 @@ import { DeleteNode } from "../../../../redux/features/node.slice";
 import { deleteEdges } from "../../../../redux/features/edge.slice";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { DuplicateNodes } from "../../../../redux/functions/duplicate.action";
+import useEditor from "../../../../hooks/useEditor";
+import { InfoOutlined } from "@mui/icons-material";
 
 function NodeWrapper({
 	children,
@@ -16,6 +18,8 @@ function NodeWrapper({
 	children: React.ReactNode;
 	card: CardInterface;
 }) {
+	const { onNodeDoubleClick } = useEditor();
+
 	const [ContextMenu, setContextMenu] = useState<{
 		mouseX: number;
 		mouseY: number;
@@ -54,6 +58,16 @@ function NodeWrapper({
 						: undefined
 				}
 				onClose={handleClose}>
+				<MenuItem
+					onClick={(e) => {
+						onNodeDoubleClick(e, card);
+						handleClose();
+					}}>
+					<Stack direction={"row"} spacing={1}>
+						<InfoOutlined />
+						<Typography>Info</Typography>
+					</Stack>
+				</MenuItem>
 				<MenuItem
 					onClick={() => {
 						dispatch(

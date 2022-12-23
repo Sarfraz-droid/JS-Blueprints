@@ -83,12 +83,13 @@ export function OutputNode(props: CardInterface) {
 											}}>
 											{input.name}
 										</Typography>
-										<pre
+										<div
 											style={{
 												fontSize: "0.4rem",
+												fontFamily: "monospace",
 											}}>
 											{JSON.stringify(input.value, null, 2)}
-										</pre>
+										</div>
 									</div>
 								))}
 						</Typography>
