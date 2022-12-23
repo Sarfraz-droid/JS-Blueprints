@@ -1,14 +1,20 @@
 import { Edge } from "react-flow-renderer";
-import { CardInterface, CardType } from "@workspace/lib/types/Card";
+import { CardInterface, CardType, Parameters } from "@workspace/lib/types/Card";
 import { runCodeService } from "./functions.service";
+import { Variable } from "@workspace/lib/types/variables.types";
 
+const notBacktrackTypes = [
+    Parameters.event
+];
 
 export class FlowService {
     FlowMap = new Map<string, any>;
     node:Array<CardInterface>;
-    edges : Array<Edge>;
+    edges: Array<Edge>;
+    variables: Array<Variable>;
 
-    constructor(node: Array<CardInterface>, edges: Array<Edge>) { 
+    constructor(node: Array<CardInterface>, edges: Array<Edge>, variables: Array<Variable>) {
+        this.variables = variables;
         this.node = node;
         this.edges = edges;
     }
@@ -20,6 +26,12 @@ export class FlowService {
         }
         return eventStart;
     };
+
+    private mapVariables = () => {
+        this.variables.forEach((variable) => {
+            this.FlowMap.set(`${variable.type}__${variable.id}`, variable.value);
+        })
+    }
 
     private GetNodeById = (id: string) => { 
         return this.node.find((card) => card.id === id);
@@ -40,20 +52,25 @@ export class FlowService {
 
         nodeData.input = nodeData.input.map((_input) => {
             const input = { ..._input };
-            const connectedinput = this.edges.find((edge) => edge.target === node.id && edge.targetHandle === input.id);
 
-            if (connectedinput) {
-                const connectedNode = this.GetNodeById(connectedinput.source);
+            if (notBacktrackTypes.includes(input.type)) {
+                return input;
+            }
+
+            const connectedInput = this.edges.find((edge) => edge.target === node.id && edge.targetHandle === input.id);
+
+            if (connectedInput) {
+                const connectedNode = this.GetNodeById(connectedInput.source);
 
                 if (connectedNode) {
-                    const connectedNodeValue = this.FlowMap.get(connectedinput.sourceHandle!);
+                    const connectedNodeValue = this.FlowMap.get(connectedInput.sourceHandle!);
                     if (connectedNodeValue != undefined) {
                         this.FlowMap.set(input.id, connectedNodeValue);
                         input.value = connectedNodeValue;
                     } else {
                         this.pathFinding(connectedNode);
-                        this.FlowMap.set(input.id, this.FlowMap.get(connectedinput.sourceHandle!));
-                        input.value = this.FlowMap.get(connectedinput.sourceHandle!);
+                        this.FlowMap.set(input.id, this.FlowMap.get(connectedInput.sourceHandle!));
+                        input.value = this.FlowMap.get(connectedInput.sourceHandle!);
                     }
                 }
             }
@@ -65,32 +82,46 @@ export class FlowService {
             return { ..._parameter };
         });
 
-        const Codeoutput = runCodeService(nodeData.input, nodeData.parameters, nodeData.function.content);
-        console.log("Output for Node ", node.id, " is  : ", Codeoutput);
+        // ? Run Code
+        const outputList = runCodeService(nodeData.input, nodeData.parameters, nodeData.output, nodeData.function.content);
+        console.log("Output for Node ", node.id, " is  : ", outputList);
 
-        nodeData.output = nodeData.output.map((_output) => {
-            const output = { ..._output };
-            this.FlowMap.set(output.id, Codeoutput[`${output.name}`]);
-            output.value = Codeoutput[`${output.name}`];
-            return output;
-        })
+        for (let i = 0; i < outputList.length; i++) {
+            const codeOutput = outputList[i];
 
-
-        this.edges.filter((edge) => edge.source === node.id && edge.sourceHandle === node.data.start).forEach((edge) => { 
-            const connectedNode = this.GetNodeById(edge.target);
-            if (connectedNode) { 
-                this.pathFinding(connectedNode);
+            if (!codeOutput.id) {
+                continue;
             }
-        })
 
-        console.log("NewNode : ", node);
+            // ? Set Output of the node
+            nodeData.output = nodeData.output.map((_output) => {
+                const output = { ..._output };
+                this.FlowMap.set(output.id, codeOutput.output[`${output.name}`]);
+                output.value = codeOutput.output[`${output.name}`];
+                return output;
+            })
+            console.log("All Edges", this.edges);
 
-        this.replaceNode(node);
+            console.log("Connected edge to : ", codeOutput.id, this.edges.filter((edge) => edge.source === node.id && edge.sourceHandle === codeOutput.id))
+            // ? Path Finding for next node
+            // ? Finding connected edges with its node and find the edge connected to its event
+            this.edges.filter((edge) => edge.source === node.id && edge.sourceHandle === codeOutput.id).forEach((edge) => {
+                const connectedNode = this.GetNodeById(edge.target);
+                if (connectedNode) {
+                    this.pathFinding(connectedNode);
+                }
+            })
+
+            console.log("NewNode : ", node);
+
+            this.replaceNode(node);
+        }
     }
 
     public runFlowService = async() => {
 
         const eventStart = this.findEventStart(this.node);
+        this.mapVariables();
 
         if (eventStart) {
             this.pathFinding(eventStart);

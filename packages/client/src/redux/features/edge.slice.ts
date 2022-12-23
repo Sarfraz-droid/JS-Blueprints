@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { addEdge, Connection, Edge } from "react-flow-renderer";
 import toast from "react-hot-toast";
-import { addEdgeThunk } from "../functions/addEdge.action";
-import { loadData } from "../functions/db.action";
+import { addEdgeThunk } from "../functions/add_edge.action";
+import { loadDataThunk } from "../functions/db.action";
 import { Demo } from "./state";
 
 export const initialState: Array<Edge> = [];
@@ -26,7 +26,7 @@ export const EdgeSlice = createSlice({
       state = action.payload;
       return state;
     },
-    DeleteEdges: (state: Array<Edge>, action: PayloadAction<string>) => {
+    deleteEdges: (state: Array<Edge>, action: PayloadAction<string>) => {
       state = state.filter(
         (_) => _.source != action.payload || _.target != action.payload
       );
@@ -37,6 +37,10 @@ export const EdgeSlice = createSlice({
       state = action.payload;
       return state;
     },
+    removeEdgeById: (state: Array<Edge>, action: PayloadAction<string>) => {
+      state = state.filter((_) => _.id != action.payload);
+      return state;
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(addEdgeThunk.fulfilled, (state, action) => {
@@ -58,7 +62,7 @@ export const EdgeSlice = createSlice({
 
       return state;
     });
-    builder.addCase(loadData.fulfilled, (state, action) => {
+    builder.addCase(loadDataThunk.fulfilled, (state, action) => {
       if (action.payload === undefined) return state;
       state = action.payload?.edges;
       return state;
@@ -66,6 +70,6 @@ export const EdgeSlice = createSlice({
   },
 });
 
-export const { addEdgeReducer, setEdgeReducer, DeleteEdges, setEdges } =
+export const { addEdgeReducer, setEdgeReducer, deleteEdges, setEdges, removeEdgeById } =
   EdgeSlice.actions;
 export default EdgeSlice.reducer;

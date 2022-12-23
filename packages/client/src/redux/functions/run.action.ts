@@ -17,9 +17,10 @@ export const RunCode = createAsyncThunk(
 
     const nodes = JSON.parse(JSON.stringify(store.nodes));
     const edges = JSON.parse(JSON.stringify(store.edges));
+    const variables = JSON.parse(JSON.stringify(store.variables.variables));
 
     console.log("RunCode", nodes, edges);
-    const Flow = new FlowService(nodes, edges);
+    const Flow = new FlowService(nodes, edges, variables);
 
     let result = await Flow.runFlowService();
 

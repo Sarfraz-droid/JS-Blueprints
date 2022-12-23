@@ -17,7 +17,8 @@ import {
 import { runCodeService } from "../../../services/functions.service";
 import { ICardIO, Parameters } from "@workspace/lib/types/Card";
 
-function Handler({
+// ? Test Runner
+function TestRunner({
   item,
   SampleInput,
   setSampleInput,
@@ -91,7 +92,7 @@ function TestRun() {
 
   const [SampleInput, setSampleInput] = useState<{ [key: string]: string }>({});
 
-  const activeNode = useSelector((state: RootState) => state.activeNode);
+  const activeNode = useSelector((state: RootState) => state.active);
 
   const activeCard = useSelector((state: RootState) => {
     const card = state.nodes.find((card) => card.id === activeNode.activeNode);
@@ -101,40 +102,41 @@ function TestRun() {
 
   const TestState = useCallback(async () => {
     try {
-      setCodeRunner({
-        ...CodeRunner,
-        running: true,
-      });
+			setCodeRunner({
+				...CodeRunner,
+				running: true,
+			});
 
-      const data = {
-        input: activeCard?.data.input.map((item) => {
-          return {
-            ...item,
-            value: SampleInput[item.name] ? SampleInput[item.name] : item.value,
-          };
-        }),
-        parameter: activeCard?.data.parameters,
-        code: activeCard?.data.function.content,
-      };
+			const data = {
+				input: activeCard?.data.input.map((item) => {
+					return {
+						...item,
+						value: SampleInput[item.name] ? SampleInput[item.name] : item.value,
+					};
+				}),
+				parameter: activeCard?.data.parameters,
+				code: activeCard?.data.function.content,
+			};
 
-      console.log(data, SampleInput);
-      if (!activeCard?.data.function.content || !data.input || !data.parameter)
-        return new Error("Missing data");
+			console.log(data, SampleInput);
+			if (!activeCard?.data.function.content || !data.input || !data.parameter)
+				return new Error("Missing data");
 
-      const output = runCodeService(
-        data.input,
-        data.parameter,
-        activeCard?.data.function.content
-      );
+			// const output = runCodeService(
+			//   data.input,
+			//   data.parameter,
+			//   {},
+			//   activeCard?.data.function.content
+			// );
 
-      setCodeRunner({
-        ...CodeRunner,
-        running: false,
-        output: JSON.stringify(output, null, 2),
-      });
+			setCodeRunner({
+				...CodeRunner,
+				running: false,
+				// output: JSON.stringify(output, null, 2),
+			});
 
-      console.log(data);
-    } catch (err) {
+			console.log(data);
+		} catch (err) {
       setCodeRunner({
         running: false,
         output: "Error Occured",
@@ -148,43 +150,44 @@ function TestRun() {
   if (!activeCard) return <>Please Choose a card</>;
 
   return (
-    <div
-      style={{
-        height: "95vh",
-        overflow: "auto",
-      }}>
-      <Stack
-        direction={"column"}
-        spacing={1}
-        sx={{
-          p: 2,
-        }}>
-        {activeCard.data.input.map((item, index) => (
-          <React.Fragment>
-            <Handler
+		<div
+			style={{
+				height: "95vh",
+				overflow: "auto",
+			}}>
+			<Stack
+				direction={"column"}
+				spacing={1}
+				sx={{
+					p: 2,
+				}}>
+				{activeCard.data.input.map((item, index) => (
+					<React.Fragment>
+						{/* <TestRunner
               item={item}
               SampleInput={SampleInput}
               setSampleInput={setSampleInput}
-            />
-          </React.Fragment>
-        ))}
-      </Stack>
-      <Button variant="contained" onClick={TestState} sx={{ my: 2 }}>
-        {CodeRunner.running ? "Running..." : "Run"}
-      </Button>
-      <div className="p-1">
-        <Typography
-          sx={{
-            fontWeight: 700,
-          }}>
-          Output
-        </Typography>
-        <pre className="p-3 h-40 bg-slate-200 font-mono">
-          {CodeRunner.output}
-        </pre>
-      </div>
-    </div>
-  );
+            /> */}
+						In Progress
+					</React.Fragment>
+				))}
+			</Stack>
+			<Button variant="contained" onClick={TestState} sx={{ my: 2 }}>
+				{CodeRunner.running ? "Running..." : "Run"}
+			</Button>
+			<div className="p-1">
+				<Typography
+					sx={{
+						fontWeight: 700,
+					}}>
+					Output
+				</Typography>
+				<pre className="p-3 h-40 bg-slate-200 font-mono">
+					{CodeRunner.output}
+				</pre>
+			</div>
+		</div>
+	);
 }
 
 export default TestRun;

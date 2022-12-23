@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import Editor from "@monaco-editor/react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../redux/store";
-import { UpdateData } from "../../../redux/functions/UpdateData.action";
+import { UpdateData } from "../../../redux/functions/updateData.action";
 import { instance } from "../../../api/instance";
 import toast from "react-hot-toast";
 import {
@@ -19,6 +19,7 @@ import { blueGrey, grey } from "@mui/material/colors";
 import { fontWeight } from "@mui/system";
 import { Parameters } from "@workspace/lib/types/Card";
 
+// ? Function Editor Node
 function FunctionEditor() {
   const [CodeRunner, setCodeRunner] = useState({
     running: false,
@@ -26,7 +27,7 @@ function FunctionEditor() {
     data: {},
   });
 
-  const activeNode = useSelector((state: RootState) => state.activeNode);
+  const activeNode = useSelector((state: RootState) => state.active);
 
   const activeCard = useSelector((state: RootState) => {
     const card = state.nodes.find((card) => card.id === activeNode.activeNode);

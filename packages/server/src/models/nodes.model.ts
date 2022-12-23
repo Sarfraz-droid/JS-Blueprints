@@ -12,6 +12,11 @@ const NodeSchema = new mongoose.Schema({
       type: Object,
     },
   ],
+  variables: [
+    {
+      type: Object,
+    }
+  ]
 });
 
 export const NodeModel = mongoose.model("Node", NodeSchema);

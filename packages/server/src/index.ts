@@ -5,15 +5,18 @@ import mongoose from "mongoose";
 import cors from "cors";
 
 const app = express();
-app.use(
-  cors({
-    origin: [
-      "http://localhost:3000",
-      "https://fflow-kohl.vercel.app",
-      process?.env?.DEPLOY || "",
-    ],
-  })
-);
+
+// app.use(
+//   cors({
+//     origin: [
+//       "http://localhost:3000",
+//       "https://fflow-kohl.vercel.app",
+//       process?.env?.DEPLOY || "",
+//     ],
+//   })
+// );
+
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
