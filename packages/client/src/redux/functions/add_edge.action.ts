@@ -34,6 +34,7 @@ export const addEdgeThunk = createAsyncThunk(
 
     actions = {
       ...actions,
+      type: "default",
       style: (edgeStyles[source_id as string] || edgeStyles.default),
     }
 

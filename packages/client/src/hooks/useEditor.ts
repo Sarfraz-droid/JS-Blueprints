@@ -1,12 +1,20 @@
-import React, { MouseEvent, useEffect } from 'react'
+import React, { MouseEvent, useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../redux/store';
 import { Connection, Edge, Node, NodeChange, useUpdateNodeInternals } from 'react-flow-renderer';
 import { addEdgeThunk } from '../redux/functions/add_edge.action';
 import { UpdateNode } from '../redux/features/node.slice';
 import { setEdge, setNode } from '../redux/features/active.slice';
+import DefaultEdge from '../components/edges/default';
+import { removeEdgeById } from '../redux/features/edge.slice';
 
 function useEditor() {
+    const edgeTypes = useMemo(() => {
+        return {
+            "default": DefaultEdge
+        }
+    }, []);
+
     const nodes = useSelector((state: RootState) => state.nodes);
     const edges = useSelector((state: RootState) => state.edges);
     const dispatch = useDispatch<AppDispatch>();
@@ -23,6 +31,10 @@ function useEditor() {
         console.log("onConnect", params);
         dispatch(addEdgeThunk(params));
     };
+
+    const deleteEdgeById = (id: string) => {
+        dispatch(removeEdgeById(id));
+    }
 
     const onEdgeClick = (event: MouseEvent<Element, globalThis.MouseEvent>, edge: Edge) => {
         console.log("onEdgeClick", edge);
@@ -56,6 +68,7 @@ function useEditor() {
     }, [nodes]);
 
     return {
+        edgeTypes,
         nodes,
         edges,
         onEdgeClick,
@@ -63,7 +76,8 @@ function useEditor() {
         onConnect,
         onNodesChange,
         onNodeDoubleClick,
-        onEdgeContextMenu
+        onEdgeContextMenu,
+        deleteEdgeById
     }
 
 }

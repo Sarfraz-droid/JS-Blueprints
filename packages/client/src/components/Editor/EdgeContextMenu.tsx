@@ -4,10 +4,13 @@ import { RootState } from "../../redux/store";
 import { Menu, MenuItem } from "@mui/material";
 import { deleteActiveEdge } from "../../redux/features/active.slice";
 import { removeEdgeById } from "../../redux/features/edge.slice";
+import useEditor from "../../hooks/useEditor";
 
 function EdgeContextMenu() {
 	const activeEdge = useSelector((state: RootState) => state.active.Edge);
 	const dispatch = useDispatch();
+
+	const { deleteEdgeById } = useEditor();
 
 	console.log(activeEdge);
 	return (
@@ -29,7 +32,7 @@ function EdgeContextMenu() {
 					}}
 					onClick={() => {
 						if (activeEdge?.edge.id !== undefined)
-							dispatch(removeEdgeById(activeEdge.edge.id));
+							deleteEdgeById(activeEdge.edge.id);
 						dispatch(deleteActiveEdge());
 					}}>
 					Delete

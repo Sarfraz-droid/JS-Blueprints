@@ -34,6 +34,7 @@ import EdgeContextMenu from "./EdgeContextMenu";
 
 const EditorComponent = () => {
 	const {
+		edgeTypes,
 		nodes,
 		edges,
 		onEdgeUpdate,
@@ -58,6 +59,7 @@ const EditorComponent = () => {
 				attributionPosition="top-right"
 				nodeTypes={nodeTypes as any}
 				onEdgeClick={onEdgeClick}
+				edgeTypes={edgeTypes}
 				onEdgeContextMenu={onEdgeContextMenu}
 				onNodeDoubleClick={onNodeDoubleClick}
 				style={{
