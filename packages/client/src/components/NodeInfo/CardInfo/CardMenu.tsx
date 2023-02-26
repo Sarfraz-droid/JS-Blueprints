@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { newIOP } from "../../../redux/functions/new_iop.action";
 import { UpdateData } from "../../../redux/functions/updateData.action";
 import { AppDispatch } from "../../../redux/store";

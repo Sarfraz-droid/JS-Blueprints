@@ -3,7 +3,6 @@ import {
 	Grid,
 	IconButton,
 	Stack,
-	TextField,
 	Typography,
 } from "@mui/material";
 import React from "react";
@@ -11,7 +10,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../redux/store";
 import { DeleteOutline } from "@mui/icons-material";
 import { Variable, VariableType } from "@workspace/lib/types/variables.types";
-import { updateVariableValue } from "../../../redux/features/variables.slice";
 import {
 	deleteVariableThunk,
 	generateVariableThunk,

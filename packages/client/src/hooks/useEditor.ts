@@ -1,4 +1,4 @@
-import React, { MouseEvent, useEffect, useMemo } from 'react'
+import { MouseEvent, useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../redux/store';
 import { Connection, Edge, Node, NodeChange, useUpdateNodeInternals } from 'react-flow-renderer';
@@ -22,7 +22,6 @@ function useEditor() {
 
     const onEdgeUpdate = (oldEdge: Edge<any>, newConnection: Connection) => {
         console.log("onEdgeUpdate", oldEdge, newConnection);
-        // setEdges((els) => updateEdge(oldEdge, newConnection, els));
     };
 
 

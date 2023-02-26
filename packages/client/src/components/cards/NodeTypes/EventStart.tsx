@@ -11,14 +11,9 @@ import InputHandler from "../UI/InputHandler";
 import NodeWrapper from "./common/NodeWrapper";
 
 export function EventHandlerNode(props: CardInterface) {
-  console.log(props);
-  const onChange = useCallback((evt: ChangeEvent<HTMLInputElement>) => {
-    console.log(evt.target.value);
-  }, []);
+	const dispatch = useDispatch<AppDispatch>();
 
-  const dispatch = useDispatch<AppDispatch>();
-
-  return (
+	return (
 		<>
 			<NodeWrapper card={props}>
 				<Card

@@ -1,36 +1,8 @@
-import { nanoid } from "nanoid";
-import React, { MouseEvent, MouseEventHandler, useEffect } from "react";
-import ReactFlow, {
-	useNodesState,
-	useEdgesState,
-	Controls,
-	updateEdge,
-	addEdge,
-	Connection,
-	Edge,
-	NodeChange,
-	EdgeChange,
-	ReactFlowProvider,
-	useUpdateNodeInternals,
-	Background,
-} from "react-flow-renderer";
-import { useDispatch, useSelector } from "react-redux";
-import { NodeTemplate } from "../cards/NodeTypes/TextNode";
+import React from "react";
+import ReactFlow, { Background } from "react-flow-renderer";
 import { nodeTypes } from "../../predefined_components";
-import { setNode } from "../../redux/features/active.slice";
-import {
-	addEdgeReducer,
-	setEdgeReducer,
-} from "../../redux/features/edge.slice";
-import { UpdateNode } from "../../redux/features/node.slice";
-import { addEdgeThunk } from "../../redux/functions/add_edge.action";
-import { AppDispatch, RootState } from "../../redux/store";
-import { CardInterface, CardType, Parameters } from "@workspace/lib/types/Card";
-import { EventHandlerNode } from "../cards/NodeTypes/EventStart";
-import { OutputNode } from "../cards/NodeTypes/OutputNode";
 import useEditor from "../../hooks/useEditor";
 import EdgeContextMenu from "./EdgeContextMenu";
-
 
 const EditorComponent = () => {
 	const {

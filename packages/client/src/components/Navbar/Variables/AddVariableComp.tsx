@@ -2,13 +2,10 @@ import {
 	Button,
 	FormControl,
 	Grid,
-	Input,
 	InputLabel,
-	Menu,
 	MenuItem,
 	Select,
 	TextField,
-	Typography,
 } from "@mui/material";
 import { Parameters } from "@workspace/lib/types/Card";
 import React, { useMemo } from "react";

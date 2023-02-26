@@ -1,26 +1,11 @@
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { newIOP } from "../../../redux/functions/new_iop.action";
 import { UpdateData } from "../../../redux/functions/updateData.action";
 import { AppDispatch, RootState } from "../../../redux/store";
-import {
-	ICardIO,
-} from "@workspace/lib/types/Card";
-import {
-	Box,
-	Button,
-	Grid,
-	TextField,
-	Typography,
-} from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { red } from "@mui/material/colors";
-import AddIcon from "@mui/icons-material/Add";
+import { ICardIO } from "@workspace/lib/types/Card";
+import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { haveInputOutputParam } from "../../../predefined_components";
 import CardMenu from "./CardMenu";
-
-
-
 
 function CardInfo() {
 	const activeNode = useSelector((state: RootState) => state.active);
@@ -29,14 +14,6 @@ function CardInfo() {
 
 		return card;
 	});
-
-	const CardInputs = [
-		{
-			title: "Input",
-			name: "input",
-			activeCard: [],
-		},
-	];
 
 	const [cardData, setCardData] = useState<
 		Array<{

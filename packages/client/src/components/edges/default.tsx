@@ -31,7 +31,7 @@ function DefaultEdge(props: {
 	});
 
 	const onEdgeClick = (
-		evt: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+		evt: React.MouseEvent<SVGSVGElement, MouseEvent>,
 		id: string
 	) => {
 		evt.stopPropagation();

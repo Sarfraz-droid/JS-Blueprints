@@ -1,14 +1,12 @@
-import { Button, Menu, MenuItem } from "@mui/material";
+import { Button } from "@mui/material";
 import React, { useState } from "react";
-import AddIcon from "@mui/icons-material/Add";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import MultiLevelMenu from "./MultiLevelMenu";
 
 function AddButton() {
-  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-  const open = Boolean(anchorEl);
+	const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+	const open = Boolean(anchorEl);
 
-  return (
+	return (
 		<React.Fragment>
 			<Button
 				id="add-menu-button"

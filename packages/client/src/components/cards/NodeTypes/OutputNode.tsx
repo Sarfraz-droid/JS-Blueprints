@@ -1,32 +1,16 @@
-import { Card, createStyles, Typography } from "@mui/material";
-import { grey, yellow } from "@mui/material/colors";
+import { Card, Typography } from "@mui/material";
+import { yellow } from "@mui/material/colors";
 import { Box } from "@mui/system";
-import React, { ChangeEvent, useCallback } from "react";
-import { Handle, Position } from "react-flow-renderer";
-import { useDispatch } from "react-redux";
-import { UpdateData } from "../../../redux/functions/updateData.action";
-import { AppDispatch } from "../../../redux/store";
-import {
-	CardInterface,
-	parameterColor,
-	Parameters,
-} from "@workspace/lib/types/Card";
-import InputHandler from "../UI/InputHandler";
+import React from "react";
+import { Position } from "react-flow-renderer";
+import { CardInterface, Parameters } from "@workspace/lib/types/Card";
 import NodeWrapper from "./common/NodeWrapper";
 import TagHandler from "./common/TagHandler";
-
-const handleStyle = { top: 10 };
 
 const doNotOutput = [Parameters.event];
 
 export function OutputNode(props: CardInterface) {
 	console.log(props);
-	const onChange = useCallback((evt: ChangeEvent<HTMLInputElement>) => {
-		console.log(evt.target.value);
-	}, []);
-
-	const dispatch = useDispatch<AppDispatch>();
-
 	return (
 		<>
 			<NodeWrapper card={props}>

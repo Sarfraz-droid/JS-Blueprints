@@ -1,4 +1,3 @@
-import React from "react";
 import EditorComponent from "../Editor";
 import Loading from "../Loading";
 
@@ -14,7 +13,6 @@ function Renderer({
 	}
 
 	if (matches) {
-		// TODO: Add a mobile editor
 		return (
 			<div>Please use the desktop version of the editor to add cards.</div>
 		);

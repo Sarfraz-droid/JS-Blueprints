@@ -1,15 +1,12 @@
-import { Card, createStyles, Typography } from "@mui/material";
-import { grey } from "@mui/material/colors";
+import { Card, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { ChangeEvent, useCallback } from "react";
-import { Handle, Position } from "react-flow-renderer";
+import React from "react";
+import {  Position } from "react-flow-renderer";
 import { useDispatch } from "react-redux";
 import { UpdateData } from "../../../redux/functions/updateData.action";
 import { AppDispatch } from "../../../redux/store";
 import {
 	CardInterface,
-	parameterColor,
-	Parameters,
 } from "@workspace/lib/types/Card";
 import InputHandler from "../UI/InputHandler";
 import NodeWrapper from "./common/NodeWrapper";

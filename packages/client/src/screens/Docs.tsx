@@ -54,6 +54,7 @@ function Docs() {
       <AppBar position="static" color="transparent" elevation={0}>
         <Toolbar>
           <img
+            alt=".."
             src={Logo}
             style={{
               width: 100,
