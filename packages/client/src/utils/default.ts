@@ -7,16 +7,17 @@ export const main = (input: any, parameter: any) => {
 
 export const defaultComment = `
   /*
-    the object should be returned as value of the ouput
-    if ouput has 
+    the object should be returned as value of the output
+    if output has 
     {
       type: "string",
       value: "Hello"
     }
 
-    then the function should return {
-      Hello: "Output String"
-    }
+    then you should call
+    
+    call('Event', {out: "Hello"}) 
+    Here 'Event' is the name of the event and 'out' is the name of the output
   */
 `;
 

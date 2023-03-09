@@ -1,15 +1,16 @@
 import { nanoid } from "nanoid";
 import { CardData, CardInterface, Parameters } from "@workspace/lib/types/Card";
 import { defaultComment, main } from "../utils/default";
+import { functionCreator } from "./default";
 
-export const InputCard = () =>
+export const CustomOperation = () =>
 ({
   error: {
     code: "",
     message: "",
   },
   function: {
-    content: `${defaultComment}  \n${main.toString()}`,
+    content: `${defaultComment}  ${functionCreator('')}`,
     outdated: false,
     old: "",
   },

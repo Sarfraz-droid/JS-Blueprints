@@ -3,7 +3,7 @@ import { OutputNode } from "../components/cards/NodeTypes/OutputNode";
 import { NodeTemplate } from "../components/cards/NodeTypes/TextNode";
 import { CardType } from "@workspace/lib/types/Card";
 import { EventHandler } from "./Basic/EventHandler";
-import { InputCard } from "./Input";
+import { CustomOperation } from "./customOperation";
 import { OutputCard } from "./Basic/Output";
 import { string_AddStrings } from "./String/AddStrings";
 import { input_StringInput } from "./Input/StringInput";
@@ -23,8 +23,8 @@ import { loops_ForLoop } from "./Loops/ForLoop";
  * This file contains all the predefined components that are available to the user
  */
 const PredefinedComponents = {
-  [CardType.CustomOperation]: InputCard,
-  [CardType.input]: InputCard,
+  [CardType.CustomOperation]: CustomOperation,
+  [CardType.input]: CustomOperation,
   [CardType.basic_EventStart]: EventStart,
   [CardType.basic_EventEnd]: EventEnd,
   [CardType.basic_Output]: OutputCard,
