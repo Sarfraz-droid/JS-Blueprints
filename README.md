@@ -40,3 +40,4 @@ The app uses ```lerna```. If lerna CLI isn't set up. Get started on [Getting Sta
 2. Run by
 ```npx lerna run dev```
 *Runs the client and the server in development mode*
+
