@@ -71,7 +71,8 @@ function Docs() {
               py: 3,
             }}
             direction="row"
-            spacing={3}>
+            spacing={3}
+          >
             <Typography>
               <NavLink
                 to={`/editor/${projectId}`}
@@ -82,7 +83,8 @@ function Docs() {
                   fontWeight: isActive ? 700 : 200,
                   fontSize: "1.2rem",
                   padding: "10px",
-                })}>
+                })}
+              >
                 Editor
               </NavLink>
             </Typography>
@@ -97,7 +99,8 @@ function Docs() {
                   fontSize: "1.2rem",
                   padding: "17px",
                   borderRadius: "15px",
-                })}>
+                })}
+              >
                 Documentation
               </NavLink>
             </Typography>
@@ -108,30 +111,34 @@ function Docs() {
         container
         sx={{
           minHeight: "89.5vh",
-        }}>
+        }}
+      >
         <Grid
           item
           sm={2}
           sx={{
             borderRight: "3px solid #e0e0e0",
-          }}>
+          }}
+        >
           <List>
             {docsRoutes.map((route, index) => (
               <ListItemButton
                 key={index}
                 onClick={() => {
-                  Navigate(`../${route.path}`);
+                  Navigate(`/docs/${route.path}`);
                 }}
                 sx={{
                   p: 2,
-                }}>
+                }}
+              >
                 <Typography>
                   <ListItemText
                     sx={{
                       fontSize: "1.2rem",
                       fontWeight: ActiveRoute.path === route.path ? 700 : 200,
                     }}
-                    disableTypography>
+                    disableTypography
+                  >
                     {route.name}
                   </ListItemText>
                 </Typography>
@@ -145,7 +152,8 @@ function Docs() {
           sm={10}
           sx={{
             p: 2,
-          }}>
+          }}
+        >
           <DisplayDocument ActiveRoute={ActiveRoute} />
         </Grid>
       </Grid>
