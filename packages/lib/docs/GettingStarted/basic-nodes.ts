@@ -21,6 +21,21 @@ Number Function Nodes allow you to perform Number operations and String function
 They allow you to add input to the builder
 
 ## Conditionals
-This adds conditional operators to your app.`;
+This adds conditional operators to your app.
+
+## Variables
+variables serve as placeholders for data values, allowing you to store information that can be accessed and manipulated as needed. 
+
+## Loop Node
+The **Loop Node** repeats a set of actions until a certain condition is met. This is useful for processing lists or running tasks multiple times.
+
+## Custom Operation Node
+The **Custom Operation Node** allows you to define your own functions or operations. You can create reusable logic that can be called from other nodes, making your app more organized.
+
+## JS IDE Node
+The **JS IDE Node** provides an integrated environment for writing JavaScript code. You can use this node to implement complex logic and algorithms directly in your app.
+
+
+`;
 
 export default BasicNodes;
