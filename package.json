@@ -25,5 +25,8 @@
     "packages": [
       "packages/*"
     ]
+  },
+  "dependencies": {
+    "run-script": "^0.1.1"
   }
 }
