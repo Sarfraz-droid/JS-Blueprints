@@ -1,43 +1,45 @@
-![v1vpW6fWwt](https://user-images.githubusercontent.com/73013838/180638472-1d207273-11c6-4d23-9504-aea0d7c93cf9.gif)
+# 🎨 Block Based JavaScript Blueprints
 
-### BLOCK BASED JAVASCRIPT BLUEPRINTS
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/73013838/180638472-1d207273-11c6-4d23-9504-aea0d7c93cf9.gif" alt="Block Based JavaScript Builder" />
+</div>
 
-Block based Javascript Builder, Built on Typescript, React. 
-Managed with Lerna.
+Welcome to the **Block Based JavaScript Blueprints**! This project is a block-based JavaScript builder, crafted with **TypeScript** and **React**. It's managed using **Lerna** for efficient package management.
+
+## 🛠️ Tech Stack
+
+- **TypeScript**: For type safety and better code quality.
+- **React.js**: For building user interfaces.
+- **Node.js**: To run JavaScript server-side.
+- **Lerna**: For managing JavaScript projects with multiple packages.
+- **Firebase**: For backend services and real-time data management.
+
+## 📂 Folder Structure
+
+Here’s a brief overview of the project structure:
 
 
-The app uses ```lerna```. If lerna CLI isn't set up. Get started on [Getting Started | Lerna](https://lerna.js.org/docs/getting-started)
+### 🖥️ Client
 
-### Tech Stack
-- Typescript
-- React.JS
-- Node.JS
-- Lerna
-- Firebase
+This folder hosts the React application, where users can interact with the block-based builder.
 
-### Folder Structure
+### 📚 Lib
 
--  packages
-	- client
-	- lib
-	- server
+The `lib` folder contains shared types and documentation, ensuring consistency across the application.
 
-**Client**
-- This contains the client side react application
+### 🖥️ Server
 
-**Lib**
-- the `lib` folder shares the common types and documentation for the application
-
-**Server**
-- the `server` folder contains the express application as a server.
+The `server` folder runs the Express application, handling backend logic and APIs.
 
 ---
-### SETTING UP THE APPLICATION
-1. Setup
-```npx lerna bootstrap --use-workspaces```
-		*This installs all the dependencies needed*
 
-2. Run by
-```npx lerna run dev```
-*Runs the client and the server in development mode*
+## 🚀 Setting Up the Application
 
+Follow these steps to get started with the Block Based JavaScript Blueprints:
+
+### 1. Install Dependencies
+
+Run the following command to set up the project:
+
+```bash
+npx lerna bootstrap --use-workspaces
