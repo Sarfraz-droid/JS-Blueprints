@@ -14,6 +14,8 @@ import { number_MultiplyNumbers } from "./Number/MultiplyNumbers";
 import { number_DivideNumbers } from "./Number/DivideNumbers";
 import { input_BooleanInput } from "./Input/BooleanInput";
 import { condition_GreaterThan } from "./Conditionals/Greaterthan";
+import { condition_LessThan } from "./Conditionals/Lessthan";
+
 import { condition_EqualTo as condition_EqualTo } from "./Conditionals/Equalto";
 import { EventStart } from "./Basic/EventStart";
 import { EventEnd } from "./Basic/EventEnd";
@@ -37,6 +39,7 @@ const PredefinedComponents = {
   [CardType.number_MultiplyNumbers]: number_MultiplyNumbers,
   [CardType.number_DivideNumbers]: number_DivideNumbers,
   [CardType.condition_greaterThan]: condition_GreaterThan,
+  [CardType.condition_lessThan]: condition_LessThan,
   [CardType.condition_equalTo]: condition_EqualTo,
   [CardType.loops_ForLoop]: loops_ForLoop
 };

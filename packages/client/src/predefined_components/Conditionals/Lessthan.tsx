@@ -3,7 +3,7 @@ import React from "react";
 import { CardData, Parameters } from "@workspace/lib/types/Card";
 import { DefaultComponent, functionCreator } from "../default";
 
-export const condition_GreaterThan = () =>
+export const condition_LessThan = () =>
 	({
 		error: {
 			code: "",
