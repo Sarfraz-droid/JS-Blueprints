@@ -30,7 +30,6 @@ export const condition_LessThan = () =>
 		renderer: () => (
 			<div>
 				<p>A{" < "}B</p>
-                <p>A{"less than"}B</p>
 			</div>
 		),
 		output: [
