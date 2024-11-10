@@ -10,6 +10,7 @@ import { input_StringInput } from "./Input/StringInput";
 import { string_Repeater } from "./String/Repeater";
 import { input_numberInput } from "./Input/NumberInput";
 import { number_AddNumbers } from "./Number/addNumber";
+import { number_SubtractNumbers } from "./Number/SubtractNumber";
 import { number_MultiplyNumbers } from "./Number/MultiplyNumbers";
 import { number_DivideNumbers } from "./Number/DivideNumbers";
 import { input_BooleanInput } from "./Input/BooleanInput";
@@ -36,6 +37,7 @@ const PredefinedComponents = {
   [CardType.input_String]: input_StringInput,
   [CardType.input_Boolean]: input_BooleanInput,
   [CardType.number_AddNumbers]: number_AddNumbers,
+  [CardType.number_SubtractNumbers]: number_SubtractNumbers,
   [CardType.number_MultiplyNumbers]: number_MultiplyNumbers,
   [CardType.number_DivideNumbers]: number_DivideNumbers,
   [CardType.condition_greaterThan]: condition_GreaterThan,
