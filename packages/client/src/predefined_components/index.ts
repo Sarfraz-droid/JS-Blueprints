@@ -13,6 +13,7 @@ import { number_AddNumbers } from "./Number/addNumber";
 import { number_SubtractNumbers } from "./Number/SubtractNumber";
 import { number_MultiplyNumbers } from "./Number/MultiplyNumbers";
 import { number_DivideNumbers } from "./Number/DivideNumbers";
+import { number_PowerNumbers } from "./Number/PowerNumbers";
 import { input_BooleanInput } from "./Input/BooleanInput";
 import { condition_GreaterThan } from "./Conditionals/Greaterthan";
 import { condition_LessThan } from "./Conditionals/Lessthan";
@@ -40,6 +41,7 @@ const PredefinedComponents = {
   [CardType.number_SubtractNumbers]: number_SubtractNumbers,
   [CardType.number_MultiplyNumbers]: number_MultiplyNumbers,
   [CardType.number_DivideNumbers]: number_DivideNumbers,
+  [CardType.number_PowerNumbers]: number_PowerNumbers,
   [CardType.condition_greaterThan]: condition_GreaterThan,
   [CardType.condition_lessThan]: condition_LessThan,
   [CardType.condition_equalTo]: condition_EqualTo,
