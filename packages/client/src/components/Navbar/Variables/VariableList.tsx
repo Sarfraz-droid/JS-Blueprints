@@ -31,11 +31,13 @@ function VariableList() {
 	};
 
 	const onDeleteVariable = (variable: Variable) => {
-		dispatch(
-			deleteVariableThunk({
-				id: variable.id,
-			})
-		);
+		if (window.confirm("Are you sure you want to delete this variable?")) {
+			dispatch(
+				deleteVariableThunk({
+					id: variable.id,
+				})
+			);
+		}
 	};
 
 	return (

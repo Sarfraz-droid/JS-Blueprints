@@ -8,26 +8,33 @@ import {
 import { defaultComment, main } from "../../utils/default";
 import { DefaultComponent, functionCreator } from "../default";
 
-export const number_AddNumbers = () =>
-  DefaultComponent(
+export const number_AddNumbers = () => {
+  const inputCount = Number(prompt("How many inputs should be there?"));
+  if (inputCount < 2) {
+    alert("Input number should be at least 2");
+    throw new Error("Input number should be at least 2");
+  }
+
+  const inputs = [];
+  for (let i = 0; i < inputCount; i++) {
+    inputs.push({
+      id: `${Parameters.number}__input__${nanoid()}`,
+      type: Parameters.number,
+      value: "",
+      name: `Input${i + 1}`,
+    });
+  }
+
+  const functionBody = inputs
+    .map((input, index) => `input['Input${index + 1}']`)
+    .join(" + ");
+
+  return DefaultComponent(
     "Add Numbers",
     functionCreator(`
-      call('Event', {out: input['A'] + input['B']})
+      call('Event', {out: ${functionBody}})
     `),
-    [
-      {
-        id: `${Parameters.number}__input__${nanoid()}`,
-        type: Parameters.number,
-        value: "",
-        name: `A`,
-      },
-      {
-        id: `${Parameters.number}__input__${nanoid()}`,
-        type: Parameters.number,
-        value: "",
-        name: `B`,
-      },
-    ],
+    inputs,
     [
       {
         type: Parameters.number,
@@ -39,6 +46,7 @@ export const number_AddNumbers = () =>
     [],
     null
   );
+};
 
 // const temp = {
 //   type: "input",
